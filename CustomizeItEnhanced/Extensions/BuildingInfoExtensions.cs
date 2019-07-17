@@ -1,19 +1,19 @@
 ﻿using ColossalFramework.UI;
-using CustomizeItEnhanced.GUI;
-using CustomizeItEnhanced.Internal;
+using CustomizeItExtended.GUI;
+using CustomizeItExtended.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace CustomizeItEnhanced.Extensions
+namespace CustomizeItExtended.Extensions
 {
     public static class BuildingInfoExtensions
     {
         public static Properties GetOriginalProperties(this BuildingInfo info)
         {
-            if (CustomizeItEnhancedTool.instance.OriginalData.TryGetValue(info.name, out Properties props))
+            if (CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out Properties props))
                 return props;
 
             return null;
@@ -43,7 +43,7 @@ namespace CustomizeItEnhanced.Extensions
                 }
                 catch(Exception e)
                 {
-                    DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, $"[Customize It! Enhanced] Failed to Load Properties. {e.Message} - {e.StackTrace}");
+                    DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, $"[Customize It! Extended] Failed to Load Properties. {e.Message} - {e.StackTrace}");
                 }
             }
         }
@@ -53,10 +53,10 @@ namespace CustomizeItEnhanced.Extensions
             return new Properties(info);
         }
 
-        public static UIPanelWrapper GenerateCustomizeItEnhancedPanel(this BuildingInfo info)
+        public static UIPanelWrapper GenerateCustomizeItExtendedPanel(this BuildingInfo info)
         {
-            CustomizeItEnhancedTool.instance.CurrentSelectedBuilding = info;
-            UIUtils.DeepDestroy(UIView.Find("CustomizeItEnhancedPanelWrapper"));
+            CustomizeItExtendedTool.instance.CurrentSelectedBuilding = info;
+            UIUtils.DeepDestroy(UIView.Find("CustomizeItExtendedPanelWrapper"));
 
             return UIView.GetAView().AddUIComponent(typeof(UIPanelWrapper)) as UIPanelWrapper;
         }

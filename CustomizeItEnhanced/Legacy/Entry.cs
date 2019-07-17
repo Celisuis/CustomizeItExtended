@@ -1,10 +1,10 @@
-﻿using CustomizeItEnhanced.Legacy;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended.Legacy
 {
     [Serializable]
     public class CustomizablePropertiesEntry

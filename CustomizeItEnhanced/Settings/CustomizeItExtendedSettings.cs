@@ -1,36 +1,36 @@
 ﻿using ColossalFramework.IO;
 using ColossalFramework.UI;
-using CustomizeItEnhanced.Internal;
+using CustomizeItExtended.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
 
-namespace CustomizeItEnhanced.Settings
+namespace CustomizeItExtended.Settings
 {
-    [XmlRoot("CustomizeItEnhanced")]
-    public class CustomizeItEnhancedSettings
+    [XmlRoot("CustomizeItExtended")]
+    public class CustomizeItExtendedSettings
     {
         [XmlIgnore]
-        private static readonly string _configPath = Path.Combine(DataLocation.localApplicationData, "CustomizeIt-Enhanced.xml");
+        private static readonly string _configPath = Path.Combine(DataLocation.localApplicationData, "CustomizeIt-Extended.xml");
         public List<PropertyEntry> Entries = new List<PropertyEntry>();
         public float PanelX = 8f;
         public float PanelY = 65f;
         public bool SavePerCity = false;
 
-        public CustomizeItEnhancedSettings()
+        public CustomizeItExtendedSettings()
         {
 
         }
 
         public void Save()
         {
-            if(!CustomizeItEnhancedMod.Settings.SavePerCity)
+            if(!CustomizeItExtendedMod.Settings.SavePerCity)
             {
                 Entries.Clear();
 
-                foreach(var entry in CustomizeItEnhancedTool.instance.CustomData)
+                foreach(var entry in CustomizeItExtendedTool.instance.CustomData)
                 {
                     if(entry.Value != null)
                     {
@@ -39,32 +39,32 @@ namespace CustomizeItEnhanced.Settings
                 }
             }
 
-            var serializer = new XmlSerializer(typeof(CustomizeItEnhancedSettings));
+            var serializer = new XmlSerializer(typeof(CustomizeItExtendedSettings));
 
             using(var writer = new StreamWriter(_configPath))
             {
-                serializer.Serialize(writer, CustomizeItEnhancedMod.Settings);
+                serializer.Serialize(writer, CustomizeItExtendedMod.Settings);
             }
         }
 
-        public static CustomizeItEnhancedSettings Load()
+        public static CustomizeItExtendedSettings Load()
         {
 
-            var serializer = new XmlSerializer(typeof(CustomizeItEnhancedSettings));
+            var serializer = new XmlSerializer(typeof(CustomizeItExtendedSettings));
             try
             {
                 using (var reader = new StreamReader(_configPath))
                 {
-                    var config = (CustomizeItEnhancedSettings)serializer.Deserialize(reader);
+                    var config = (CustomizeItExtendedSettings)serializer.Deserialize(reader);
 
                     if(!config.SavePerCity)
                     {
-                        CustomizeItEnhancedTool.instance.CustomData.Clear();
+                        CustomizeItExtendedTool.instance.CustomData.Clear();
 
                         foreach(var entry in config.Entries)
                         {
                             if (entry != null)
-                                CustomizeItEnhancedTool.instance.CustomData.Add(entry.Key, entry.Value);
+                                CustomizeItExtendedTool.instance.CustomData.Add(entry.Key, entry.Value);
                         }
                     }
 
@@ -73,7 +73,7 @@ namespace CustomizeItEnhanced.Settings
             }
             catch(Exception e)
             {
-                return new CustomizeItEnhancedSettings();
+                return new CustomizeItExtendedSettings();
             }
         }
     }

@@ -1,16 +1,16 @@
-﻿using CustomizeItEnhanced.Internal;
+﻿using CustomizeItExtended.Internal;
 using ICities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended
 {
     public class LoadingExtension : LoadingExtensionBase
     {
         private bool isDoneLoading;
 
-        private CustomizeItEnhancedTool Instance => CustomizeItEnhancedTool.instance;
+        private CustomizeItExtendedTool Instance => CustomizeItExtendedTool.instance;
         public override void OnLevelLoaded(LoadMode mode)
         {
             base.OnLevelLoaded(mode);
@@ -24,7 +24,7 @@ namespace CustomizeItEnhanced
             {
                 if (LoadingManager.instance.m_loadingComplete)
                 {
-                    CustomizeItEnhancedTool.instance.Initialize();
+                    CustomizeItExtendedTool.instance.Initialize();
                     isDoneLoading = true;
                 }
             }

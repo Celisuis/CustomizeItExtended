@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CustomizeItExtended.Legacy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CustomizeItEnhanced.Internal
+namespace CustomizeItExtended.Internal
 {
     [Serializable]
     public class PropertyEntry

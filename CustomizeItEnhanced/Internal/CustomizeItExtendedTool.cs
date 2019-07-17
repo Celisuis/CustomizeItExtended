@@ -1,7 +1,7 @@
 ﻿using ColossalFramework;
 using ColossalFramework.UI;
-using CustomizeItEnhanced.Extensions;
-using CustomizeItEnhanced.GUI;
+using CustomizeItExtended.Extensions;
+using CustomizeItExtended.GUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CustomizeItEnhanced.Internal
+namespace CustomizeItExtended.Internal
 {
-    public class CustomizeItEnhancedTool : Singleton<CustomizeItEnhancedTool>
+    public class CustomizeItExtendedTool : Singleton<CustomizeItExtendedTool>
     {
         internal Dictionary<string, Properties> CustomData = new Dictionary<string, Properties>();
         internal Dictionary<string, Properties> OriginalData = new Dictionary<string, Properties>();
@@ -23,9 +23,9 @@ namespace CustomizeItEnhanced.Internal
         internal BuildingInfo CurrentSelectedBuilding;
         internal CityServiceWorldInfoPanel ServiceBuildingPanel;
 
-        private UIButton _customizeItEnhancedButton;
+        private UIButton _customizeItExtendedButton;
 
-        internal UIPanelWrapper CustomizeItEnhancedPanel;
+        internal UIPanelWrapper CustomizeItExtendedPanel;
 
         internal UICheckBox SavePerCity;
 
@@ -62,9 +62,9 @@ namespace CustomizeItEnhanced.Internal
                 CustomData[info.name] = new Properties(info);
             }
 
-            if(!CustomizeItEnhancedMod.Settings.SavePerCity)
+            if(!CustomizeItExtendedMod.Settings.SavePerCity)
             {
-                CustomizeItEnhancedMod.Settings.Save();
+                CustomizeItExtendedMod.Settings.Save();
             }
         }
 
@@ -79,9 +79,9 @@ namespace CustomizeItEnhanced.Internal
             }
             info.LoadProperties(originalProperties);
 
-            if(!CustomizeItEnhancedMod.Settings.SavePerCity)
+            if(!CustomizeItExtendedMod.Settings.SavePerCity)
             {
-                CustomizeItEnhancedMod.Settings.Save();
+                CustomizeItExtendedMod.Settings.Save();
             }
 
 
@@ -95,7 +95,7 @@ namespace CustomizeItEnhanced.Internal
 
                 if(ServiceBuildingPanel != null)
                 {
-                    AddBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItEnhancedButton, new Vector3(-7f, 43f, 0f));
+                    AddBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton, new Vector3(-7f, 43f, 0f));
                     isButtonInitialized = true;
                 }
             }
@@ -108,14 +108,14 @@ namespace CustomizeItEnhanced.Internal
                 InstanceID instanceID = (InstanceID)infoPanel.GetType().GetField("m_InstanceID", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(infoPanel);
                 var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
 
-                if (CustomizeItEnhancedPanel == null || building != CurrentSelectedBuilding)
+                if (CustomizeItExtendedPanel == null || building != CurrentSelectedBuilding)
                 {
-                    CustomizeItEnhancedPanel = building.GenerateCustomizeItEnhancedPanel();
+                    CustomizeItExtendedPanel = building.GenerateCustomizeItExtendedPanel();
                 }
                 else
                 {
-                    CustomizeItEnhancedPanel.isVisible = false;
-                    UIUtils.DeepDestroy(CustomizeItEnhancedPanel);
+                    CustomizeItExtendedPanel.isVisible = false;
+                    UIUtils.DeepDestroy(CustomizeItExtendedPanel);
                 }
 
                 if (comp.hasFocus)

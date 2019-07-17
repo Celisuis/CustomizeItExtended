@@ -1,12 +1,12 @@
 ﻿using ColossalFramework.UI;
-using CustomizeItEnhanced.Internal;
+using CustomizeItExtended.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended
 {
     public class UITitleBar : UIPanel
     {
@@ -24,7 +24,7 @@ namespace CustomizeItEnhanced
 
         private void SetupControls()
         {
-            name = "CustomizeItEnhancedTitleBar";
+            name = "CustomizeItExtendedTitleBar";
             isVisible = false;
             canFocus = true;
             isInteractive = true;
@@ -38,13 +38,13 @@ namespace CustomizeItEnhanced
             dragHandle.target = parent;
             dragHandle.eventMouseUp += (c, e) =>
             {
-                CustomizeItEnhancedMod.Settings.PanelX = parent.relativePosition.x;
-                CustomizeItEnhancedMod.Settings.PanelY = parent.relativePosition.y;
-                CustomizeItEnhancedMod.Settings.Save();
+                CustomizeItExtendedMod.Settings.PanelX = parent.relativePosition.x;
+                CustomizeItExtendedMod.Settings.PanelY = parent.relativePosition.y;
+                CustomizeItExtendedMod.Settings.Save();
             };
 
             titleLabel = AddUIComponent<UILabel>();
-            titleLabel.text = CustomizeItEnhancedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
+            titleLabel.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
             titleLabel.textScale = 0.9f;
             titleLabel.isInteractive = false;
 
@@ -56,8 +56,8 @@ namespace CustomizeItEnhanced
             closeButton.pressedBgSprite = "DeleteLineButtonPressed";
             closeButton.eventClick += (component, param) =>
             {
-                CustomizeItEnhancedTool.instance.CustomizeItEnhancedPanel.isVisible = false;
-                UIUtils.DeepDestroy(CustomizeItEnhancedTool.instance.CustomizeItEnhancedPanel);
+                CustomizeItExtendedTool.instance.CustomizeItExtendedPanel.isVisible = false;
+                UIUtils.DeepDestroy(CustomizeItExtendedTool.instance.CustomizeItExtendedPanel);
             };
         }
 

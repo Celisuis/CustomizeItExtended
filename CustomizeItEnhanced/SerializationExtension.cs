@@ -1,5 +1,5 @@
-﻿using CustomizeItEnhanced.Extensions;
-using CustomizeItEnhanced.Internal;
+﻿using CustomizeItExtended.Extensions;
+using CustomizeItExtended.Internal;
 using ICities;
 using System;
 using System.Collections.Generic;
@@ -8,13 +8,13 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended
 {
     public class SerializationExtension : SerializableDataExtensionBase
     {
-        private CustomizeItEnhancedTool Instance => CustomizeItEnhancedTool.instance;
+        private CustomizeItExtendedTool Instance => CustomizeItExtendedTool.instance;
 
-        private static readonly string m_dataID = "Customize-It-Enhanced";
+        private static readonly string m_dataID = "Customize-It-Extended";
 
         private List<PropertyEntry> CustomDataList
         {
@@ -52,7 +52,7 @@ namespace CustomizeItEnhanced
         {
             base.OnSaveData();
 
-            if (!CustomizeItEnhancedMod.Settings.SavePerCity || Instance.CustomData == null)
+            if (!CustomizeItExtendedMod.Settings.SavePerCity || Instance.CustomData == null)
                 return;
 
             using (var stream = new MemoryStream())
@@ -67,7 +67,7 @@ namespace CustomizeItEnhanced
         {
             base.OnLoadData();
 
-            if (!CustomizeItEnhancedMod.Settings.SavePerCity)
+            if (!CustomizeItExtendedMod.Settings.SavePerCity)
                 return;
 
             var data = serializableDataManager.LoadData(m_dataID);
@@ -86,7 +86,7 @@ namespace CustomizeItEnhanced
             {
                 for (uint x = 0; x < PrefabCollection<BuildingInfo>.LoadedCount(); x++)
                 {
-                    if (CustomizeItEnhancedTool.instance.CustomData.TryGetValue(PrefabCollection<BuildingInfo>.GetLoaded(x).name, out Properties customProps))
+                    if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(PrefabCollection<BuildingInfo>.GetLoaded(x).name, out Properties customProps))
                     {
                         PrefabCollection<BuildingInfo>.GetLoaded(x).LoadProperties(customProps);
                     }

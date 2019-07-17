@@ -1,8 +1,8 @@
 ﻿using ColossalFramework.IO;
 using ColossalFramework.UI;
-using CustomizeItEnhanced.Internal;
-using CustomizeItEnhanced.Legacy;
-using CustomizeItEnhanced.Settings;
+using CustomizeItExtended.Internal;
+using CustomizeItExtended.Legacy;
+using CustomizeItExtended.Settings;
 using Harmony;
 using ICities;
 using System;
@@ -16,29 +16,29 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended
 {
-    public class CustomizeItEnhancedMod : IUserMod
+    public class CustomizeItExtendedMod : IUserMod
     {
-        public string Name => "Customize It! Enhanced";
+        public string Name => "Customize It! Extended";
 
         public string Description => "Change various values on buildings such as garbage accumulation, energy consumption and more!";
 
-        internal static CustomizeItEnhancedSettings _settings;
+        internal static CustomizeItExtendedSettings _settings;
 
         private static HarmonyInstance _harmony;
 
-        public static CustomizeItEnhancedSettings Settings
+        public static CustomizeItExtendedSettings Settings
         {
             get
             {
                 if(_settings == null)
                 {
-                    _settings = CustomizeItEnhancedSettings.Load();
+                    _settings = CustomizeItExtendedSettings.Load();
 
                     if(_settings == null)
                     {
-                        _settings = new CustomizeItEnhancedSettings();
+                        _settings = new CustomizeItExtendedSettings();
                         _settings.Save();
                     }
                 }
@@ -51,11 +51,11 @@ namespace CustomizeItEnhanced
             }
         }
 
-        private CustomizeItEnhancedTool Instance => CustomizeItEnhancedTool.instance;
+        private CustomizeItExtendedTool Instance => CustomizeItExtendedTool.instance;
 
         public void OnEnabled()
         {
-            _harmony = HarmonyInstance.Create("com.github.celisuis.csl.customizeitenhanced");
+            _harmony = HarmonyInstance.Create("com.github.celisuis.csl.customizeitExtended");
 
             try
             {
@@ -63,7 +63,7 @@ namespace CustomizeItEnhanced
             }
             catch (Exception e)
             {
-                DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, $"[Customize It Enhanced] Failed to Patch Building Info. {e.Message} - {e.StackTrace}");
+                DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, $"[Customize It Extended] Failed to Patch Building Info. {e.Message} - {e.StackTrace}");
             }
         }
 
@@ -92,7 +92,7 @@ namespace CustomizeItEnhanced
                         if (building == null || building.m_buildingAI == null || !(building.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI))))
                             continue;
 
-                        CustomizeItEnhancedTool.instance.ResetBuilding(building);
+                        CustomizeItExtendedTool.instance.ResetBuilding(building);
 
                     }
                 });
@@ -102,7 +102,7 @@ namespace CustomizeItEnhanced
 
             var importButton = (UIButton)helper.AddButton($"Import Old Settings", ImportOldSettings);
             importButton.isEnabled = File.Exists(Path.Combine(DataLocation.localApplicationData, $"CustomizeIt.xml"));
-            importButton.tooltip = File.Exists(Path.Combine(DataLocation.localApplicationData, $"CustomizeIt.xml")) ? $"Note: This will import your old Customize It settings into Customize It Enhanced." : $"No Old Settings Found.";
+            importButton.tooltip = File.Exists(Path.Combine(DataLocation.localApplicationData, $"CustomizeIt.xml")) ? $"Note: This will import your old Customize It settings into Customize It Extended." : $"No Old Settings Found.";
         }
 
         private void ImportOldSettings()
@@ -119,7 +119,7 @@ namespace CustomizeItEnhanced
                     oldSettings = (CustomizeItSettings)xmlSerializer.Deserialize(reader);
                 }
 
-                _settings = new CustomizeItEnhancedSettings
+                _settings = new CustomizeItExtendedSettings
                 {
                     PanelX = oldSettings.PanelX,
                     PanelY = oldSettings.PanelY,
@@ -128,7 +128,7 @@ namespace CustomizeItEnhanced
 
                 foreach(var entry in oldSettings.Entries)
                 {
-                    CustomizeItEnhancedTool.instance.CustomData.Add(entry.Key, entry.Value);
+                    CustomizeItExtendedTool.instance.CustomData.Add(entry.Key, entry.Value);
                 }
                 Settings.Save();
             }

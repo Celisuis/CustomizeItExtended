@@ -1,8 +1,8 @@
-﻿using CustomizeItEnhanced.Extensions;
-using CustomizeItEnhanced.Internal;
+﻿using CustomizeItExtended.Extensions;
+using CustomizeItExtended.Internal;
 using Harmony;
 
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended
 {
     [HarmonyPatch(typeof(BuildingInfo), "InitializePrefab")]
     public static class InitializePrefabPatch
@@ -14,12 +14,12 @@ namespace CustomizeItEnhanced
             if (info == null ||info.m_buildingAI == null || !(info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI))))
                 return;
 
-            if(!CustomizeItEnhancedTool.instance.OriginalData.TryGetValue(info.name, out Properties originalProps))
+            if(!CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out Properties originalProps))
             {
-                CustomizeItEnhancedTool.instance.OriginalData.Add(info.name, info.GetProperties());
+                CustomizeItExtendedTool.instance.OriginalData.Add(info.name, info.GetProperties());
             }
 
-            if(CustomizeItEnhancedTool.instance.CustomData.TryGetValue(info.name, out Properties customProps))
+            if(CustomizeItExtendedTool.instance.CustomData.TryGetValue(info.name, out Properties customProps))
             {
                 info.LoadProperties(customProps);
             }

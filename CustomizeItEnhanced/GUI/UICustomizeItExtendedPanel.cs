@@ -1,20 +1,20 @@
 ﻿using ColossalFramework.PlatformServices;
 using ColossalFramework.UI;
-using CustomizeItEnhanced.GUI;
-using CustomizeItEnhanced.Internal;
+using CustomizeItExtended.GUI;
+using CustomizeItExtended.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended
 {
-    public class UICustomizeItEnhancedPanel : UIPanel
+    public class UICustomizeItExtendedPanel : UIPanel
     {
-        private BuildingInfo SelectedBuilding => CustomizeItEnhancedTool.instance.CurrentSelectedBuilding;
+        private BuildingInfo SelectedBuilding => CustomizeItExtendedTool.instance.CurrentSelectedBuilding;
 
-        internal static UICustomizeItEnhancedPanel Instance;
+        internal static UICustomizeItExtendedPanel Instance;
 
         private List<UILabel> Labels;
 
@@ -29,7 +29,7 @@ namespace CustomizeItEnhanced
 
         private void Setup()
         {
-            name = "CustomizeItEnhancedPanel";
+            name = "CustomizeItExtendedPanel";
             isVisible = false;
             canFocus = true;
             isInteractive = true;
@@ -81,9 +81,9 @@ namespace CustomizeItEnhanced
             height = (Inputs.Count * (UIUtils.FieldHeight + UIUtils.FieldMargin)) + (UIUtils.FieldMargin * 3);
             UIPanelWrapper.Instance.height = height + UITitleBar.Instance.height;
 
-            var anchor = CustomizeItEnhancedTool.instance.ServiceBuildingPanel.component;
+            var anchor = CustomizeItExtendedTool.instance.ServiceBuildingPanel.component;
 
-            UIPanelWrapper.Instance.relativePosition = new UnityEngine.Vector3(CustomizeItEnhancedMod.Settings.PanelX, CustomizeItEnhancedMod.Settings.PanelY);
+            UIPanelWrapper.Instance.relativePosition = new UnityEngine.Vector3(CustomizeItExtendedMod.Settings.PanelX, CustomizeItExtendedMod.Settings.PanelY);
             isVisible = UIPanelWrapper.Instance.isVisible = UITitleBar.Instance.isVisible = UITitleBar.Instance.dragHandle.isVisible = true;
         }
 

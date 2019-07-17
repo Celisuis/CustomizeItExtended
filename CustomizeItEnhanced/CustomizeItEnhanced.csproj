@@ -57,12 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomizeItEnhancedMod.cs" />
+    <Compile Include="CustomizeItExtendedMod.cs" />
     <Compile Include="Legacy\CustomizeItSettings.cs" />
     <Compile Include="Legacy\Entry.cs" />
     <Compile Include="Extensions\BuildingInfoExtensions.cs" />
     <Compile Include="GUI\UIPanelWrapper.cs" />
-    <Compile Include="Internal\CustomizeItEnhancedTool.cs" />
+    <Compile Include="Internal\CustomizeItExtendedTool.cs" />
     <Compile Include="Internal\Properties.cs" />
     <Compile Include="Internal\PropertyEntry.cs" />
     <Compile Include="Legacy\CustomizableProperties.cs" />
@@ -70,8 +70,8 @@
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializationExtension.cs" />
-    <Compile Include="Settings\CustomizeItEnhancedSettings.cs" />
-    <Compile Include="GUI\UICustomizeItEnhancedPanel.cs" />
+    <Compile Include="Settings\CustomizeItExtendedSettings.cs" />
+    <Compile Include="GUI\UICustomizeItExtendedPanel.cs" />
     <Compile Include="GUI\UITitleBar.cs" />
     <Compile Include="GUI\UIUtils.cs" />
   </ItemGroup>

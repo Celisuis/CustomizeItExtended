@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace CustomizeItEnhanced.Legacy
+namespace CustomizeItExtended.Legacy
 {
     [Serializable]
     public class CustomizableProperties

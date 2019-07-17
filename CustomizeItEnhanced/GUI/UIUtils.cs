@@ -1,12 +1,12 @@
 ﻿using ColossalFramework.UI;
-using CustomizeItEnhanced.Internal;
+using CustomizeItExtended.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace CustomizeItEnhanced
+namespace CustomizeItExtended
 {
     public static class UIUtils
     {
@@ -163,7 +163,7 @@ namespace CustomizeItEnhanced
         public static UIButton CreateResetButton(UIComponent parent)
         {
             UIButton button = parent.AddUIComponent<UIButton>();
-            button.name = "CustomizeItEnhancedResetButton";
+            button.name = "CustomizeItExtendedResetButton";
             button.text = "Reset";
             button.width = FieldWidth;
             button.height = FieldHeight;
@@ -180,10 +180,10 @@ namespace CustomizeItEnhanced
 
             button.eventClick += (x, y) =>
             {
-                var selectedBuilding = CustomizeItEnhancedTool.instance.CurrentSelectedBuilding;
-                CustomizeItEnhancedTool.instance.ResetBuilding(selectedBuilding);
+                var selectedBuilding = CustomizeItExtendedTool.instance.CurrentSelectedBuilding;
+                CustomizeItExtendedTool.instance.ResetBuilding(selectedBuilding);
 
-                foreach (var input in UICustomizeItEnhancedPanel.Instance.Inputs)
+                foreach (var input in UICustomizeItExtendedPanel.Instance.Inputs)
                 {
                     if (input is UITextField)
                     {
@@ -202,7 +202,7 @@ namespace CustomizeItEnhanced
         public static UIButton CreateToggleButton(UIComponent parentComponent, Vector3 offset, UIAlignAnchor anchor, MouseEventHandler handler)
         {
             UIButton uibutton = UIView.GetAView().AddUIComponent(typeof(UIButton)) as UIButton;
-            uibutton.name = "CustomizeItEnhancedButton";
+            uibutton.name = "CustomizeItExtendedButton";
             uibutton.width = 26f;
             uibutton.height = 26f;
             uibutton.normalFgSprite = "Options";
@@ -241,13 +241,13 @@ namespace CustomizeItEnhanced
             checkBox.checkedBoxObject.relativePosition = Vector3.zero;
 
             checkBox.eventCheckChanged += EventCheckChangedHandler;
-            checkBox.isChecked = (bool)CustomizeItEnhancedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType().GetField(fieldName).GetValue(CustomizeItEnhancedTool.instance.CurrentSelectedBuilding.m_buildingAI);
+            checkBox.isChecked = (bool)CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType().GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI);
             return checkBox;
         }
 
         private static void EventCheckChangedHandler(UIComponent component, bool value)
         {
-            var ai = CustomizeItEnhancedTool.instance.CurrentSelectedBuilding.m_buildingAI;
+            var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
             var type = ai.GetType();
             type.GetField(component.name)?.SetValue(ai, value);
         }
@@ -276,7 +276,7 @@ namespace CustomizeItEnhanced
             textField.selectOnFocus = true;
             textField.eventKeyPress += EventKeyPressedHandler;
             textField.eventTextSubmitted += EventTextSubmittedHandler;
-            textField.text = CustomizeItEnhancedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType().GetField(fieldName).GetValue(CustomizeItEnhancedTool.instance.CurrentSelectedBuilding.m_buildingAI).ToString();
+            textField.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType().GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI).ToString();
 
             return textField;
         }
@@ -285,7 +285,7 @@ namespace CustomizeItEnhanced
         {
             if (int.TryParse(value, out int result))
             {
-                var ai = CustomizeItEnhancedTool.instance.CurrentSelectedBuilding.m_buildingAI;
+                var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
                 var type = ai.GetType();
                 if (component.name.IndexOf("capacity", StringComparison.OrdinalIgnoreCase) >= 0 && result == 0)
                 {
