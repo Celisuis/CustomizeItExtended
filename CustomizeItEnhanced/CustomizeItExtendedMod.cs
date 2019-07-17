@@ -11,6 +11,8 @@ using System.Reflection;
 using System.Xml.Serialization;
 using UnityEngine;
 
+// ReSharper disable InconsistentNaming
+
 namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
@@ -47,7 +49,7 @@ namespace CustomizeItExtended
 
         public void OnEnabled()
         {
-            _harmony = HarmonyInstance.Create("com.github.celisuis.csl.customizeitExtended");
+            _harmony = HarmonyInstance.Create("com.github.celisuis.csl.customizeitextended");
 
             try
             {
@@ -64,7 +66,7 @@ namespace CustomizeItExtended
             _harmony.UnpatchAll();
         }
 
-        public void OnSettingsUi(UIHelperBase helper)
+        public void OnSettingsUI(UIHelperBase helper)
         {
             helper.AddSpace(10);
             Instance.SavePerCity = (UICheckBox)helper.AddCheckbox("Save Per City", Settings.SavePerCity, (x) =>
@@ -117,6 +119,8 @@ namespace CustomizeItExtended
                     PanelY = oldSettings.PanelY,
                     SavePerCity = oldSettings.SavePerCity
                 };
+
+                CustomizeItExtendedTool.instance.CustomData.Clear();
 
                 foreach (var entry in oldSettings.Entries)
                 {

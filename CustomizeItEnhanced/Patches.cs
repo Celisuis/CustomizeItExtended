@@ -7,9 +7,9 @@ namespace CustomizeItExtended
     [HarmonyPatch(typeof(BuildingInfo), "InitializePrefab")]
     public static class InitializePrefabPatch
     {
-        public static void Postfix(BuildingInfo instance)
+        public static void Postfix(BuildingInfo __instance)
         {
-            var info = instance;
+            var info = __instance;
 
             if (info == null || info.m_buildingAI == null ||
                 !info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI)))
