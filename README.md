@@ -1,2 +1,2 @@
-# CustomizeItEnhanced
- Lets you change the "customizable property" fields of buildings directly in-game.
+# Customize It! Extended
+Extended Version of the Popular Customize It! Mod. Now Supports Industries and Campus
