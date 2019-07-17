@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Internal;
+using CustomizeItExtended.Legacy;
 using ICities;
 
 namespace CustomizeItExtended
@@ -64,7 +65,15 @@ namespace CustomizeItExtended
             var data = serializableDataManager.LoadData(MDataId);
 
             if (data == null || data.Length == 0)
+            {
+                var oldData = serializableDataManager.LoadData("CUSTOMIZE-IT-DATA");
+
+                if (oldData == null || oldData.Length == 0)
+                    return;
+
+                ImportOldData();
                 return;
+            }
 
             var formatter = new BinaryFormatter();
 
@@ -79,6 +88,44 @@ namespace CustomizeItExtended
                     if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(
                         PrefabCollection<BuildingInfo>.GetLoaded(x).name, out var customProps))
                         PrefabCollection<BuildingInfo>.GetLoaded(x).LoadProperties(customProps);
+            });
+        }
+
+        private void ImportOldData()
+        {
+            var oldData = serializableDataManager.LoadData("CUSTOMIZE-IT-DATA");
+
+            if (oldData == null || oldData.Length == 0)
+                return;
+
+            var formatter = new BinaryFormatter();
+
+            List<CustomizablePropertiesEntry> oldCustomData;
+
+            using (var stream = new MemoryStream(oldData))
+            {
+                oldCustomData = (List<CustomizablePropertiesEntry>) formatter.Deserialize(stream);
+            }
+
+            List<PropertyEntry> newData = new List<PropertyEntry>();
+
+            foreach (var entry in oldCustomData)
+            {
+                newData.Add(entry);
+            }
+
+            CustomDataList = newData;
+
+            SimulationManager.instance.AddAction(() =>
+            {
+                for (uint x = 0; x < PrefabCollection<BuildingInfo>.LoadedCount(); x++)
+                {
+                    if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(
+                        PrefabCollection<BuildingInfo>.GetLoaded(x).name, out var customProps))
+                    {
+                        PrefabCollection<BuildingInfo>.GetLoaded(x).LoadProperties(customProps);
+                    }
+                }
             });
         }
     }
