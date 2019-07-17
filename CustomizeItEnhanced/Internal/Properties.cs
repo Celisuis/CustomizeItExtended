@@ -1,10 +1,9 @@
-﻿
-using CustomizeItExtended.Legacy;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using CustomizeItExtended.Legacy;
+// ReSharper disable InconsistentNaming
 
 namespace CustomizeItExtended.Internal
 {
@@ -194,7 +193,6 @@ namespace CustomizeItExtended.Internal
 
         public Properties()
         {
-
         }
 
         public Properties(BuildingInfo info)
@@ -203,46 +201,26 @@ namespace CustomizeItExtended.Internal
 
             var fields = ai.GetType().GetFields();
 
-            var oldFields = new Dictionary<string, FieldInfo>();
-
-            foreach(var field in fields)
-            {
-                oldFields.Add(field.Name, field);
-            }
+            var oldFields = fields.ToDictionary(field => field.Name);
 
             fields = GetType().GetFields();
 
-            foreach(var customField in fields)
-            {
-                if(oldFields.ContainsKey(customField.Name))
-                {
+            foreach (var customField in fields)
+                if (oldFields.ContainsKey(customField.Name))
                     customField.SetValue(this, oldFields[customField.Name].GetValue(ai));
-                }
-            }
         }
 
         public Properties(CustomizableProperties oldProps)
         {
-            var originalFields = new Dictionary<string, FieldInfo>();
-
             var fields = oldProps.GetType().GetFields();
 
-
-            foreach(var field in fields)
-            {
-                originalFields.Add(field.Name, field);
-            }
+            var originalFields = fields.ToDictionary(field => field.Name);
 
             fields = GetType().GetFields();
 
-            foreach(var customField in fields)
-            {
-                if(originalFields.ContainsKey(customField.Name))
-                {
+            foreach (var customField in fields)
+                if (originalFields.ContainsKey(customField.Name))
                     customField.SetValue(this, originalFields[customField.Name].GetValue(oldProps));
-                }
-            }
-
         }
 
         public static implicit operator Properties(CustomizableProperties props)

@@ -1,8 +1,6 @@
-﻿using CustomizeItExtended.Legacy;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using CustomizeItExtended.Legacy;
 
 namespace CustomizeItExtended.Internal
 {
@@ -14,7 +12,6 @@ namespace CustomizeItExtended.Internal
 
         public PropertyEntry()
         {
-
         }
 
         public PropertyEntry(string key, Properties value)

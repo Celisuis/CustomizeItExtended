@@ -1,19 +1,15 @@
 ﻿using ColossalFramework.UI;
 using CustomizeItExtended.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace CustomizeItExtended
 {
-    public class UITitleBar : UIPanel
+    public class UiTitleBar : UIPanel
     {
-        public static UITitleBar Instance;
-        private UILabel titleLabel;
-        private UIButton closeButton;
-        public UIDragHandle dragHandle;
+        public static UiTitleBar Instance;
+        private UIButton _closeButton;
+        private UILabel _titleLabel;
+        public UIDragHandle DragHandle;
 
         public override void Start()
         {
@@ -32,39 +28,40 @@ namespace CustomizeItExtended
             width = parent.width;
             height = 40f;
 
-            dragHandle = AddUIComponent<UIDragHandle>();
-            dragHandle.height = height;
-            dragHandle.relativePosition = Vector3.zero;
-            dragHandle.target = parent;
-            dragHandle.eventMouseUp += (c, e) =>
+            DragHandle = AddUIComponent<UIDragHandle>();
+            DragHandle.height = height;
+            DragHandle.relativePosition = Vector3.zero;
+            DragHandle.target = parent;
+            DragHandle.eventMouseUp += (c, e) =>
             {
                 CustomizeItExtendedMod.Settings.PanelX = parent.relativePosition.x;
                 CustomizeItExtendedMod.Settings.PanelY = parent.relativePosition.y;
                 CustomizeItExtendedMod.Settings.Save();
             };
 
-            titleLabel = AddUIComponent<UILabel>();
-            titleLabel.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
-            titleLabel.textScale = 0.9f;
-            titleLabel.isInteractive = false;
+            _titleLabel = AddUIComponent<UILabel>();
+            _titleLabel.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
+            _titleLabel.textScale = 0.9f;
+            _titleLabel.isInteractive = false;
 
-            closeButton = AddUIComponent<UIButton>();
-            closeButton.size = new Vector2(20, 20);
-            closeButton.relativePosition = new Vector3(width - closeButton.width - 10f, 10f);
-            closeButton.normalBgSprite = "DeleteLineButton";
-            closeButton.hoveredBgSprite = "DeleteLineButtonHovered";
-            closeButton.pressedBgSprite = "DeleteLineButtonPressed";
-            closeButton.eventClick += (component, param) =>
+            _closeButton = AddUIComponent<UIButton>();
+            _closeButton.size = new Vector2(20, 20);
+            _closeButton.relativePosition = new Vector3(width - _closeButton.width - 10f, 10f);
+            _closeButton.normalBgSprite = "DeleteLineButton";
+            _closeButton.hoveredBgSprite = "DeleteLineButtonHovered";
+            _closeButton.pressedBgSprite = "DeleteLineButtonPressed";
+            _closeButton.eventClick += (component, param) =>
             {
                 CustomizeItExtendedTool.instance.CustomizeItExtendedPanel.isVisible = false;
-                UIUtils.DeepDestroy(CustomizeItExtendedTool.instance.CustomizeItExtendedPanel);
+                UiUtils.DeepDestroy(CustomizeItExtendedTool.instance.CustomizeItExtendedPanel);
             };
         }
 
         public void RecenterElements()
         {
-            closeButton.relativePosition = new Vector3(width - closeButton.width - 10f, 10f);
-            titleLabel.relativePosition = new Vector3((width - titleLabel.width) / 2f, (height - titleLabel.height) / 2);
+            _closeButton.relativePosition = new Vector3(width - _closeButton.width - 10f, 10f);
+            _titleLabel.relativePosition =
+                new Vector3((width - _titleLabel.width) / 2f, (height - _titleLabel.height) / 2);
         }
     }
 }

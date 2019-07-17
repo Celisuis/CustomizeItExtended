@@ -1,8 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CustomizeItExtended.Legacy
 {
@@ -14,7 +11,6 @@ namespace CustomizeItExtended.Legacy
 
         public CustomizablePropertiesEntry()
         {
-
         }
 
         public CustomizablePropertiesEntry(string key, CustomizableProperties value)
@@ -23,7 +19,8 @@ namespace CustomizeItExtended.Legacy
             Value = value;
         }
 
-        public static implicit operator CustomizablePropertiesEntry(KeyValuePair<string, CustomizableProperties> keyValuePair)
+        public static implicit operator CustomizablePropertiesEntry(
+            KeyValuePair<string, CustomizableProperties> keyValuePair)
         {
             return new CustomizablePropertiesEntry(keyValuePair.Key, keyValuePair.Value);
         }

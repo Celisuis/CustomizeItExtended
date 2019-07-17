@@ -7,8 +7,8 @@
     <ProjectGuid>{3C976608-0668-4460-933E-FA0C65E2BFA6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CustomizeItEnhanced</RootNamespace>
-    <AssemblyName>CustomizeItEnhanced</AssemblyName>
+    <RootNamespace>CustomizeItExtended</RootNamespace>
+    <AssemblyName>CustomizeItExtended</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace CustomizeItExtended.Extensions
 {
@@ -13,10 +12,7 @@ namespace CustomizeItExtended.Extensions
     {
         public static Properties GetOriginalProperties(this BuildingInfo info)
         {
-            if (CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out Properties props))
-                return props;
-
-            return null;
+            return CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out Properties props) ? props : null;
         }
 
         public static void LoadProperties(this BuildingInfo info, Properties props)
@@ -25,23 +21,18 @@ namespace CustomizeItExtended.Extensions
 
             var originalFields = info.m_buildingAI.GetType().GetFields();
 
-            var namedFields = new Dictionary<string, FieldInfo>();
+            var namedFields = customFields.ToDictionary(customField => customField.Name);
 
-            foreach(var customField in customFields)
-            {
-                namedFields.Add(customField.Name, customField);
-            }
-
-            foreach(var originalField in originalFields)
+            foreach (var originalField in originalFields)
             {
                 try
                 {
-                    if(namedFields.TryGetValue(originalField.Name, out FieldInfo fieldInfo))
+                    if (namedFields.TryGetValue(originalField.Name, out FieldInfo fieldInfo))
                     {
                         originalField.SetValue(info.m_buildingAI, fieldInfo.GetValue(props));
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, $"[Customize It! Extended] Failed to Load Properties. {e.Message} - {e.StackTrace}");
                 }
@@ -53,12 +44,12 @@ namespace CustomizeItExtended.Extensions
             return new Properties(info);
         }
 
-        public static UIPanelWrapper GenerateCustomizeItExtendedPanel(this BuildingInfo info)
+        public static UiPanelWrapper GenerateCustomizeItExtendedPanel(this BuildingInfo info)
         {
             CustomizeItExtendedTool.instance.CurrentSelectedBuilding = info;
-            UIUtils.DeepDestroy(UIView.Find("CustomizeItExtendedPanelWrapper"));
+            UiUtils.DeepDestroy(UIView.Find("CustomizeItExtendedPanelWrapper"));
 
-            return UIView.GetAView().AddUIComponent(typeof(UIPanelWrapper)) as UIPanelWrapper;
+            return UIView.GetAView().AddUIComponent(typeof(UiPanelWrapper)) as UiPanelWrapper;
         }
     }
 }

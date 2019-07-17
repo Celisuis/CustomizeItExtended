@@ -7,22 +7,19 @@ namespace CustomizeItExtended
     [HarmonyPatch(typeof(BuildingInfo), "InitializePrefab")]
     public static class InitializePrefabPatch
     {
-        public static void Postfix(BuildingInfo __instance)
+        public static void Postfix(BuildingInfo instance)
         {
-            var info = __instance;
+            var info = instance;
 
-            if (info == null ||info.m_buildingAI == null || !(info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI))))
+            if (info == null || info.m_buildingAI == null ||
+                !info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI)))
                 return;
 
-            if(!CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out Properties originalProps))
-            {
+            if (!CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out var originalProps))
                 CustomizeItExtendedTool.instance.OriginalData.Add(info.name, info.GetProperties());
-            }
 
-            if(CustomizeItExtendedTool.instance.CustomData.TryGetValue(info.name, out Properties customProps))
-            {
+            if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(info.name, out var customProps))
                 info.LoadProperties(customProps);
-            }
         }
     }
 }

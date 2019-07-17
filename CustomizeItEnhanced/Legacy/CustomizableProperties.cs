@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
+// ReSharper disable InconsistentNaming
 
 namespace CustomizeItExtended.Legacy
 {
@@ -137,11 +136,8 @@ namespace CustomizeItExtended.Legacy
         public int m_tourismBonus;
         public int m_facultyBonusFactor;
 
-
-
         public CustomizableProperties()
         {
-
         }
 
         public CustomizableProperties(BuildingInfo building)
@@ -153,7 +149,7 @@ namespace CustomizeItExtended.Legacy
             foreach (var field in fields)
                 buildingFields.Add(field.Name, field);
 
-            fields = this.GetType().GetFields();
+            fields = GetType().GetFields();
 
             foreach (var field in fields)
                 if (buildingFields.ContainsKey(field.Name))

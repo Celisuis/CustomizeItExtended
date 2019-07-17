@@ -2,12 +2,8 @@
 using ColossalFramework.UI;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.GUI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace CustomizeItExtended.Internal
 {
@@ -16,16 +12,16 @@ namespace CustomizeItExtended.Internal
         internal Dictionary<string, Properties> CustomData = new Dictionary<string, Properties>();
         internal Dictionary<string, Properties> OriginalData = new Dictionary<string, Properties>();
 
-        private bool isInitialized;
+        private bool _isInitialized;
 
-        private bool isButtonInitialized;
+        private bool _isButtonInitialized;
 
         internal BuildingInfo CurrentSelectedBuilding;
         internal CityServiceWorldInfoPanel ServiceBuildingPanel;
 
         private UIButton _customizeItExtendedButton;
 
-        internal UIPanelWrapper CustomizeItExtendedPanel;
+        internal UiPanelWrapper CustomizeItExtendedPanel;
 
         internal UICheckBox SavePerCity;
 
@@ -35,25 +31,24 @@ namespace CustomizeItExtended.Internal
 
         internal string CheckboxTooltip => SavePerCity != null && SavePerCity.isEnabled ? null : "This option is only available in the main menu.";
 
-
         public void Initialize()
         {
-            if (isInitialized)
+            if (_isInitialized)
                 return;
 
             AddPanelButton();
-            isInitialized = true;
+            _isInitialized = true;
         }
 
         public void Release()
         {
-            isButtonInitialized = false;
-            isInitialized = false;
+            _isButtonInitialized = false;
+            _isInitialized = false;
         }
 
         public void SaveBuilding(BuildingInfo info)
         {
-            if(!CustomData.TryGetValue(info.name, out Properties props))
+            if (!CustomData.TryGetValue(info.name, out Properties props))
             {
                 CustomData.Add(info.name, new Properties(info));
             }
@@ -62,7 +57,7 @@ namespace CustomizeItExtended.Internal
                 CustomData[info.name] = new Properties(info);
             }
 
-            if(!CustomizeItExtendedMod.Settings.SavePerCity)
+            if (!CustomizeItExtendedMod.Settings.SavePerCity)
             {
                 CustomizeItExtendedMod.Settings.Save();
             }
@@ -72,41 +67,38 @@ namespace CustomizeItExtended.Internal
         {
             var originalProperties = info.GetOriginalProperties();
 
-            if(CustomData.TryGetValue(info.name, out Properties customProps))
+            if (CustomData.TryGetValue(info.name, out Properties customProps))
             {
                 CustomData.Remove(info.name);
-
             }
             info.LoadProperties(originalProperties);
 
-            if(!CustomizeItExtendedMod.Settings.SavePerCity)
+            if (!CustomizeItExtendedMod.Settings.SavePerCity)
             {
                 CustomizeItExtendedMod.Settings.Save();
             }
-
-
         }
 
         private void AddPanelButton()
         {
-            if(!isButtonInitialized)
-            {
-                ServiceBuildingPanel = GameObject.Find("(Library) CityServiceWorldInfoPanel").GetComponent<CityServiceWorldInfoPanel>();
+            if (_isButtonInitialized)
+                return;
 
-                if(ServiceBuildingPanel != null)
-                {
-                    AddBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton, new Vector3(-7f, 43f, 0f));
-                    isButtonInitialized = true;
-                }
-            }
+            ServiceBuildingPanel = GameObject.Find("(Library) CityServiceWorldInfoPanel").GetComponent<CityServiceWorldInfoPanel>();
+
+            if (ServiceBuildingPanel == null)
+                return;
+
+            AddBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton, new Vector3(120f, 5f, 0f));
+            _isButtonInitialized = true;
         }
 
         private void AddBuildingPropertiesButton(WorldInfoPanel infoPanel, out UIButton button, Vector3 offset)
         {
-            button = UIUtils.CreateToggleButton(infoPanel.component, offset, UIAlignAnchor.BottomRight, delegate (UIComponent comp, UIMouseEventParameter e)
+            button = UiUtils.CreateToggleButton(infoPanel.component, offset, UIAlignAnchor.BottomLeft, (UIComponent comp, UIMouseEventParameter e) =>
             {
-                InstanceID instanceID = (InstanceID)infoPanel.GetType().GetField("m_InstanceID", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(infoPanel);
-                var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
+                InstanceID instanceId = (InstanceID)infoPanel.GetType().GetField("m_InstanceID", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(infoPanel);
+                var building = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
 
                 if (CustomizeItExtendedPanel == null || building != CurrentSelectedBuilding)
                 {
@@ -115,7 +107,7 @@ namespace CustomizeItExtended.Internal
                 else
                 {
                     CustomizeItExtendedPanel.isVisible = false;
-                    UIUtils.DeepDestroy(CustomizeItExtendedPanel);
+                    UiUtils.DeepDestroy(CustomizeItExtendedPanel);
                 }
 
                 if (comp.hasFocus)
@@ -133,6 +125,5 @@ namespace CustomizeItExtended.Internal
             SavePerCity.Find<UISprite>("Unchecked").spriteName = isInGame ? "ToggleBaseDisabled" : "ToggleBase";
             ((UISprite)SavePerCity.checkedBoxObject).spriteName = isInGame ? "ToggleBaseDisabled" : "ToggleBaseFocused";
         }
-
     }
 }

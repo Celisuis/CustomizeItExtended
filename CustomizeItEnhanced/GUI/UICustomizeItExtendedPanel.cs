@@ -1,24 +1,20 @@
-﻿using ColossalFramework.PlatformServices;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ColossalFramework.UI;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace CustomizeItExtended
 {
-    public class UICustomizeItExtendedPanel : UIPanel
+    public class UiCustomizeItExtendedPanel : UIPanel
     {
-        private BuildingInfo SelectedBuilding => CustomizeItExtendedTool.instance.CurrentSelectedBuilding;
+        internal static UiCustomizeItExtendedPanel Instance;
 
-        internal static UICustomizeItExtendedPanel Instance;
-
-        private List<UILabel> Labels;
+        private List<UILabel> _labels;
 
         internal List<UIComponent> Inputs;
+        private BuildingInfo SelectedBuilding => CustomizeItExtendedTool.instance.CurrentSelectedBuilding;
 
         public override void Start()
         {
@@ -33,7 +29,7 @@ namespace CustomizeItExtended
             isVisible = false;
             canFocus = true;
             isInteractive = true;
-            relativePosition = new UnityEngine.Vector3(0f, UITitleBar.Instance.height);
+            relativePosition = new Vector3(0f, UiTitleBar.Instance.height);
             width = parent.width;
 
             var ai = SelectedBuilding.m_buildingAI;
@@ -44,65 +40,70 @@ namespace CustomizeItExtended
 
             Inputs = new List<UIComponent>();
 
-            Labels = new List<UILabel>();
+            _labels = new List<UILabel>();
 
-            float widestWidth = 0f;
+            var widestWidth = 0f;
 
-            foreach(var field in fields.Where(x => fieldsToRetrieve.Contains(x.Name)))
+            foreach (var field in fields.Where(x => fieldsToRetrieve.Contains(x.Name)))
             {
                 var label = AddUIComponent<UILabel>();
                 label.name = field.Name + "Label";
-                label.text = UIUtils.FieldNames[field.Name];
+                label.text = UiUtils.FieldNames[field.Name];
                 label.textScale = 0.9f;
                 label.isInteractive = false;
 
-                if(field.FieldType == typeof(int) || field.FieldType == typeof(float))
+                if (field.FieldType == typeof(int) || field.FieldType == typeof(float))
                 {
-                    Inputs.Add(UIUtils.CreateTextField(this, field.Name));
-                    Labels.Add(label);
+                    Inputs.Add(UiUtils.CreateTextField(this, field.Name));
+                    _labels.Add(label);
                 }
-                else if(field.FieldType == typeof(bool))
+                else if (field.FieldType == typeof(bool))
                 {
-                    Inputs.Add(UIUtils.CreateCheckBox(this, field.Name));
-                    Labels.Add(label);
+                    Inputs.Add(UiUtils.CreateCheckBox(this, field.Name));
+                    _labels.Add(label);
                 }
 
-                if ((label.width + UIUtils.FieldWidth + (UIUtils.FieldMargin * 6)) > widestWidth)
-                    widestWidth = label.width + UIUtils.FieldWidth + (UIUtils.FieldMargin * 6);
+                if (label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
+                    widestWidth = label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
             }
 
             Inputs.Sort((x, y) => x.name.CompareTo(y.name));
-            Labels.Sort((x, y) => x.name.CompareTo(y.name));
+            _labels.Sort((x, y) => x.name.CompareTo(y.name));
 
-            Inputs.Add(UIUtils.CreateResetButton(this));
-            width = UIPanelWrapper.Instance.width = UITitleBar.Instance.width = UITitleBar.Instance.dragHandle.width = widestWidth;
-            UITitleBar.Instance.RecenterElements();
+            Inputs.Add(UiUtils.CreateResetButton(this));
+            width = UiPanelWrapper.Instance.width =
+                UiTitleBar.Instance.width = UiTitleBar.Instance.DragHandle.width = widestWidth;
+            UiTitleBar.Instance.RecenterElements();
             Align();
-            height = (Inputs.Count * (UIUtils.FieldHeight + UIUtils.FieldMargin)) + (UIUtils.FieldMargin * 3);
-            UIPanelWrapper.Instance.height = height + UITitleBar.Instance.height;
+            height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;
+            UiPanelWrapper.Instance.height = height + UiTitleBar.Instance.height;
 
-            var anchor = CustomizeItExtendedTool.instance.ServiceBuildingPanel.component;
 
-            UIPanelWrapper.Instance.relativePosition = new UnityEngine.Vector3(CustomizeItExtendedMod.Settings.PanelX, CustomizeItExtendedMod.Settings.PanelY);
-            isVisible = UIPanelWrapper.Instance.isVisible = UITitleBar.Instance.isVisible = UITitleBar.Instance.dragHandle.isVisible = true;
+            UiPanelWrapper.Instance.relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
+                CustomizeItExtendedMod.Settings.PanelY);
+            isVisible = UiPanelWrapper.Instance.isVisible =
+                UiTitleBar.Instance.isVisible = UiTitleBar.Instance.DragHandle.isVisible = true;
         }
 
         private void Align()
         {
-            float inputX = width - UIUtils.FieldWidth - (UIUtils.FieldMargin * 2);
+            var inputX = width - UiUtils.FieldWidth - UiUtils.FieldMargin * 2;
 
-            for(int x = 0; x < Inputs.Count; x++)
+            for (var x = 0; x < Inputs.Count; x++)
             {
-                float finalY = (x * UIUtils.FieldHeight) + ((UIUtils.FieldMargin) * (x + 2));
+                var finalY = x * UiUtils.FieldHeight + UiUtils.FieldMargin * (x + 2);
 
-                if(x < Labels.Count)
+                if (x < _labels.Count)
                 {
-                    float labelX = inputX - Labels[x].width - (UIUtils.FieldMargin * 2);
-                    Labels[x].relativePosition = new UnityEngine.Vector3(labelX, finalY + 4);
+                    var labelX = inputX - _labels[x].width - UiUtils.FieldMargin * 2;
+                    _labels[x].relativePosition = new Vector3(labelX, finalY + 4);
                 }
-                Inputs[x].relativePosition = Inputs[x] is UICheckBox ? new Vector3(inputX + ((UIUtils.FieldWidth - Inputs[x].width) / 2), finalY + ((UIUtils.FieldHeight - Inputs[x].height) / 2)) : new Vector3(inputX, finalY);
+
+                Inputs[x].relativePosition = Inputs[x] is UICheckBox
+                    ? new Vector3(inputX + (UiUtils.FieldWidth - Inputs[x].width) / 2,
+                        finalY + (UiUtils.FieldHeight - Inputs[x].height) / 2)
+                    : new Vector3(inputX, finalY);
             }
         }
-        }
     }
-
+}

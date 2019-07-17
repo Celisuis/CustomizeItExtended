@@ -1,14 +1,13 @@
-﻿using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using ColossalFramework.UI;
+using CustomizeItExtended.Internal;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CustomizeItExtended
 {
-    public static class UIUtils
+    public static class UiUtils
     {
         public const float FieldHeight = 23f;
         public const float FieldWidth = 100f;
@@ -18,7 +17,7 @@ namespace CustomizeItExtended
 
         private static Dictionary<string, string> GetFieldNames()
         {
-            return new Dictionary<string, string>()
+            return new Dictionary<string, string>
             {
                 ["m_constructionCost"] = "Construction Cost",
                 ["m_maintenanceCost"] = "Maintenance Cost",
@@ -136,8 +135,7 @@ namespace CustomizeItExtended
                 ["m_landValueBonus"] = "Land Value Bonus",
                 ["m_healthBonus"] = "Health Bonus",
                 ["m_tourismBonus"] = "Tourism Bonus",
-                ["m_facultyBonusFactor"] = "Faculty Bonus Factor",
-
+                ["m_facultyBonusFactor"] = "Faculty Bonus Factor"
             };
         }
 
@@ -146,23 +144,22 @@ namespace CustomizeItExtended
             if (comp == null)
                 return;
 
-            UIComponent[] childrenComps = comp.GetComponentsInChildren<UIComponent>();
+            var childrenComps = comp.GetComponentsInChildren<UIComponent>();
 
-            if(childrenComps != null && childrenComps.Length > 0)
-            {
-                for(int i = 0; i < childrenComps.Length; i++)
-                {
-                    if (childrenComps[i].parent == comp)
-                        DeepDestroy(childrenComps[i]);
-                }
-                GameObject.Destroy(comp);
-                comp = null;
-            }
+            if (!(childrenComps?.Length > 0))
+                return;
+
+            foreach (var t in childrenComps)
+                if (t.parent == comp)
+                    DeepDestroy(t);
+
+            Object.Destroy(comp);
+            comp = null;
         }
 
         public static UIButton CreateResetButton(UIComponent parent)
         {
-            UIButton button = parent.AddUIComponent<UIButton>();
+            var button = parent.AddUIComponent<UIButton>();
             button.name = "CustomizeItExtendedResetButton";
             button.text = "Reset";
             button.width = FieldWidth;
@@ -183,25 +180,29 @@ namespace CustomizeItExtended
                 var selectedBuilding = CustomizeItExtendedTool.instance.CurrentSelectedBuilding;
                 CustomizeItExtendedTool.instance.ResetBuilding(selectedBuilding);
 
-                foreach (var input in UICustomizeItExtendedPanel.Instance.Inputs)
-                {
-                    if (input is UITextField)
+                foreach (var input in UiCustomizeItExtendedPanel.Instance.Inputs)
+                    switch (input)
                     {
-                        ((UITextField)input).text = selectedBuilding.m_buildingAI.GetType().GetField(input.name)?.GetValue(selectedBuilding.m_buildingAI)?.ToString();
+                        case UITextField field:
+                            field.text = selectedBuilding.m_buildingAI.GetType().GetField(field.name)
+                                ?.GetValue(selectedBuilding.m_buildingAI)?.ToString();
+                            break;
+                        case UICheckBox box:
+                            box.isChecked = (bool) selectedBuilding.m_buildingAI.GetType()
+                                .GetField(box.name)?.GetValue(selectedBuilding.m_buildingAI);
+                            break;
                     }
-                    else if (input is UICheckBox)
-                    {
-                        ((UICheckBox)input).isChecked = (bool)selectedBuilding.m_buildingAI.GetType().GetField(input.name)?.GetValue(selectedBuilding.m_buildingAI);
-                    }
-                }
             };
 
             return button;
         }
 
-        public static UIButton CreateToggleButton(UIComponent parentComponent, Vector3 offset, UIAlignAnchor anchor, MouseEventHandler handler)
+        public static UIButton CreateToggleButton(UIComponent parentComponent, Vector3 offset, UIAlignAnchor anchor,
+            MouseEventHandler handler)
         {
-            UIButton uibutton = UIView.GetAView().AddUIComponent(typeof(UIButton)) as UIButton;
+            var budgetButton = parentComponent.Find<UIButton>("Budget");
+
+            var uibutton = UIView.GetAView().AddUIComponent(typeof(UIButton)) as UIButton;
             uibutton.name = "CustomizeItExtendedButton";
             uibutton.width = 26f;
             uibutton.height = 26f;
@@ -215,33 +216,35 @@ namespace CustomizeItExtended
             uibutton.hoveredBgSprite = "OptionBaseHovered";
             uibutton.focusedBgSprite = "OptionBaseFocused";
             uibutton.pressedBgSprite = "OptionBasePressed";
-            uibutton.eventClick += handler;
             uibutton.AlignTo(parentComponent, anchor);
+            uibutton.eventClick += handler;
             uibutton.relativePosition += offset;
+
             return uibutton;
         }
 
         public static UICheckBox CreateCheckBox(UIComponent parent, string fieldName)
         {
-            UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
+            var checkBox = parent.AddUIComponent<UICheckBox>();
 
             checkBox.name = fieldName;
             checkBox.width = 20f;
             checkBox.height = 20f;
             checkBox.relativePosition = Vector3.zero;
 
-            UISprite sprite = checkBox.AddUIComponent<UISprite>();
+            var sprite = checkBox.AddUIComponent<UISprite>();
             sprite.spriteName = "ToggleBase";
             sprite.size = new Vector2(16f, 16f);
             sprite.relativePosition = new Vector3(2f, 2f);
 
             checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
-            ((UISprite)checkBox.checkedBoxObject).spriteName = "ToggleBaseFocused";
+            ((UISprite) checkBox.checkedBoxObject).spriteName = "ToggleBaseFocused";
             checkBox.checkedBoxObject.size = new Vector2(16f, 16f);
             checkBox.checkedBoxObject.relativePosition = Vector3.zero;
 
             checkBox.eventCheckChanged += EventCheckChangedHandler;
-            checkBox.isChecked = (bool)CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType().GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI);
+            checkBox.isChecked = (bool) CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType()
+                .GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI);
             return checkBox;
         }
 
@@ -251,9 +254,10 @@ namespace CustomizeItExtended
             var type = ai.GetType();
             type.GetField(component.name)?.SetValue(ai, value);
         }
+
         public static UITextField CreateTextField(UIComponent parent, string fieldName)
         {
-            UITextField textField = parent.AddUIComponent<UITextField>();
+            var textField = parent.AddUIComponent<UITextField>();
 
             textField.name = fieldName;
             textField.builtinKeyNavigation = true;
@@ -276,24 +280,28 @@ namespace CustomizeItExtended
             textField.selectOnFocus = true;
             textField.eventKeyPress += EventKeyPressedHandler;
             textField.eventTextSubmitted += EventTextSubmittedHandler;
-            textField.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType().GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI).ToString();
+            textField.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType()
+                .GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI)
+                .ToString();
 
             return textField;
         }
 
         private static void EventTextSubmittedHandler(UIComponent component, string value)
         {
-            if (int.TryParse(value, out int result))
+            if (!int.TryParse(value, out var result))
+                return;
+
+            var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
+            var type = ai.GetType();
+
+            if (component.name.IndexOf("capacity", StringComparison.OrdinalIgnoreCase) >= 0 && result == 0)
             {
-                var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
-                var type = ai.GetType();
-                if (component.name.IndexOf("capacity", StringComparison.OrdinalIgnoreCase) >= 0 && result == 0)
-                {
-                    result = 1;
-                    ((UITextField)component).text = "1";
-                }
-                type.GetField(component.name)?.SetValue(ai, result);
+                result = 1;
+                ((UITextField) component).text = "1";
             }
+
+            type.GetField(component.name)?.SetValue(ai, result);
         }
 
         private static void EventKeyPressedHandler(UIComponent component, UIKeyEventParameter eventParam)
@@ -303,4 +311,3 @@ namespace CustomizeItExtended
         }
     }
 }
-

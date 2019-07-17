@@ -1,18 +1,15 @@
-﻿using ColossalFramework.UI;
+﻿using System.Reflection;
+using ColossalFramework.UI;
 using CustomizeItExtended.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UnityEngine;
 
 namespace CustomizeItExtended.GUI
 {
-    public class UIPanelWrapper : UIPanel
+    public class UiPanelWrapper : UIPanel
     {
-        private UITitleBar _titleBar;
-        private UICustomizeItExtendedPanel _customizeItExtendedPanel;
-
-        public static UIPanelWrapper Instance;
+        public static UiPanelWrapper Instance;
+        private UiCustomizeItExtendedPanel _customizeItExtendedPanel;
+        private UiTitleBar _titleBar;
 
         public override void Start()
         {
@@ -25,14 +22,13 @@ namespace CustomizeItExtended.GUI
         public override void Update()
         {
             base.Update();
-            InstanceID instanceId = (InstanceID)CustomizeItExtendedTool.instance.ServiceBuildingPanel.GetType().GetField("m_InstanceID", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(CustomizeItExtendedTool.instance.ServiceBuildingPanel);
+            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.ServiceBuildingPanel.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic)
+                ?.GetValue(CustomizeItExtendedTool.instance.ServiceBuildingPanel);
 
             var buildingInfo = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
 
-            if(buildingInfo != CustomizeItExtendedTool.instance.CurrentSelectedBuilding)
-            {
-                UIUtils.DeepDestroy(this);
-            }
+            if (buildingInfo != CustomizeItExtendedTool.instance.CurrentSelectedBuilding) UiUtils.DeepDestroy(this);
         }
 
         public override void OnDestroy()
@@ -46,11 +42,12 @@ namespace CustomizeItExtended.GUI
             isVisible = false;
             isInteractive = false;
             name = "CustomizeItExtendedPanelWrapper";
-            padding = new UnityEngine.RectOffset(10, 10, 4, 4);
-            relativePosition = new UnityEngine.Vector3(CustomizeItExtendedMod.Settings.PanelX, CustomizeItExtendedMod.Settings.PanelX);
+            padding = new RectOffset(10, 10, 4, 4);
+            relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
+                CustomizeItExtendedMod.Settings.PanelX);
             backgroundSprite = "MenuPanel";
-            _titleBar = AddUIComponent<UITitleBar>();
-            _customizeItExtendedPanel = AddUIComponent<UICustomizeItExtendedPanel>();
+            _titleBar = AddUIComponent<UiTitleBar>();
+            _customizeItExtendedPanel = AddUIComponent<UiCustomizeItExtendedPanel>();
         }
     }
 }

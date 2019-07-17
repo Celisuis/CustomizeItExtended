@@ -1,20 +1,16 @@
-﻿using CustomizeItExtended.Extensions;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Internal;
 using ICities;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace CustomizeItExtended
 {
     public class SerializationExtension : SerializableDataExtensionBase
     {
+        private static readonly string MDataId = "Customize-It-Extended";
         private CustomizeItExtendedTool Instance => CustomizeItExtendedTool.instance;
-
-        private static readonly string m_dataID = "Customize-It-Extended";
 
         private List<PropertyEntry> CustomDataList
         {
@@ -22,13 +18,11 @@ namespace CustomizeItExtended
             {
                 var list = new List<PropertyEntry>();
 
-                if(Instance.CustomData != null)
-                {
-                    foreach(var item in Instance.CustomData)
-                    {
-                        list.Add(item);
-                    }
-                }
+                if (Instance.CustomData == null)
+                    return list;
+
+                foreach (var item in Instance.CustomData)
+                    list.Add(item);
 
                 return list;
             }
@@ -36,15 +30,12 @@ namespace CustomizeItExtended
             {
                 var collection = new Dictionary<string, Properties>();
 
-                if(value != null)
-                {
-                    foreach(var item in value)
-                    {
-                        collection.Add(item.Key, item.Value);
-                    }
+                if (value == null)
+                    return;
 
-                    Instance.CustomData = collection;
-                }
+                foreach (var item in value) collection.Add(item.Key, item.Value);
+
+                Instance.CustomData = collection;
             }
         }
 
@@ -59,7 +50,7 @@ namespace CustomizeItExtended
             {
                 var formatter = new BinaryFormatter();
                 formatter.Serialize(stream, CustomDataList);
-                serializableDataManager.SaveData(m_dataID, stream.ToArray());
+                serializableDataManager.SaveData(MDataId, stream.ToArray());
             }
         }
 
@@ -70,27 +61,24 @@ namespace CustomizeItExtended
             if (!CustomizeItExtendedMod.Settings.SavePerCity)
                 return;
 
-            var data = serializableDataManager.LoadData(m_dataID);
+            var data = serializableDataManager.LoadData(MDataId);
 
             if (data == null || data.Length == 0)
                 return;
 
             var formatter = new BinaryFormatter();
 
-            using(var stream = new MemoryStream(data))
+            using (var stream = new MemoryStream(data))
             {
-                CustomDataList = (List<PropertyEntry>)formatter.Deserialize(stream);
+                CustomDataList = (List<PropertyEntry>) formatter.Deserialize(stream);
             }
 
             SimulationManager.instance.AddAction(() =>
             {
                 for (uint x = 0; x < PrefabCollection<BuildingInfo>.LoadedCount(); x++)
-                {
-                    if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(PrefabCollection<BuildingInfo>.GetLoaded(x).name, out Properties customProps))
-                    {
+                    if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(
+                        PrefabCollection<BuildingInfo>.GetLoaded(x).name, out var customProps))
                         PrefabCollection<BuildingInfo>.GetLoaded(x).LoadProperties(customProps);
-                    }
-                }
             });
         }
     }
