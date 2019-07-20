@@ -1,0 +1,11 @@
+﻿Version 1.3.0 - 
+
+Bug Fixes:
+
+- Fixed Campus Buildings. The Property Window should now appear correctly with all campus buildings.
+- Industry Barracks and Maintenance Buildings have had their Properties button restored after it mysteriously got lost.
+
+New Features:
+
+- Added Warehouse and Unique Factory Support. Property buttons can now be found on the respective building info panels. These buildings follow the same rules as other Industry Buildings if Rebalanced Industries is active. See Compatibility below.
+- Added Escape Support - You can now close the menus with `Esc` however you must confirm any changes after you have made them by pressing enter when you have edited a value.
