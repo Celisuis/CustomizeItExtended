@@ -10,6 +10,19 @@ namespace CustomizeItExtended.Internal
     [Serializable]
     public class Properties
     {
+
+        public static List<string> RebalancedFields = new List<string>
+        {
+            "m_inputRate1",
+            "m_inputRate2",
+            "m_inputRate3",
+            "m_inputRate4",
+            "m_outputRate",
+            "m_outputVehicleCount",
+            "m_extractRate",
+            "m_extractRadius"
+        };
+
         // General
         public int m_constructionCost;
         public int m_maintenanceCost;
@@ -183,6 +196,8 @@ namespace CustomizeItExtended.Internal
         public int m_storageCapacity;
         public int m_truckCount;
 
+        // Warehouses
+
         // Campus
         public float m_bonusEffectRadius;
         public int m_landValueBonus;
@@ -190,6 +205,7 @@ namespace CustomizeItExtended.Internal
         public int m_academicBoostBonus;
         public int m_tourismBonus;
         public int m_facultyBonusFactor;
+        public uint m_campusAttractiveness;
 
         public Properties()
         {
@@ -205,9 +221,29 @@ namespace CustomizeItExtended.Internal
 
             fields = GetType().GetFields();
 
-            foreach (var customField in fields)
-                if (oldFields.ContainsKey(customField.Name))
-                    customField.SetValue(this, oldFields[customField.Name].GetValue(ai));
+            if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
+            {
+                foreach (var customField in fields)
+                {
+                    if (CustomizeItExtendedMod.IsRebalancedIndustriesActive() &&
+                        RebalancedFields.Contains(customField.Name))
+                        continue;
+
+                    if (oldFields.ContainsKey(customField.Name))
+                    {
+                        customField.SetValue(this, oldFields[customField.Name].GetValue(ai));
+                    }
+                }
+            }
+            else
+            {
+                foreach (var customField in fields)
+                {
+                    if(oldFields.ContainsKey(customField.Name))
+                        customField.SetValue(this, oldFields[customField.Name].GetValue(ai));
+                }
+            }
+
         }
 
         public Properties(CustomizableProperties oldProps)
@@ -218,9 +254,27 @@ namespace CustomizeItExtended.Internal
 
             fields = GetType().GetFields();
 
-            foreach (var customField in fields)
-                if (originalFields.ContainsKey(customField.Name))
-                    customField.SetValue(this, originalFields[customField.Name].GetValue(oldProps));
+            if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
+            {
+                foreach (var customField in fields)
+                {
+                    if (CustomizeItExtendedMod.IsRebalancedIndustriesActive() &&
+                        RebalancedFields.Contains(customField.Name))
+                        continue;
+
+                    if (originalFields.ContainsKey(customField.Name))
+                        customField.SetValue(this, originalFields[customField.Name].GetValue(oldProps));
+                }
+            }
+            else
+            {
+                foreach (var customField in fields)
+                {
+                    if(originalFields.ContainsKey(customField.Name))
+                        customField.SetValue(this, originalFields[customField.Name].GetValue(oldProps));
+                }
+            }
+
         }
 
         public static implicit operator Properties(CustomizableProperties props)

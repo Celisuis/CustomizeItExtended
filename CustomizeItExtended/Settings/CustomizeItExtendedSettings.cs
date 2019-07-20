@@ -21,6 +21,9 @@ namespace CustomizeItExtended.Settings
         public float PanelY = 65f;
         public bool SavePerCity;
 
+        public bool OverrideRebalancedIndustries;
+
+        public bool RebalancedMessageShown;
         public void Save()
         {
             if (!CustomizeItExtendedMod.Settings.SavePerCity)
@@ -28,8 +31,12 @@ namespace CustomizeItExtended.Settings
                 Entries.Clear();
 
                 foreach (var entry in CustomizeItExtendedTool.instance.CustomData)
+                {
                     if (entry.Value != null)
+                    {
                         Entries.Add(entry);
+                    }
+                }
             }
 
             var serializer = new XmlSerializer(typeof(CustomizeItExtendedSettings));

@@ -33,15 +33,19 @@
   <ItemGroup>
     <Reference Include="0Harmony, Version=1.2.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lib.Harmony.1.2.0.1\lib\net35\0Harmony.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ColossalManaged">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ICities">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,13 +55,17 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomizeItExtendedMod.cs" />
+    <Compile Include="GUI\UIUniqueFactoryPanelWrapper.cs" />
+    <Compile Include="GUI\UIWarehousePanelWrapper.cs" />
     <Compile Include="Legacy\CustomizeItSettings.cs" />
     <Compile Include="Legacy\Entry.cs" />
     <Compile Include="Extensions\BuildingInfoExtensions.cs" />
@@ -74,6 +82,7 @@
     <Compile Include="GUI\UICustomizeItExtendedPanel.cs" />
     <Compile Include="GUI\UITitleBar.cs" />
     <Compile Include="GUI\UIUtils.cs" />
+    <Compile Include="ThreadingExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

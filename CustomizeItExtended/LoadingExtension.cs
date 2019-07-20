@@ -1,11 +1,14 @@
-﻿using CustomizeItExtended.Internal;
+﻿using System;
+using ColossalFramework.Plugins;
+using ColossalFramework.UI;
+using CustomizeItExtended.Internal;
 using ICities;
 
 namespace CustomizeItExtended
 {
     public class LoadingExtension : LoadingExtensionBase
     {
-        private bool _isDoneLoading;
+        public static bool _isDoneLoading;
 
         private CustomizeItExtendedTool Instance => CustomizeItExtendedTool.instance;
 
@@ -26,5 +29,7 @@ namespace CustomizeItExtended
                     _isDoneLoading = true;
                 }
         }
+
+      
     }
 }

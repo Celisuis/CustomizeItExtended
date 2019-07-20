@@ -134,8 +134,10 @@ namespace CustomizeItExtended
                 ["m_bonusEffectRadius"] = "Bonus Effect Radius",
                 ["m_landValueBonus"] = "Land Value Bonus",
                 ["m_healthBonus"] = "Health Bonus",
+                ["m_academicBoostBonus"] = "Academic Boost Bonus",
                 ["m_tourismBonus"] = "Tourism Bonus",
-                ["m_facultyBonusFactor"] = "Faculty Bonus Factor"
+                ["m_facultyBonusFactor"] = "Faculty Bonus Factor",
+                ["m_campusAttractiveness"] = "Campus Attractiveness",
             };
         }
 
@@ -287,10 +289,18 @@ namespace CustomizeItExtended
             return textField;
         }
 
+        
+
         private static void EventTextSubmittedHandler(UIComponent component, string value)
         {
             if (!int.TryParse(value, out var result))
                 return;
+
+            if (component.name == "m_campusAttractiveness")
+            {
+                if (!uint.TryParse(value, out uint uintResult))
+                    return;
+            }
 
             var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
             var type = ai.GetType();
@@ -300,6 +310,7 @@ namespace CustomizeItExtended
                 result = 1;
                 ((UITextField) component).text = "1";
             }
+
 
             type.GetField(component.name)?.SetValue(ai, result);
         }

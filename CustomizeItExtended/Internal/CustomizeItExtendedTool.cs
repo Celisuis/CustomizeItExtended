@@ -1,8 +1,10 @@
-﻿using ColossalFramework;
+﻿using System;
+using ColossalFramework;
 using ColossalFramework.UI;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.GUI;
 using System.Collections.Generic;
+using ColossalFramework.Plugins;
 using UnityEngine;
 
 namespace CustomizeItExtended.Internal
@@ -19,9 +21,20 @@ namespace CustomizeItExtended.Internal
         internal BuildingInfo CurrentSelectedBuilding;
         internal CityServiceWorldInfoPanel ServiceBuildingPanel;
 
+        internal WarehouseWorldInfoPanel WarehousePanel;
+        internal UniqueFactoryWorldInfoPanel UniqueFactoryWorldInfoPanel;
+
         private UIButton _customizeItExtendedButton;
 
+        private UIButton _warehouseButton;
+
+        private UIButton _uniqueFactoryButton;
+
         internal UiPanelWrapper CustomizeItExtendedPanel;
+
+        internal UIWarehousePanelWrapper WarehousePanelWrapper;
+
+        internal UIUniqueFactoryPanelWrapper UniqueFactoryPanelWrapper;
 
         internal UICheckBox SavePerCity;
 
@@ -90,6 +103,23 @@ namespace CustomizeItExtended.Internal
                 return;
 
             AddBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton, new Vector3(120f, 5f, 0f));
+
+            WarehousePanel = GameObject.Find("(Library) WarehouseWorldInfoPanel")
+                .GetComponent<WarehouseWorldInfoPanel>();
+
+            if (WarehousePanel == null)
+                return;
+
+            AddBuildingPropertiesButton(WarehousePanel, out _warehouseButton, new Vector3(68f, -35f, 0f));
+
+
+            UniqueFactoryWorldInfoPanel = GameObject.Find("(Library) UniqueFactoryWorldInfoPanel")
+                .GetComponent<UniqueFactoryWorldInfoPanel>();
+
+            if (UniqueFactoryWorldInfoPanel == null)
+                return;
+
+            AddBuildingPropertiesButton(UniqueFactoryWorldInfoPanel, out _uniqueFactoryButton, new Vector3(25f, -90f, 0f));
             _isButtonInitialized = true;
         }
 
@@ -99,15 +129,54 @@ namespace CustomizeItExtended.Internal
             {
                 InstanceID instanceId = (InstanceID)infoPanel.GetType().GetField("m_InstanceID", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(infoPanel);
                 var building = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
+                try
+                {
+                    if (CustomizeItExtendedPanel == null || building != CurrentSelectedBuilding)
+                    {
+                        switch (building.m_class.name)
+                        {
+                            case "Warehouses":
+                                WarehousePanelWrapper = building.GenerateWarehouseCustomizeItExtendedPanel();
+                                break;
+                            case "Unique Factories":
+                                UniqueFactoryPanelWrapper = building.GenerateUniqueFactoryCustomizeItExtendedPanel();
+                                break;
+                            default:
+                                CustomizeItExtendedPanel = building.GenerateCustomizeItExtendedPanel();
+                                break;
+                        }
 
-                if (CustomizeItExtendedPanel == null || building != CurrentSelectedBuilding)
-                {
-                    CustomizeItExtendedPanel = building.GenerateCustomizeItExtendedPanel();
+                    }
+                    else
+                    {
+                        switch (building.m_class.name)
+                        {
+                            case "Warehouses":
+                            {
+                                WarehousePanelWrapper.isVisible = false;
+                                UiUtils.DeepDestroy(WarehousePanelWrapper);
+                            }
+                                break;
+                            case "Unique Factories":
+                            {
+                                UniqueFactoryPanelWrapper.isVisible = false;
+                                UiUtils.DeepDestroy(UniqueFactoryPanelWrapper);
+                            }
+                                break;
+                            default:
+                            {
+
+                                CustomizeItExtendedPanel.isVisible = false;
+                                UiUtils.DeepDestroy(CustomizeItExtendedPanel);
+                                }
+                                break;
+                        }
+
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    CustomizeItExtendedPanel.isVisible = false;
-                    UiUtils.DeepDestroy(CustomizeItExtendedPanel);
+                    DebugOutputPanel.AddMessage(PluginManager.MessageType.Error, $"{ex.Message} - {ex.StackTrace}");
                 }
 
                 if (comp.hasFocus)

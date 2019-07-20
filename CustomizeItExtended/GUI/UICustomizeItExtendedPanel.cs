@@ -52,7 +52,7 @@ namespace CustomizeItExtended
                 label.textScale = 0.9f;
                 label.isInteractive = false;
 
-                if (field.FieldType == typeof(int) || field.FieldType == typeof(float))
+                if (field.FieldType == typeof(int) || field.FieldType == typeof(float) || field.FieldType == typeof(uint))
                 {
                     Inputs.Add(UiUtils.CreateTextField(this, field.Name));
                     _labels.Add(label);
@@ -67,21 +67,94 @@ namespace CustomizeItExtended
                     widestWidth = label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
             }
 
+            if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
+            {
+                foreach (var input in Inputs)
+                {
+                    if (!CustomizeItExtendedMod.IsRebalancedIndustriesActive() ||
+                        !Properties.RebalancedFields.Contains(input.name))
+                        continue;
+
+                    input.isEnabled = false;
+                    input.isInteractive = false;
+
+                    if (input is UITextField textField)
+                    {
+                        textField.text = $"DISABLED";
+                    }
+                }
+            }
+
+
             Inputs.Sort((x, y) => x.name.CompareTo(y.name));
             _labels.Sort((x, y) => x.name.CompareTo(y.name));
 
             Inputs.Add(UiUtils.CreateResetButton(this));
-            width = UiPanelWrapper.Instance.width =
+
+            switch (SelectedBuilding.m_class.name)
+            {
+                case "Warehouses":
+                    SetupWarehousePanel(widestWidth, ref UIWarehousePanelWrapper.Instance);
+                    break;
+                case "Unique Factories":
+                    SetupUniqueFactoryPanel(widestWidth, ref UIUniqueFactoryPanelWrapper.Instance);
+                    break;
+                default: 
+                    SetupDefaultPanel(widestWidth, ref UiPanelWrapper.Instance);
+                    break;
+            }
+
+           
+        }
+
+        private void SetupDefaultPanel(float widestWidth, ref UiPanelWrapper panelWrapper)
+        {
+            width = panelWrapper.width =
                 UiTitleBar.Instance.width = UiTitleBar.Instance.DragHandle.width = widestWidth;
             UiTitleBar.Instance.RecenterElements();
             Align();
             height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;
-            UiPanelWrapper.Instance.height = height + UiTitleBar.Instance.height;
+
+            panelWrapper.height = height + UiTitleBar.Instance.height;
 
 
-            UiPanelWrapper.Instance.relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
+            panelWrapper.relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelY);
-            isVisible = UiPanelWrapper.Instance.isVisible =
+            isVisible = panelWrapper.isVisible =
+                UiTitleBar.Instance.isVisible = UiTitleBar.Instance.DragHandle.isVisible = true;
+        }
+
+        private void SetupWarehousePanel(float widestWidth, ref UIWarehousePanelWrapper panelWrapper)
+        {
+            width = panelWrapper.width =
+                UiTitleBar.Instance.width = UiTitleBar.Instance.DragHandle.width = widestWidth;
+            UiTitleBar.Instance.RecenterElements();
+            Align();
+            height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;
+
+            panelWrapper.height = height + UiTitleBar.Instance.height;
+
+
+            panelWrapper.relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
+                CustomizeItExtendedMod.Settings.PanelY);
+            isVisible = panelWrapper.isVisible =
+                UiTitleBar.Instance.isVisible = UiTitleBar.Instance.DragHandle.isVisible = true;
+        }
+
+        private void SetupUniqueFactoryPanel(float widestWidth, ref UIUniqueFactoryPanelWrapper panelWrapper)
+        {
+            width = panelWrapper.width =
+                UiTitleBar.Instance.width = UiTitleBar.Instance.DragHandle.width = widestWidth;
+            UiTitleBar.Instance.RecenterElements();
+            Align();
+            height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;
+
+            panelWrapper.height = height + UiTitleBar.Instance.height;
+
+
+            panelWrapper.relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
+                CustomizeItExtendedMod.Settings.PanelY);
+            isVisible = panelWrapper.isVisible =
                 UiTitleBar.Instance.isVisible = UiTitleBar.Instance.DragHandle.isVisible = true;
         }
 

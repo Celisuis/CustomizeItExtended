@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Credit to TPB - Original Source File added for Backwards Compatibility. See - https://github.com/TPBCS/CustomizeIt
+
+using System;
 using System.Collections.Generic;
 
 namespace CustomizeItExtended.Legacy

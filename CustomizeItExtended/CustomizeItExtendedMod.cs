@@ -7,8 +7,10 @@ using Harmony;
 using ICities;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
+using ColossalFramework.Plugins;
 using UnityEngine;
 
 // ReSharper disable InconsistentNaming
@@ -17,9 +19,11 @@ namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
     {
+        internal const string Version = "1.3.0V";
+
         public string Name => "Customize It! Extended";
 
-        public string Description => "Change various values on buildings such as garbage accumulation, energy consumption and more!";
+        public string Description => $"{Version} - Change various values on buildings such as garbage accumulation, energy consumption and more!";
 
         private static CustomizeItExtendedSettings _settings;
 
@@ -57,7 +61,25 @@ namespace CustomizeItExtended
             }
             catch (Exception e)
             {
-                DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, $"[Customize It Extended] Failed to Patch Building Info. {e.Message} - {e.StackTrace}");
+                Debug.Log( $"[Customize It Extended] Failed to Patch Building Info. {e.Message} - {e.StackTrace}");
+            }
+
+            try
+            {
+                if (!IsRebalancedIndustriesActive() || Settings.RebalancedMessageShown)
+                    return;
+
+                UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel").SetMessage(
+                    "[Customize It Extended] Rebalanced Industries Detected.",
+                    $"Rebalanced Industries has been detected. For compatibility, certain industry properties have been disabled from being altered." +
+                    Environment.NewLine +
+                    $"This can be overridden within the Main Menu Options.", false);
+                Settings.RebalancedMessageShown = true;
+                Settings.Save();
+            }
+            catch (Exception e)
+            {
+                DebugOutputPanel.AddMessage(PluginManager.MessageType.Warning, $"Couldn't Load Exception Message. This message should not prevent mod functionality. ");
             }
         }
 
@@ -75,6 +97,19 @@ namespace CustomizeItExtended
                 Settings.Save();
             });
             Instance.SavePerCity.parent.Find<UILabel>("Label").disabledTextColor = Color.gray;
+            helper.AddSpace(10);
+            var overrideButton = (UICheckBox) helper.AddCheckbox("Override Rebalanced Industries",
+                Settings.OverrideRebalancedIndustries,
+                (x) =>
+                {
+                    Settings.OverrideRebalancedIndustries = x;
+                    Settings.Save();
+                });
+            overrideButton.tooltip =
+                $"EXPERIMENTAL - This will cause your Industry buildings to revert back to Vanilla";
+
+            overrideButton.isEnabled = IsRebalancedIndustriesActive();
+            overrideButton.disabledColor = Color.gray;
             helper.AddSpace(10);
             Instance.ResetAll = (UIButton)helper.AddButton("Reset ALL Buildings", () =>
             {
@@ -96,6 +131,10 @@ namespace CustomizeItExtended
             var importButton = (UIButton)helper.AddButton($"Import Old Settings", ImportOldSettings);
             importButton.isEnabled = File.Exists(Path.Combine(DataLocation.localApplicationData, $"CustomizeIt.xml"));
             importButton.tooltip = File.Exists(Path.Combine(DataLocation.localApplicationData, $"CustomizeIt.xml")) ? $"Note: This will import your old Customize It settings into Customize It Extended." : $"No Old Settings Found.";
+            importButton.disabledColor = Color.gray;
+            helper.AddSpace(10);
+            var version = (UITextField)helper.AddTextfield("Version", Version, text => { }, text => { });
+            version.isInteractive = false;
         }
 
         private static void ImportOldSettings()
@@ -132,6 +171,13 @@ namespace CustomizeItExtended
             {
                 DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, $"{e.Message} - {e.StackTrace}");
             }
+        }
+
+        public static bool IsRebalancedIndustriesActive()
+        {
+            var plugins = PluginManager.instance.GetPluginsInfo();
+            
+            return plugins.Where(x => x.isEnabled).Any(plugin => plugin.publishedFileID.AsUInt64 == 1562650024);
         }
     }
 }
