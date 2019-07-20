@@ -9,3 +9,9 @@ New Features:
 
 - Added Warehouse and Unique Factory Support. Property buttons can now be found on the respective building info panels. These buildings follow the same rules as other Industry Buildings if Rebalanced Industries is active. See Compatibility below.
 - Added Escape Support - You can now close the menus with `Esc` however you must confirm any changes after you have made them by pressing enter when you have edited a value.
+
+Version 1.2.0 - 
+
+New Features: 
+
+- Added Rebalanced Industries Compatibility Mode.
