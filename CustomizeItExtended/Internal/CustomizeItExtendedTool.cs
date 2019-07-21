@@ -12,12 +12,11 @@ namespace CustomizeItExtended.Internal
 {
     public class CustomizeItExtendedTool : Singleton<CustomizeItExtendedTool>
     {
-
         public enum InfoPanelType
         {
             Default,
             Warehouse,
-            Factory,
+            Factory
         }
 
 
@@ -39,6 +38,8 @@ namespace CustomizeItExtended.Internal
         internal UiPanelWrapper CustomizeItExtendedPanel;
         internal Dictionary<string, Properties> OriginalData = new Dictionary<string, Properties>();
 
+        internal InfoPanelType PanelType;
+
         internal UIButton ResetAll;
 
         internal UICheckBox SavePerCity;
@@ -54,8 +55,6 @@ namespace CustomizeItExtended.Internal
         internal ZonedBuildingWorldInfoPanel ZoneBuildingPanel;
 
         internal UIZonedBuildingPanelWrapper ZonedBuildingPanelWrapper;
-
-        internal InfoPanelType PanelType;
 
         internal string ButtonTooltip =>
             ResetAll != null && ResetAll.isEnabled ? null : "This option is only available in game.";
@@ -146,7 +145,6 @@ namespace CustomizeItExtended.Internal
             button = UiUtils.CreateToggleButton(ZoneBuildingPanel.component, offset, UIAlignAnchor.BottomLeft,
                 (comp, e) =>
                 {
-
                     InstanceID instanceID = (InstanceID) infoPanel.GetType()
                         .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(infoPanel);
 
@@ -254,41 +252,14 @@ namespace CustomizeItExtended.Internal
                     try
                     {
                         if (CustomizeItExtendedPanel == null || building != CurrentSelectedBuilding)
-                            switch (building.m_class.name)
-                            {
-                                case "Warehouses":
-                                    WarehousePanelWrapper = building.GenerateWarehouseCustomizeItExtendedPanel();
-                                    break;
-                                case "Unique Factories":
-                                    UniqueFactoryPanelWrapper =
-                                        building.GenerateUniqueFactoryCustomizeItExtendedPanel();
-                                    break;
-                                default:
-                                    CustomizeItExtendedPanel = building.GenerateCustomizeItExtendedPanel();
-                                    break;
-                            }
+                        {
+                            CustomizeItExtendedPanel = building.GenerateCustomizeItExtendedPanel();
+                        }
                         else
-                            switch (building.m_class.name)
-                            {
-                                case "Warehouses":
-                                {
-                                    WarehousePanelWrapper.isVisible = false;
-                                    UiUtils.DeepDestroy(WarehousePanelWrapper);
-                                }
-                                    break;
-                                case "Unique Factories":
-                                {
-                                    UniqueFactoryPanelWrapper.isVisible = false;
-                                    UiUtils.DeepDestroy(UniqueFactoryPanelWrapper);
-                                }
-                                    break;
-                                default:
-                                {
-                                    CustomizeItExtendedPanel.isVisible = false;
-                                    UiUtils.DeepDestroy(CustomizeItExtendedPanel);
-                                }
-                                    break;
-                            }
+                        {
+                            CustomizeItExtendedPanel.isVisible = false;
+                            UiUtils.DeepDestroy(CustomizeItExtendedPanel);
+                        }
                     }
                     catch (Exception ex)
                     {

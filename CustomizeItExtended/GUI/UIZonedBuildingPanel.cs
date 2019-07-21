@@ -237,7 +237,7 @@ namespace CustomizeItExtended.GUI
                 {"Noise Pollution", NoisePollution},
                 {"Fire Hazard", FireHazard},
                 {"Fire Tolerance", FireTolerance},
-                {"Mail Accumulation", MailAccumulation },
+                {"Mail Accumulation", MailAccumulation}
             };
 
 

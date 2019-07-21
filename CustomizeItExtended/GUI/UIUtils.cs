@@ -200,7 +200,6 @@ namespace CustomizeItExtended
         }
 
 
-
         public static UIButton CreateToggleButton(UIComponent parentComponent, Vector3 offset, UIAlignAnchor anchor,
             MouseEventHandler handler)
         {
