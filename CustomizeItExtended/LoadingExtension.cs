@@ -1,7 +1,4 @@
-﻿using System;
-using ColossalFramework.Plugins;
-using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
+﻿using CustomizeItExtended.Internal;
 using ICities;
 
 namespace CustomizeItExtended
@@ -29,7 +26,5 @@ namespace CustomizeItExtended
                     _isDoneLoading = true;
                 }
         }
-
-      
     }
 }

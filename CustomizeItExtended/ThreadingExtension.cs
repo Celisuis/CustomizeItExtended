@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CustomizeItExtended.GUI;
-using CustomizeItExtended.Internal;
+﻿using CustomizeItExtended.GUI;
 using ICities;
 using UnityEngine;
 
@@ -15,14 +10,13 @@ namespace CustomizeItExtended
         {
             base.OnUpdate(realTimeDelta, simulationTimeDelta);
 
-            if(!LoadingExtension._isDoneLoading)
+            if (!LoadingExtension._isDoneLoading)
                 return;
 
             if (Input.GetKeyUp(KeyCode.Escape))
             {
                 if (UiPanelWrapper.Instance != null && UiPanelWrapper.Instance.isVisible)
                 {
-
                     UiPanelWrapper.Instance.isVisible = false;
                     UiUtils.DeepDestroy(UiPanelWrapper.Instance);
                     return;
@@ -30,7 +24,6 @@ namespace CustomizeItExtended
 
                 if (UIWarehousePanelWrapper.Instance != null && UIWarehousePanelWrapper.Instance.isVisible)
                 {
-
                     UIWarehousePanelWrapper.Instance.isVisible = false;
                     UiUtils.DeepDestroy(UIWarehousePanelWrapper.Instance);
                 }
@@ -40,9 +33,7 @@ namespace CustomizeItExtended
                     UIUniqueFactoryPanelWrapper.Instance.isVisible = false;
 
                     UiUtils.DeepDestroy(UIUniqueFactoryPanelWrapper.Instance);
-
                 }
-
             }
         }
     }

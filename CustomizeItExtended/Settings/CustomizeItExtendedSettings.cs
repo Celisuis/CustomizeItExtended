@@ -17,13 +17,14 @@ namespace CustomizeItExtended.Settings
         public float ButtonY;
 
         public List<PropertyEntry> Entries = new List<PropertyEntry>();
-        public float PanelX = 8f;
-        public float PanelY = 65f;
-        public bool SavePerCity;
 
         public bool OverrideRebalancedIndustries;
+        public float PanelX = 8f;
+        public float PanelY = 65f;
 
         public bool RebalancedMessageShown;
+        public bool SavePerCity;
+
         public void Save()
         {
             if (!CustomizeItExtendedMod.Settings.SavePerCity)
@@ -31,12 +32,8 @@ namespace CustomizeItExtended.Settings
                 Entries.Clear();
 
                 foreach (var entry in CustomizeItExtendedTool.instance.CustomData)
-                {
                     if (entry.Value != null)
-                    {
                         Entries.Add(entry);
-                    }
-                }
             }
 
             var serializer = new XmlSerializer(typeof(CustomizeItExtendedSettings));

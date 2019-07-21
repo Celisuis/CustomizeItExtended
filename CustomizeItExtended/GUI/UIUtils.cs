@@ -137,7 +137,7 @@ namespace CustomizeItExtended
                 ["m_academicBoostBonus"] = "Academic Boost Bonus",
                 ["m_tourismBonus"] = "Tourism Bonus",
                 ["m_facultyBonusFactor"] = "Faculty Bonus Factor",
-                ["m_campusAttractiveness"] = "Campus Attractiveness",
+                ["m_campusAttractiveness"] = "Campus Attractiveness"
             };
         }
 
@@ -198,6 +198,8 @@ namespace CustomizeItExtended
 
             return button;
         }
+
+
 
         public static UIButton CreateToggleButton(UIComponent parentComponent, Vector3 offset, UIAlignAnchor anchor,
             MouseEventHandler handler)
@@ -289,7 +291,45 @@ namespace CustomizeItExtended
             return textField;
         }
 
-        
+        public static UITextField CreateInfoField(UIComponent parent, string fieldName, int value = -201,
+            string secondaryValue = null)
+        {
+            var textField = parent.AddUIComponent<UITextField>();
+
+            textField.name = fieldName;
+            textField.builtinKeyNavigation = true;
+            textField.isInteractive = true;
+            textField.readOnly = false;
+
+            textField.selectionSprite = "EmptySprite";
+            textField.selectionBackgroundColor = new Color32(0, 172, 234, 255);
+
+            textField.width = FieldWidth;
+            textField.height = FieldHeight;
+            textField.padding = new RectOffset(6, 6, 6, 6);
+            textField.normalBgSprite = "LevelBarBackground";
+            textField.hoveredBgSprite = "LevelBarBackground";
+            textField.disabledBgSprite = "LevelBarBackground";
+            textField.focusedBgSprite = "LevelBarBackground";
+            textField.horizontalAlignment = UIHorizontalAlignment.Center;
+            textField.textColor = Color.white;
+            textField.textScale = 0.85f;
+            textField.selectOnFocus = true;
+            textField.eventKeyPress += EventKeyPressedHandler;
+            textField.eventTextSubmitted += EventTextSubmittedHandler;
+            if (value != -201)
+            {
+                textField.text = $"{value}";
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(secondaryValue))
+                    textField.text = secondaryValue;
+            }
+
+            textField.tooltip = !string.IsNullOrEmpty(secondaryValue) ? secondaryValue : $"{value}";
+            return textField;
+        }
 
         private static void EventTextSubmittedHandler(UIComponent component, string value)
         {
@@ -297,10 +337,8 @@ namespace CustomizeItExtended
                 return;
 
             if (component.name == "m_campusAttractiveness")
-            {
                 if (!uint.TryParse(value, out uint uintResult))
                     return;
-            }
 
             var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
             var type = ai.GetType();

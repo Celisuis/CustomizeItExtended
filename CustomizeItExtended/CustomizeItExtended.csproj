@@ -63,9 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\RebalancedIndustries.cs" />
     <Compile Include="CustomizeItExtendedMod.cs" />
     <Compile Include="GUI\UIUniqueFactoryPanelWrapper.cs" />
     <Compile Include="GUI\UIWarehousePanelWrapper.cs" />
+    <Compile Include="GUI\UIZonedBuildingPanel.cs" />
+    <Compile Include="GUI\UIZonedBuildingPanelWrapper.cs" />
     <Compile Include="Legacy\CustomizeItSettings.cs" />
     <Compile Include="Legacy\Entry.cs" />
     <Compile Include="Extensions\BuildingInfoExtensions.cs" />
@@ -87,5 +90,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Changelog.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

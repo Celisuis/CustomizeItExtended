@@ -1,11 +1,11 @@
-﻿using ColossalFramework.UI;
-using CustomizeItExtended.GUI;
-using CustomizeItExtended.Internal;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using ColossalFramework.Plugins;
+using ColossalFramework.UI;
+using CustomizeItExtended.Compatibility;
+using CustomizeItExtended.GUI;
+using CustomizeItExtended.Internal;
 using UnityEngine;
 
 namespace CustomizeItExtended.Extensions
@@ -28,45 +28,33 @@ namespace CustomizeItExtended.Extensions
             var namedFields = customFields.ToDictionary(customField => customField.Name);
 
             if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
-            {
                 foreach (var originalField in originalFields)
-                {
                     try
                     {
                         if (CustomizeItExtendedMod.IsRebalancedIndustriesActive() &&
-                            Properties.RebalancedFields.Contains(originalField.Name))
+                            RebalancedIndustries.RebalancedFields.Contains(originalField.Name))
                             continue;
 
                         if (namedFields.TryGetValue(originalField.Name, out FieldInfo fieldInfo))
-                        {
                             originalField.SetValue(info.m_buildingAI, fieldInfo.GetValue(props));
-                        }
                     }
                     catch (Exception e)
                     {
-                        DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error,
+                        DebugOutputPanel.AddMessage(PluginManager.MessageType.Error,
                             $"[Customize It! Extended] Failed to Load Properties. {e.Message} - {e.StackTrace}");
                     }
-                }
-            }
             else
-            {
                 foreach (var originalField in originalFields)
-                {
                     try
                     {
                         if (namedFields.TryGetValue(originalField.Name, out FieldInfo fieldInfo))
-                        {
                             originalField.SetValue(info.m_buildingAI, fieldInfo.GetValue(props));
-                        }
                     }
                     catch (Exception e)
                     {
-                        DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error,
+                        DebugOutputPanel.AddMessage(PluginManager.MessageType.Error,
                             $"[Customize It! Extended] Failed to Load Properties. {e.Message} - {e.StackTrace}");
                     }
-                }
-            }
         }
 
         public static Properties GetProperties(this BuildingInfo info)
@@ -85,7 +73,7 @@ namespace CustomizeItExtended.Extensions
             }
             catch (Exception e)
             {
-                Debug.Log( $"{e.Message} - {e.StackTrace}");
+                Debug.Log($"{e.Message} - {e.StackTrace}");
                 return null;
             }
         }
@@ -101,10 +89,9 @@ namespace CustomizeItExtended.Extensions
             }
             catch (Exception e)
             {
-                Debug.Log( $"{e.Message} - {e.StackTrace}");
+                Debug.Log($"{e.Message} - {e.StackTrace}");
                 return null;
             }
-
         }
 
         public static UIUniqueFactoryPanelWrapper GenerateUniqueFactoryCustomizeItExtendedPanel(this BuildingInfo info)
@@ -119,10 +106,27 @@ namespace CustomizeItExtended.Extensions
             }
             catch (Exception e)
             {
-                Debug.Log( $"{e.Message} - {e.StackTrace}");
+                Debug.Log($"{e.Message} - {e.StackTrace}");
                 return null;
             }
+        }
 
+        public static UIZonedBuildingPanelWrapper GenerateBuildingInformation(this BuildingInfo info)
+        {
+            try
+            {
+                CustomizeItExtendedTool.instance.CurrentSelectedBuilding = info;
+                UiUtils.DeepDestroy(UIView.Find("CustomizeItExtendedZonedBuildingPanelWrapper"));
+
+                return UIView.GetAView().AddUIComponent(typeof(UIZonedBuildingPanelWrapper)) as
+                    UIZonedBuildingPanelWrapper;
+                ;
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"{e.Message} - {e.StackTrace}");
+                return null;
+            }
         }
     }
 }

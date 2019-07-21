@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace CustomizeItExtended.GUI
 {
-    public class UIUniqueFactoryPanelWrapper : UIPanel
+    public class UIZonedBuildingPanelWrapper : UIPanel
     {
-        public static UIUniqueFactoryPanelWrapper Instance;
+        public static UIZonedBuildingPanelWrapper Instance;
 
-        private UiCustomizeItExtendedPanel _customizeItExtendedPanel;
+        private UiInfoTitleBar _uiTitleBar;
 
-        private UiUniqueFactoryTitleBar _uiTitleBar;
+        private UIZonedBuildingPanel _uiZonedBuildingPanel;
 
         public override void Start()
         {
@@ -25,9 +25,9 @@ namespace CustomizeItExtended.GUI
         {
             base.Update();
 
-            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.UniqueFactoryWorldInfoPanel.GetType()
+            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.ZoneBuildingPanel.GetType()
                 .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic)
-                ?.GetValue(CustomizeItExtendedTool.instance.UniqueFactoryWorldInfoPanel);
+                ?.GetValue(CustomizeItExtendedTool.instance.ZoneBuildingPanel);
 
             var buildingInfo = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
 
@@ -41,17 +41,16 @@ namespace CustomizeItExtended.GUI
             CustomizeItExtendedTool.instance.SaveBuilding(CustomizeItExtendedTool.instance.CurrentSelectedBuilding);
         }
 
-
         private void Setup()
         {
             isVisible = false;
             isInteractive = false;
-            name = "CustomizeItExtendedPanelWrapper";
+            name = "CustomizeItExtendedZonedBuildingPanelWrapper";
             relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelX);
             backgroundSprite = "MenuPanel";
-            _uiTitleBar = AddUIComponent<UiUniqueFactoryTitleBar>();
-            _customizeItExtendedPanel = AddUIComponent<UiCustomizeItExtendedPanel>();
+            _uiTitleBar = AddUIComponent<UiInfoTitleBar>();
+            _uiZonedBuildingPanel = AddUIComponent<UIZonedBuildingPanel>();
         }
     }
 }

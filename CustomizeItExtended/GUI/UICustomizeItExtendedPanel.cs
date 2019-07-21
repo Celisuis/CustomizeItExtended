@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ColossalFramework.UI;
+using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.Internal;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace CustomizeItExtended
             isVisible = false;
             canFocus = true;
             isInteractive = true;
-            relativePosition = new Vector3(0f, UiTitleBar.Instance.height);
+            relativePosition = new Vector3(0f, Titlebar().height);
             width = parent.width;
 
             var ai = SelectedBuilding.m_buildingAI;
@@ -52,7 +53,8 @@ namespace CustomizeItExtended
                 label.textScale = 0.9f;
                 label.isInteractive = false;
 
-                if (field.FieldType == typeof(int) || field.FieldType == typeof(float) || field.FieldType == typeof(uint))
+                if (field.FieldType == typeof(int) || field.FieldType == typeof(float) ||
+                    field.FieldType == typeof(uint))
                 {
                     Inputs.Add(UiUtils.CreateTextField(this, field.Name));
                     _labels.Add(label);
@@ -68,22 +70,17 @@ namespace CustomizeItExtended
             }
 
             if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
-            {
                 foreach (var input in Inputs)
                 {
                     if (!CustomizeItExtendedMod.IsRebalancedIndustriesActive() ||
-                        !Properties.RebalancedFields.Contains(input.name))
+                        !RebalancedIndustries.RebalancedFields.Contains(input.name))
                         continue;
 
                     input.isEnabled = false;
                     input.isInteractive = false;
 
-                    if (input is UITextField textField)
-                    {
-                        textField.text = $"DISABLED";
-                    }
+                    if (input is UITextField textField) textField.text = "DISABLED";
                 }
-            }
 
 
             Inputs.Sort((x, y) => x.name.CompareTo(y.name));
@@ -91,20 +88,19 @@ namespace CustomizeItExtended
 
             Inputs.Add(UiUtils.CreateResetButton(this));
 
-            switch (SelectedBuilding.m_class.name)
+
+            switch (CustomizeItExtendedTool.instance.PanelType)
             {
-                case "Warehouses":
+                case CustomizeItExtendedTool.InfoPanelType.Warehouse:
                     SetupWarehousePanel(widestWidth, ref UIWarehousePanelWrapper.Instance);
                     break;
-                case "Unique Factories":
+                case CustomizeItExtendedTool.InfoPanelType.Factory:
                     SetupUniqueFactoryPanel(widestWidth, ref UIUniqueFactoryPanelWrapper.Instance);
                     break;
-                default: 
+                default:
                     SetupDefaultPanel(widestWidth, ref UiPanelWrapper.Instance);
                     break;
             }
-
-           
         }
 
         private void SetupDefaultPanel(float widestWidth, ref UiPanelWrapper panelWrapper)
@@ -127,35 +123,37 @@ namespace CustomizeItExtended
         private void SetupWarehousePanel(float widestWidth, ref UIWarehousePanelWrapper panelWrapper)
         {
             width = panelWrapper.width =
-                UiTitleBar.Instance.width = UiTitleBar.Instance.DragHandle.width = widestWidth;
-            UiTitleBar.Instance.RecenterElements();
+                UiWarehouseTitleBar.Instance.width = UiWarehouseTitleBar.Instance.DragHandle.width = widestWidth;
+            UiWarehouseTitleBar.Instance.RecenterElements();
             Align();
             height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;
 
-            panelWrapper.height = height + UiTitleBar.Instance.height;
+            panelWrapper.height = height + UiWarehouseTitleBar.Instance.height;
 
 
             panelWrapper.relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelY);
             isVisible = panelWrapper.isVisible =
-                UiTitleBar.Instance.isVisible = UiTitleBar.Instance.DragHandle.isVisible = true;
+                UiWarehouseTitleBar.Instance.isVisible = UiWarehouseTitleBar.Instance.DragHandle.isVisible = true;
         }
 
         private void SetupUniqueFactoryPanel(float widestWidth, ref UIUniqueFactoryPanelWrapper panelWrapper)
         {
             width = panelWrapper.width =
-                UiTitleBar.Instance.width = UiTitleBar.Instance.DragHandle.width = widestWidth;
-            UiTitleBar.Instance.RecenterElements();
+                UiUniqueFactoryTitleBar.Instance.width =
+                    UiUniqueFactoryTitleBar.Instance.DragHandle.width = widestWidth;
+            UiUniqueFactoryTitleBar.Instance.RecenterElements();
             Align();
             height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;
 
-            panelWrapper.height = height + UiTitleBar.Instance.height;
+            panelWrapper.height = height + UiUniqueFactoryTitleBar.Instance.height;
 
 
             panelWrapper.relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelY);
             isVisible = panelWrapper.isVisible =
-                UiTitleBar.Instance.isVisible = UiTitleBar.Instance.DragHandle.isVisible = true;
+                UiUniqueFactoryTitleBar.Instance.isVisible =
+                    UiUniqueFactoryTitleBar.Instance.DragHandle.isVisible = true;
         }
 
         private void Align()
@@ -176,6 +174,19 @@ namespace CustomizeItExtended
                     ? new Vector3(inputX + (UiUtils.FieldWidth - Inputs[x].width) / 2,
                         finalY + (UiUtils.FieldHeight - Inputs[x].height) / 2)
                     : new Vector3(inputX, finalY);
+            }
+        }
+
+        private UIPanel Titlebar()
+        {
+            switch (CustomizeItExtendedTool.instance.PanelType)
+            {
+                case CustomizeItExtendedTool.InfoPanelType.Warehouse:
+                    return UiWarehouseTitleBar.Instance;
+                case CustomizeItExtendedTool.InfoPanelType.Factory:
+                    return UiUniqueFactoryTitleBar.Instance;
+                default:
+                    return UiTitleBar.Instance;
             }
         }
     }

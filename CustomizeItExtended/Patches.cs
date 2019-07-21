@@ -11,8 +11,10 @@ namespace CustomizeItExtended
         {
             var info = __instance;
 
-            if (info == null || info.m_buildingAI == null ||
-                !info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI)))
+            if (info == null || info.m_buildingAI == null)
+                return;
+
+            if (!info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI)))
                 return;
 
             if (!CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out var originalProps))

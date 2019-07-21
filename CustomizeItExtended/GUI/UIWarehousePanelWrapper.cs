@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using ColossalFramework.UI;
 using CustomizeItExtended.Internal;
 using UnityEngine;
@@ -15,7 +11,7 @@ namespace CustomizeItExtended.GUI
 
         private UiCustomizeItExtendedPanel _customizeItExtendedPanel;
 
-        private UiTitleBar _uiTitleBar;
+        private UiWarehouseTitleBar _uiTitleBar;
 
         public override void Start()
         {
@@ -38,6 +34,7 @@ namespace CustomizeItExtended.GUI
             if (buildingInfo != CustomizeItExtendedTool.instance.CurrentSelectedBuilding)
                 UiUtils.DeepDestroy(this);
         }
+
         public override void OnDestroy()
         {
             base.OnDestroy();
@@ -53,7 +50,7 @@ namespace CustomizeItExtended.GUI
             relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelX);
             backgroundSprite = "MenuPanel";
-            _uiTitleBar = AddUIComponent<UiTitleBar>();
+            _uiTitleBar = AddUIComponent<UiWarehouseTitleBar>();
             _customizeItExtendedPanel = AddUIComponent<UiCustomizeItExtendedPanel>();
         }
     }
