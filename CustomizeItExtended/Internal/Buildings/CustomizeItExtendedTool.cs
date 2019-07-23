@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Reflection;
 using ColossalFramework;
-using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.GUI;
+using CustomizeItExtended.GUI.Buildings;
 using UnityEngine;
 
-namespace CustomizeItExtended.Internal
+namespace CustomizeItExtended.Internal.Buildings
 {
     public class CustomizeItExtendedTool : Singleton<CustomizeItExtendedTool>
     {
@@ -22,6 +22,9 @@ namespace CustomizeItExtended.Internal
 
         private UIButton _customizeItExtendedButton;
 
+        private UILabel _defaultNameLabel;
+        private UILabel _factoryDefaultNameLabel;
+
         private bool _isButtonInitialized;
 
         private bool _isInitialized;
@@ -29,14 +32,18 @@ namespace CustomizeItExtended.Internal
         private UIButton _uniqueFactoryButton;
 
         private UIButton _warehouseButton;
+        private UILabel _warehouseDefaultNameLabel;
 
         private UIButton _zonedInfoButton;
 
         internal BuildingInfo CurrentSelectedBuilding;
-        internal Dictionary<string, Properties> CustomData = new Dictionary<string, Properties>();
+
+        internal Dictionary<string, NameProperties> CustomBuildingNames = new Dictionary<string, NameProperties>();
+        internal Dictionary<string, BuildingProperties> CustomData = new Dictionary<string, BuildingProperties>();
 
         internal UiPanelWrapper CustomizeItExtendedPanel;
-        internal Dictionary<string, Properties> OriginalData = new Dictionary<string, Properties>();
+        internal Dictionary<string, NameProperties> OriginalBuildingNames = new Dictionary<string, NameProperties>();
+        internal Dictionary<string, BuildingProperties> OriginalData = new Dictionary<string, BuildingProperties>();
 
         internal InfoPanelType PanelType;
 
@@ -44,6 +51,10 @@ namespace CustomizeItExtended.Internal
 
         internal UICheckBox SavePerCity;
         internal CityServiceWorldInfoPanel ServiceBuildingPanel;
+
+        internal UICheckBox SetDefaultNameCheckbox;
+        internal UICheckBox SetFactoryDefaultNameCheckbox;
+        internal UICheckBox SetWarehouseDefaultNameCheckbox;
 
         internal UIUniqueFactoryPanelWrapper UniqueFactoryPanelWrapper;
         internal UniqueFactoryWorldInfoPanel UniqueFactoryWorldInfoPanel;
@@ -80,10 +91,10 @@ namespace CustomizeItExtended.Internal
 
         public void SaveBuilding(BuildingInfo info)
         {
-            if (!CustomData.TryGetValue(info.name, out Properties props))
-                CustomData.Add(info.name, new Properties(info));
+            if (!CustomData.TryGetValue(info.name, out BuildingProperties props))
+                CustomData.Add(info.name, new BuildingProperties(info));
             else
-                CustomData[info.name] = new Properties(info);
+                CustomData[info.name] = new BuildingProperties(info);
 
             if (!CustomizeItExtendedMod.Settings.SavePerCity) CustomizeItExtendedMod.Settings.Save();
         }
@@ -92,7 +103,7 @@ namespace CustomizeItExtended.Internal
         {
             var originalProperties = info.GetOriginalProperties();
 
-            if (CustomData.TryGetValue(info.name, out Properties customProps)) CustomData.Remove(info.name);
+            if (CustomData.TryGetValue(info.name, out BuildingProperties customProps)) CustomData.Remove(info.name);
 
             info.LoadProperties(originalProperties);
 
@@ -112,6 +123,8 @@ namespace CustomizeItExtended.Internal
 
             AddDefaultBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton,
                 new Vector3(120f, 5f, 0f));
+            AddDefaultNameCheckbox(ServiceBuildingPanel, out SetDefaultNameCheckbox, new Vector3(-127f, 85f, 0f));
+            AddDefaultNameLabel(ServiceBuildingPanel, out _defaultNameLabel, new Vector3(-156f, 89f, 0f));
 
             WarehousePanel = GameObject.Find("(Library) WarehouseWorldInfoPanel")
                 .GetComponent<WarehouseWorldInfoPanel>();
@@ -120,6 +133,8 @@ namespace CustomizeItExtended.Internal
                 return;
 
             AddWarehouseBuildingPropertiesButton(WarehousePanel, out _warehouseButton, new Vector3(68f, -35f, 0f));
+            AddDefaultNameCheckbox(WarehousePanel, out SetWarehouseDefaultNameCheckbox, new Vector3(-127f, 46f, 0f));
+            AddDefaultNameLabel(WarehousePanel, out _warehouseDefaultNameLabel, new Vector3(-147f, 49f, 0f));
 
 
             UniqueFactoryWorldInfoPanel = GameObject.Find("(Library) UniqueFactoryWorldInfoPanel")
@@ -130,6 +145,9 @@ namespace CustomizeItExtended.Internal
 
             AddUniqueFactoriesBuildingPropertiesButton(UniqueFactoryWorldInfoPanel, out _uniqueFactoryButton,
                 new Vector3(25f, -90f, 0f));
+            AddDefaultNameCheckbox(UniqueFactoryWorldInfoPanel, out SetFactoryDefaultNameCheckbox,
+                new Vector3(-127f, 46f, 0f));
+            AddDefaultNameLabel(UniqueFactoryWorldInfoPanel, out _factoryDefaultNameLabel, new Vector3(-147f, 49f, 0f));
 
             ZoneBuildingPanel = GameObject.Find("(Library) ZonedBuildingWorldInfoPanel")
                 .GetComponent<ZonedBuildingWorldInfoPanel>();
@@ -138,6 +156,38 @@ namespace CustomizeItExtended.Internal
                 AddBuildingInformationButton(ZoneBuildingPanel, out _zonedInfoButton, new Vector3(120f, 5f, 0f));
 
             _isButtonInitialized = true;
+        }
+
+        private void AddDefaultNameLabel(WorldInfoPanel infoPanel, out UILabel label, Vector3 offset)
+        {
+            label = UiUtils.CreateDefaultNameLabel(infoPanel.component, offset, UIAlignAnchor.TopRight);
+        }
+
+        private void AddDefaultNameCheckbox(WorldInfoPanel infoPanel, out UICheckBox checkBox, Vector3 offset)
+        {
+            checkBox = UiUtils.CreateDefaultNameCheckbox(infoPanel.component, offset, UIAlignAnchor.TopRight,
+                (component, value) =>
+                {
+                    InstanceID instanceID = (InstanceID) infoPanel.GetType()
+                        .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(infoPanel);
+
+                    var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
+
+                    try
+                    {
+                        if (!CustomBuildingNames.TryGetValue(building.name, out NameProperties props))
+                            return;
+
+                        CustomBuildingNames[building.name].DefaultName = value;
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log($"{e.Message} - {e.StackTrace}");
+                    }
+
+                    if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                        CustomizeItExtendedMod.Settings.Save();
+                });
         }
 
         private void AddBuildingInformationButton(WorldInfoPanel infoPanel, out UIButton button, Vector3 offset)
@@ -163,7 +213,7 @@ namespace CustomizeItExtended.Internal
                     }
                     catch (Exception ex)
                     {
-                        DebugOutputPanel.AddMessage(PluginManager.MessageType.Error, $"{ex.Message} - {ex.StackTrace}");
+                        Debug.Log($"{ex.Message} - {ex.StackTrace}");
                     }
 
                     if (comp.hasFocus)
@@ -196,7 +246,7 @@ namespace CustomizeItExtended.Internal
                 }
                 catch (Exception ex)
                 {
-                    DebugOutputPanel.AddMessage(PluginManager.MessageType.Error, $"{ex.Message} - {ex.StackTrace}");
+                    Debug.Log($"{ex.Message} - {ex.StackTrace}");
                 }
 
                 if (comp.hasFocus)
@@ -230,7 +280,7 @@ namespace CustomizeItExtended.Internal
                 }
                 catch (Exception ex)
                 {
-                    DebugOutputPanel.AddMessage(PluginManager.MessageType.Error, $"{ex.Message} - {ex.StackTrace}");
+                    Debug.Log($"{ex.Message} - {ex.StackTrace}");
                 }
 
                 if (comp.hasFocus)
@@ -263,7 +313,7 @@ namespace CustomizeItExtended.Internal
                     }
                     catch (Exception ex)
                     {
-                        DebugOutputPanel.AddMessage(PluginManager.MessageType.Error, $"{ex.Message} - {ex.StackTrace}");
+                        Debug.Log($"{ex.Message} - {ex.StackTrace}");
                     }
 
                     if (comp.hasFocus)

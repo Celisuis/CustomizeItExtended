@@ -1,17 +1,17 @@
 ﻿using System.Reflection;
 using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 
-namespace CustomizeItExtended.GUI
+namespace CustomizeItExtended.GUI.Buildings
 {
-    public class UIZonedBuildingPanelWrapper : UIPanel
+    public class UIUniqueFactoryPanelWrapper : UIPanel
     {
-        public static UIZonedBuildingPanelWrapper Instance;
+        public static UIUniqueFactoryPanelWrapper Instance;
 
-        private UiInfoTitleBar _uiTitleBar;
+        private UiCustomizeItExtendedPanel _customizeItExtendedPanel;
 
-        private UIZonedBuildingPanel _uiZonedBuildingPanel;
+        private UiUniqueFactoryTitleBar _uiTitleBar;
 
         public override void Start()
         {
@@ -25,9 +25,9 @@ namespace CustomizeItExtended.GUI
         {
             base.Update();
 
-            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.ZoneBuildingPanel.GetType()
+            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.UniqueFactoryWorldInfoPanel.GetType()
                 .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic)
-                ?.GetValue(CustomizeItExtendedTool.instance.ZoneBuildingPanel);
+                ?.GetValue(CustomizeItExtendedTool.instance.UniqueFactoryWorldInfoPanel);
 
             var buildingInfo = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
 
@@ -41,16 +41,17 @@ namespace CustomizeItExtended.GUI
             CustomizeItExtendedTool.instance.SaveBuilding(CustomizeItExtendedTool.instance.CurrentSelectedBuilding);
         }
 
+
         private void Setup()
         {
             isVisible = false;
             isInteractive = false;
-            name = "CustomizeItExtendedZonedBuildingPanelWrapper";
+            name = "CustomizeItExtendedPanelWrapper";
             relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelX);
             backgroundSprite = "MenuPanel";
-            _uiTitleBar = AddUIComponent<UiInfoTitleBar>();
-            _uiZonedBuildingPanel = AddUIComponent<UIZonedBuildingPanel>();
+            _uiTitleBar = AddUIComponent<UiUniqueFactoryTitleBar>();
+            _customizeItExtendedPanel = AddUIComponent<UiCustomizeItExtendedPanel>();
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using CustomizeItExtended.Extensions;
-using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using ICities;
 
-namespace CustomizeItExtended
+namespace CustomizeItExtended.Extensions
 {
     public class SerializationExtension : SerializableDataExtensionBase
     {
@@ -28,7 +27,7 @@ namespace CustomizeItExtended
             }
             set
             {
-                var collection = new Dictionary<string, Properties>();
+                var collection = new Dictionary<string, Internal.Buildings.BuildingProperties>();
 
                 if (value == null)
                     return;

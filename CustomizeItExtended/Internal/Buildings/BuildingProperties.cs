@@ -5,10 +5,10 @@ using CustomizeItExtended.Legacy;
 
 // ReSharper disable InconsistentNaming
 
-namespace CustomizeItExtended.Internal
+namespace CustomizeItExtended.Internal.Buildings
 {
     [Serializable]
-    public class Properties
+    public class BuildingProperties
     {
         public int m_academicBoostBonus;
 
@@ -196,11 +196,11 @@ namespace CustomizeItExtended.Internal
         public int m_workPlaceCount2;
         public int m_workPlaceCount3;
 
-        public Properties()
+        public BuildingProperties()
         {
         }
 
-        public Properties(BuildingInfo info)
+        public BuildingProperties(BuildingInfo info)
         {
             var ai = info.m_buildingAI;
 
@@ -226,7 +226,7 @@ namespace CustomizeItExtended.Internal
                         customField.SetValue(this, oldFields[customField.Name].GetValue(ai));
         }
 
-        public Properties(CustomizableProperties oldProps)
+        public BuildingProperties(CustomizableProperties oldProps)
         {
             var fields = oldProps.GetType().GetFields();
 
@@ -250,9 +250,9 @@ namespace CustomizeItExtended.Internal
                         customField.SetValue(this, originalFields[customField.Name].GetValue(oldProps));
         }
 
-        public static implicit operator Properties(CustomizableProperties props)
+        public static implicit operator BuildingProperties(CustomizableProperties props)
         {
-            return new Properties(props);
+            return new BuildingProperties(props);
         }
     }
 }

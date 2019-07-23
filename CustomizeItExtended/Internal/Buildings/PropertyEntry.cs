@@ -2,32 +2,32 @@
 using System.Collections.Generic;
 using CustomizeItExtended.Legacy;
 
-namespace CustomizeItExtended.Internal
+namespace CustomizeItExtended.Internal.Buildings
 {
     [Serializable]
     public class PropertyEntry
     {
         public string Key;
-        public Properties Value;
+        public BuildingProperties Value;
 
         public PropertyEntry()
         {
         }
 
-        public PropertyEntry(string key, Properties value)
+        public PropertyEntry(string key, BuildingProperties value)
         {
             Key = key;
             Value = value;
         }
 
-        public static implicit operator PropertyEntry(KeyValuePair<string, Properties> kvp)
+        public static implicit operator PropertyEntry(KeyValuePair<string, BuildingProperties> kvp)
         {
             return new PropertyEntry(kvp.Key, kvp.Value);
         }
 
-        public static implicit operator KeyValuePair<string, Properties>(PropertyEntry entry)
+        public static implicit operator KeyValuePair<string, BuildingProperties>(PropertyEntry entry)
         {
-            return new KeyValuePair<string, Properties>(entry.Key, entry.Value);
+            return new KeyValuePair<string, BuildingProperties>(entry.Key, entry.Value);
         }
 
         public static implicit operator PropertyEntry(CustomizablePropertiesEntry oldEntry)

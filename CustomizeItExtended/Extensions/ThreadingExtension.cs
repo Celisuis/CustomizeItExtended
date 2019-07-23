@@ -1,8 +1,11 @@
 ﻿using CustomizeItExtended.GUI;
+using CustomizeItExtended.GUI.Buildings;
+using CustomizeItExtended.GUI.Citizens;
+using CustomizeItExtended.GUI.Vehicles;
 using ICities;
 using UnityEngine;
 
-namespace CustomizeItExtended
+namespace CustomizeItExtended.Extensions
 {
     public class ThreadingExtension : ThreadingExtensionBase
     {
@@ -33,6 +36,20 @@ namespace CustomizeItExtended
                     UIUniqueFactoryPanelWrapper.Instance.isVisible = false;
 
                     UiUtils.DeepDestroy(UIUniqueFactoryPanelWrapper.Instance);
+                }
+
+                if (UIVehiclePanelWrapper.Instance != null && UIVehiclePanelWrapper.Instance.isVisible)
+                {
+                    UIVehiclePanelWrapper.Instance.isVisible = false;
+
+                    UiUtils.DeepDestroy(UIVehiclePanelWrapper.Instance);
+                }
+
+                if (UICitizenPanelWrapper.Instance != null && UICitizenPanelWrapper.Instance.isVisible)
+                {
+                    UICitizenPanelWrapper.Instance.isVisible = false;
+
+                    UiUtils.DeepDestroy(UICitizenPanelWrapper.Instance);
                 }
             }
         }

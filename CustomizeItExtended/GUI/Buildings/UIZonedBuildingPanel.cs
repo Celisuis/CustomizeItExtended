@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using ColossalFramework.Math;
 using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 
-namespace CustomizeItExtended.GUI
+namespace CustomizeItExtended.GUI.Buildings
 {
     public class UIZonedBuildingPanel : UIPanel
     {

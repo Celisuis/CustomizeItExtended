@@ -2,11 +2,10 @@
 using System.Linq;
 using ColossalFramework.UI;
 using CustomizeItExtended.Compatibility;
-using CustomizeItExtended.GUI;
-using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 
-namespace CustomizeItExtended
+namespace CustomizeItExtended.GUI.Buildings
 {
     public class UiCustomizeItExtendedPanel : UIPanel
     {
@@ -37,7 +36,7 @@ namespace CustomizeItExtended
 
             var fields = ai.GetType().GetFields();
 
-            var fieldsToRetrieve = typeof(Properties).GetFields().Select(x => x.Name);
+            var fieldsToRetrieve = typeof(Internal.Buildings.BuildingProperties).GetFields().Select(x => x.Name);
 
             Inputs = new List<UIComponent>();
 

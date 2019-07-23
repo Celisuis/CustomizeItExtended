@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.GUI;
+using CustomizeItExtended.GUI.Buildings;
 using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 
 namespace CustomizeItExtended.Extensions
 {
     public static class BuildingInfoExtensions
     {
-        public static Properties GetOriginalProperties(this BuildingInfo info)
+        public static Internal.Buildings.BuildingProperties GetOriginalProperties(this BuildingInfo info)
         {
-            return CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name, out Properties props)
+            return CustomizeItExtendedTool.instance.OriginalData.TryGetValue(info.name,
+                out Internal.Buildings.BuildingProperties props)
                 ? props
                 : null;
         }
 
-        public static void LoadProperties(this BuildingInfo info, Properties props)
+        public static void LoadProperties(this BuildingInfo info, Internal.Buildings.BuildingProperties props)
         {
             var customFields = props.GetType().GetFields();
 
@@ -40,8 +42,8 @@ namespace CustomizeItExtended.Extensions
                     }
                     catch (Exception e)
                     {
-                        DebugOutputPanel.AddMessage(PluginManager.MessageType.Error,
-                            $"[Customize It! Extended] Failed to Load Properties. {e.Message} - {e.StackTrace}");
+                        Debug.Log(
+                            $"[Customize It! Extended] Failed to Load BuildingProperties. {e.Message} - {e.StackTrace}");
                     }
             else
                 foreach (var originalField in originalFields)
@@ -52,14 +54,14 @@ namespace CustomizeItExtended.Extensions
                     }
                     catch (Exception e)
                     {
-                        DebugOutputPanel.AddMessage(PluginManager.MessageType.Error,
-                            $"[Customize It! Extended] Failed to Load Properties. {e.Message} - {e.StackTrace}");
+                        Debug.Log(
+                            $"[Customize It! Extended] Failed to Load BuildingProperties. {e.Message} - {e.StackTrace}");
                     }
         }
 
-        public static Properties GetProperties(this BuildingInfo info)
+        public static Internal.Buildings.BuildingProperties GetProperties(this BuildingInfo info)
         {
-            return new Properties(info);
+            return new Internal.Buildings.BuildingProperties(info);
         }
 
         public static UiPanelWrapper GenerateCustomizeItExtendedPanel(this BuildingInfo info)

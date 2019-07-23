@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
+using CustomizeItExtended.GUI.Buildings;
+using CustomizeItExtended.Helpers;
+using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Internal.Citizens;
+using CustomizeItExtended.Internal.Vehicles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace CustomizeItExtended
+namespace CustomizeItExtended.GUI
 {
     public static class UiUtils
     {
@@ -137,7 +141,19 @@ namespace CustomizeItExtended
                 ["m_academicBoostBonus"] = "Academic Boost Bonus",
                 ["m_tourismBonus"] = "Tourism Bonus",
                 ["m_facultyBonusFactor"] = "Faculty Bonus Factor",
-                ["m_campusAttractiveness"] = "Campus Attractiveness"
+                ["m_campusAttractiveness"] = "Campus Attractiveness",
+                ["m_acceleration"] = "Acceleration",
+                ["m_braking"] = "Braking",
+                ["m_turning"] = "Turning",
+                ["m_maxSpeed"] = "Max Speed",
+                ["m_springs"] = "Springs",
+                ["m_dampers"] = "Dampers",
+                ["m_nodMultiplier"] = "Nod Multiplier",
+                ["m_leanMultiplier"] = "Lean Multiplier",
+                ["m_attachOffsetFront"] = "Front Attach Offset",
+                ["m_attachOffsetBack"] = "Back Attach Offset",
+                ["m_maxTrailerCount"] = "Max Trailer Count",
+                ["m_useColorVariations"] = "Color Variations"
             };
         }
 
@@ -199,12 +215,50 @@ namespace CustomizeItExtended
             return button;
         }
 
+        public static UIButton CreateVehicleResetButton(UIComponent parent)
+        {
+            var button = parent.AddUIComponent<UIButton>();
+            button.name = "CustomizeItExtendedVehicleResetButton";
+            button.text = "Reset";
+            button.width = FieldWidth;
+            button.height = FieldHeight;
+            button.textPadding = new RectOffset(0, 0, 5, 0);
+            button.horizontalAlignment = UIHorizontalAlignment.Center;
+            button.textVerticalAlignment = UIVerticalAlignment.Middle;
+            button.textScale = 0.8f;
+            button.atlas = UIView.GetAView().defaultAtlas;
+            button.normalBgSprite = "ButtonMenu";
+            button.disabledBgSprite = "ButtonMenuDisabled";
+            button.hoveredBgSprite = "ButtonMenuHovered";
+            button.focusedBgSprite = "ButtonMenu";
+            button.pressedBgSprite = "ButtonMenuPressed";
+
+            button.eventClick += (x, y) =>
+            {
+                var selectedVehicle = CustomizeItExtendedVehicleTool.instance.SelectedVehicle;
+                CustomizeItExtendedVehicleTool.instance.ResetVehicle(selectedVehicle);
+
+                foreach (var input in UiCustomizeItExtendedPanel.Instance.Inputs)
+                    switch (input)
+                    {
+                        case UITextField field:
+                            field.text = selectedVehicle.GetType().GetField(field.name)
+                                ?.GetValue(selectedVehicle)?.ToString();
+                            break;
+                        case UICheckBox box:
+                            box.isChecked = (bool) selectedVehicle.GetType()
+                                .GetField(box.name)?.GetValue(selectedVehicle);
+                            break;
+                    }
+            };
+
+            return button;
+        }
+
 
         public static UIButton CreateToggleButton(UIComponent parentComponent, Vector3 offset, UIAlignAnchor anchor,
             MouseEventHandler handler)
         {
-            var budgetButton = parentComponent.Find<UIButton>("Budget");
-
             var uibutton = UIView.GetAView().AddUIComponent(typeof(UIButton)) as UIButton;
             uibutton.name = "CustomizeItExtendedButton";
             uibutton.width = 26f;
@@ -251,11 +305,93 @@ namespace CustomizeItExtended
             return checkBox;
         }
 
+
+        public static UICheckBox CreateVehicleCheckBox(UIComponent parent, string fieldName)
+        {
+            var checkBox = parent.AddUIComponent<UICheckBox>();
+
+            checkBox.name = fieldName;
+            checkBox.width = 20f;
+            checkBox.height = 20f;
+            checkBox.relativePosition = Vector3.zero;
+
+            var sprite = checkBox.AddUIComponent<UISprite>();
+            sprite.spriteName = "ToggleBase";
+            sprite.size = new Vector2(16f, 16f);
+            sprite.relativePosition = new Vector3(2f, 2f);
+
+            checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
+            ((UISprite) checkBox.checkedBoxObject).spriteName = "ToggleBaseFocused";
+            checkBox.checkedBoxObject.size = new Vector2(16f, 16f);
+            checkBox.checkedBoxObject.relativePosition = Vector3.zero;
+
+            checkBox.eventCheckChanged += VehicleCheckChangedHandler;
+            checkBox.isChecked = (bool) CustomizeItExtendedVehicleTool.instance.SelectedVehicle.GetType()
+                .GetField(fieldName).GetValue(CustomizeItExtendedVehicleTool.instance.SelectedVehicle);
+
+            return checkBox;
+        }
+
+        public static UICheckBox CreateDefaultNameCheckbox(UIComponent parent, Vector3 offset, UIAlignAnchor anchor,
+            PropertyChangedEventHandler<bool> handler)
+        {
+            var checkBox = parent.AddUIComponent<UICheckBox>();
+
+            checkBox.name = "DefaultNameCheckbox";
+            checkBox.width = 20f;
+            checkBox.height = 20f;
+            checkBox.relativePosition = Vector3.zero;
+
+            var sprite = checkBox.AddUIComponent<UISprite>();
+            sprite.spriteName = "ToggleBase";
+            sprite.size = new Vector2(16f, 16f);
+            sprite.relativePosition = new Vector3(2f, 2f);
+
+            checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
+            ((UISprite) checkBox.checkedBoxObject).spriteName = "ToggleBaseFocused";
+            checkBox.checkedBoxObject.size = new Vector2(16f, 16f);
+            checkBox.checkedBoxObject.relativePosition = Vector3.zero;
+
+            checkBox.eventCheckChanged += handler;
+            checkBox.AlignTo(parent, anchor);
+            checkBox.relativePosition += offset;
+            checkBox.text = "Use as Default Name?";
+
+            return checkBox;
+        }
+
+        public static UILabel CreateDefaultNameLabel(UIComponent parent, Vector3 offset, UIAlignAnchor anchor)
+        {
+            var label = parent.AddUIComponent<UILabel>();
+
+            label.name = "DefaultNameLabel";
+            label.text = "Use as Default Name?";
+            label.textScale = 0.8f;
+
+            label.AlignTo(parent, anchor);
+            label.relativePosition += offset;
+
+            return label;
+        }
+
         private static void EventCheckChangedHandler(UIComponent component, bool value)
         {
             var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
             var type = ai.GetType();
             type.GetField(component.name)?.SetValue(ai, value);
+        }
+
+        private static void VehicleCheckChangedHandler(UIComponent comp, bool value)
+        {
+            var info = CustomizeItExtendedVehicleTool.instance.SelectedVehicle;
+
+            info.GetType().GetField(comp.name)?.SetValue(info, value);
+        }
+
+        private static void DefaultNameChangedHandler(UIComponent comp, bool value)
+        {
+            CustomizeItExtendedTool.instance
+                .CustomBuildingNames[CustomizeItExtendedTool.instance.CurrentSelectedBuilding.name].DefaultName = value;
         }
 
         public static UITextField CreateTextField(UIComponent parent, string fieldName)
@@ -287,6 +423,122 @@ namespace CustomizeItExtended
                 .GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI)
                 .ToString();
 
+            return textField;
+        }
+
+        public static UITextField CreateVehicleTextField(UIComponent parent, string fieldName)
+        {
+            var textField = parent.AddUIComponent<UITextField>();
+
+            textField.name = fieldName;
+            textField.builtinKeyNavigation = true;
+            textField.isInteractive = true;
+            textField.readOnly = false;
+
+            textField.selectionSprite = "EmptySprite";
+            textField.selectionBackgroundColor = new Color32(0, 172, 234, 255);
+
+            textField.width = FieldWidth;
+            textField.height = FieldHeight;
+            textField.padding = new RectOffset(6, 6, 6, 6);
+            textField.normalBgSprite = "LevelBarBackground";
+            textField.hoveredBgSprite = "LevelBarBackground";
+            textField.disabledBgSprite = "LevelBarBackground";
+            textField.focusedBgSprite = "LevelBarBackground";
+            textField.horizontalAlignment = UIHorizontalAlignment.Center;
+            textField.textColor = Color.white;
+            textField.textScale = 0.85f;
+            textField.selectOnFocus = true;
+            textField.eventKeyPress += EventKeyPressedHandler;
+            textField.eventTextSubmitted += VehicleEventSubmittedHandler;
+            textField.text = CustomizeItExtendedVehicleTool.instance.SelectedVehicle.GetType()
+                .GetField(fieldName).GetValue(CustomizeItExtendedVehicleTool.instance.SelectedVehicle)
+                .ToString();
+
+            return textField;
+        }
+
+        public static UITextField CreateCitizenInputField(UIComponent parent, string fieldName,
+            PropertyChangedEventHandler<string> handler)
+        {
+            var textField = parent.AddUIComponent<UITextField>();
+
+            textField.name = fieldName;
+            textField.builtinKeyNavigation = true;
+            textField.isInteractive = true;
+            textField.readOnly = false;
+
+            textField.selectionSprite = "EmptySprite";
+            textField.selectionBackgroundColor = new Color32(0, 172, 234, 255);
+
+            textField.width = FieldWidth;
+            textField.height = FieldHeight;
+            textField.padding = new RectOffset(6, 6, 6, 6);
+            textField.normalBgSprite = "LevelBarBackground";
+            textField.hoveredBgSprite = "LevelBarBackground";
+            textField.disabledBgSprite = "LevelBarBackground";
+            textField.focusedBgSprite = "LevelBarBackground";
+            textField.horizontalAlignment = UIHorizontalAlignment.Center;
+            textField.textColor = Color.white;
+            textField.textScale = 0.85f;
+            textField.selectOnFocus = true;
+            textField.eventTextSubmitted += handler;
+            textField.tooltip = textField.text;
+
+            return textField;
+        }
+
+        public static UITextField CreateCitizenJobField(UIComponent parent, string fieldName,
+            PropertyChangedEventHandler<string> handler)
+        {
+            var textField = parent.AddUIComponent<UITextField>();
+
+            textField.name = fieldName;
+            textField.builtinKeyNavigation = true;
+            textField.isInteractive = true;
+            textField.readOnly = false;
+
+            textField.selectionSprite = "EmptySprite";
+            textField.selectionBackgroundColor = new Color32(0, 172, 234, 255);
+
+            textField.width = FieldWidth;
+            textField.height = FieldHeight;
+            textField.padding = new RectOffset(6, 6, 6, 6);
+            textField.normalBgSprite = "LevelBarBackground";
+            textField.hoveredBgSprite = "LevelBarBackground";
+            textField.disabledBgSprite = "LevelBarBackground";
+            textField.focusedBgSprite = "LevelBarBackground";
+            textField.horizontalAlignment = UIHorizontalAlignment.Center;
+            textField.textColor = Color.white;
+            textField.textScale = 0.85f;
+            textField.selectOnFocus = true;
+            textField.eventTextSubmitted += handler;
+
+
+            if (CustomizeItExtendedCitizenTool.instance.CustomJobTitles.TryGetValue(
+                CustomizeItExtendedCitizenTool.instance.SelectedCitizen, out string title))
+            {
+                textField.text = title;
+            }
+            else
+            {
+                if (CustomizeItExtendedCitizenTool.instance.OriginalJobTitles.TryGetValue(
+                    CustomizeItExtendedCitizenTool.instance.SelectedCitizen, out string originalTitle))
+                {
+                    textField.text = originalTitle;
+                }
+                else
+                {
+                    var defaultTitle =
+                        CitizenHelper.GetDefaultJobTitle(CustomizeItExtendedCitizenTool.instance.SelectedCitizen);
+                    textField.text = defaultTitle;
+
+                    CustomizeItExtendedCitizenTool.instance.OriginalJobTitles.Add(
+                        CustomizeItExtendedCitizenTool.instance.SelectedCitizen, defaultTitle);
+                }
+            }
+
+            textField.tooltip = textField.text;
             return textField;
         }
 
@@ -350,6 +602,16 @@ namespace CustomizeItExtended
 
 
             type.GetField(component.name)?.SetValue(ai, result);
+        }
+
+        public static void VehicleEventSubmittedHandler(UIComponent component, string value)
+        {
+            if (!int.TryParse(value, out var result))
+                return;
+
+            var vehicle = CustomizeItExtendedVehicleTool.instance.SelectedVehicle;
+
+            vehicle.GetType().GetField(component.name)?.SetValue(vehicle, result);
         }
 
         private static void EventKeyPressedHandler(UIComponent component, UIKeyEventParameter eventParam)

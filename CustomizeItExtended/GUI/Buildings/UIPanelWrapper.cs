@@ -1,17 +1,15 @@
 ﻿using System.Reflection;
 using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 
-namespace CustomizeItExtended.GUI
+namespace CustomizeItExtended.GUI.Buildings
 {
-    public class UIWarehousePanelWrapper : UIPanel
+    public class UiPanelWrapper : UIPanel
     {
-        public static UIWarehousePanelWrapper Instance;
-
+        public static UiPanelWrapper Instance;
         private UiCustomizeItExtendedPanel _customizeItExtendedPanel;
-
-        private UiWarehouseTitleBar _uiTitleBar;
+        private UiTitleBar _titleBar;
 
         public override void Start()
         {
@@ -24,15 +22,13 @@ namespace CustomizeItExtended.GUI
         public override void Update()
         {
             base.Update();
-
-            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.WarehousePanel.GetType()
+            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.ServiceBuildingPanel.GetType()
                 .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic)
-                ?.GetValue(CustomizeItExtendedTool.instance.WarehousePanel);
+                ?.GetValue(CustomizeItExtendedTool.instance.ServiceBuildingPanel);
 
             var buildingInfo = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
 
-            if (buildingInfo != CustomizeItExtendedTool.instance.CurrentSelectedBuilding)
-                UiUtils.DeepDestroy(this);
+            if (buildingInfo != CustomizeItExtendedTool.instance.CurrentSelectedBuilding) UiUtils.DeepDestroy(this);
         }
 
         public override void OnDestroy()
@@ -41,16 +37,16 @@ namespace CustomizeItExtended.GUI
             CustomizeItExtendedTool.instance.SaveBuilding(CustomizeItExtendedTool.instance.CurrentSelectedBuilding);
         }
 
-
         private void Setup()
         {
             isVisible = false;
             isInteractive = false;
-            name = "CustomizeItExtendedWarehousePanelWrapper";
+            name = "CustomizeItExtendedPanelWrapper";
+            padding = new RectOffset(10, 10, 4, 4);
             relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelX);
             backgroundSprite = "MenuPanel";
-            _uiTitleBar = AddUIComponent<UiWarehouseTitleBar>();
+            _titleBar = AddUIComponent<UiTitleBar>();
             _customizeItExtendedPanel = AddUIComponent<UiCustomizeItExtendedPanel>();
         }
     }

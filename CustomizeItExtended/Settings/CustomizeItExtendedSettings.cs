@@ -4,6 +4,8 @@ using System.IO;
 using System.Xml.Serialization;
 using ColossalFramework.IO;
 using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Internal.Vehicles;
 
 namespace CustomizeItExtended.Settings
 {
@@ -16,6 +18,10 @@ namespace CustomizeItExtended.Settings
         public float ButtonX;
         public float ButtonY;
 
+        public List<CustomNameEntry> CustomNameEntries = new List<CustomNameEntry>();
+
+        public List<CustomNameEntry> CustomVehicleNameEntries = new List<CustomNameEntry>();
+
         public List<PropertyEntry> Entries = new List<PropertyEntry>();
 
         public bool OverrideRebalancedIndustries;
@@ -24,6 +30,8 @@ namespace CustomizeItExtended.Settings
 
         public bool RebalancedMessageShown;
         public bool SavePerCity;
+
+        public List<VehiclePropertyEntry> VehicleEntries = new List<VehiclePropertyEntry>();
 
         public void Save()
         {
@@ -34,6 +42,24 @@ namespace CustomizeItExtended.Settings
                 foreach (var entry in CustomizeItExtendedTool.instance.CustomData)
                     if (entry.Value != null)
                         Entries.Add(entry);
+
+                VehicleEntries.Clear();
+
+                foreach (var vehicleEntry in CustomizeItExtendedVehicleTool.instance.CustomVehicleData)
+                    if (vehicleEntry.Value != null)
+                        VehicleEntries.Add(vehicleEntry);
+
+                CustomNameEntries.Clear();
+
+                foreach (var nameEntry in CustomizeItExtendedTool.instance.CustomBuildingNames)
+                    if (nameEntry.Value != null)
+                        CustomNameEntries.Add(nameEntry);
+
+                CustomVehicleNameEntries.Clear();
+
+                foreach (var vehicleName in CustomizeItExtendedVehicleTool.instance.CustomVehicleNames)
+                    if (vehicleName.Value != null)
+                        CustomVehicleNameEntries.Add(vehicleName);
             }
 
             var serializer = new XmlSerializer(typeof(CustomizeItExtendedSettings));
@@ -61,6 +87,22 @@ namespace CustomizeItExtended.Settings
                     foreach (var entry in config.Entries)
                         if (entry != null)
                             CustomizeItExtendedTool.instance.CustomData.Add(entry.Key, entry.Value);
+
+                    CustomizeItExtendedVehicleTool.instance.CustomVehicleData.Clear();
+
+                    foreach (var vehicleEntry in config.VehicleEntries)
+                        if (vehicleEntry != null)
+                            CustomizeItExtendedVehicleTool.instance.CustomVehicleData.Add(vehicleEntry.Key,
+                                vehicleEntry.Value);
+
+                    foreach (var nameEntry in config.CustomNameEntries)
+                        if (nameEntry != null)
+                            CustomizeItExtendedTool.instance.CustomBuildingNames.Add(nameEntry.Key, nameEntry.Value);
+
+                    foreach (var vehicleNameEntry in config.CustomVehicleNameEntries)
+                        if (vehicleNameEntry != null)
+                            CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.Add(vehicleNameEntry.Key,
+                                vehicleNameEntry.Value);
 
                     return config;
                 }

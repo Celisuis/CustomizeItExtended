@@ -1,17 +1,17 @@
 ﻿using System.Reflection;
 using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 
-namespace CustomizeItExtended.GUI
+namespace CustomizeItExtended.GUI.Buildings
 {
-    public class UIUniqueFactoryPanelWrapper : UIPanel
+    public class UIWarehousePanelWrapper : UIPanel
     {
-        public static UIUniqueFactoryPanelWrapper Instance;
+        public static UIWarehousePanelWrapper Instance;
 
         private UiCustomizeItExtendedPanel _customizeItExtendedPanel;
 
-        private UiUniqueFactoryTitleBar _uiTitleBar;
+        private UiWarehouseTitleBar _uiTitleBar;
 
         public override void Start()
         {
@@ -25,9 +25,9 @@ namespace CustomizeItExtended.GUI
         {
             base.Update();
 
-            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.UniqueFactoryWorldInfoPanel.GetType()
+            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.WarehousePanel.GetType()
                 .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic)
-                ?.GetValue(CustomizeItExtendedTool.instance.UniqueFactoryWorldInfoPanel);
+                ?.GetValue(CustomizeItExtendedTool.instance.WarehousePanel);
 
             var buildingInfo = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
 
@@ -46,11 +46,11 @@ namespace CustomizeItExtended.GUI
         {
             isVisible = false;
             isInteractive = false;
-            name = "CustomizeItExtendedPanelWrapper";
+            name = "CustomizeItExtendedWarehousePanelWrapper";
             relativePosition = new Vector3(CustomizeItExtendedMod.Settings.PanelX,
                 CustomizeItExtendedMod.Settings.PanelX);
             backgroundSprite = "MenuPanel";
-            _uiTitleBar = AddUIComponent<UiUniqueFactoryTitleBar>();
+            _uiTitleBar = AddUIComponent<UiWarehouseTitleBar>();
             _customizeItExtendedPanel = AddUIComponent<UiCustomizeItExtendedPanel>();
         }
     }

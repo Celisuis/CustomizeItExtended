@@ -1,5 +1,10 @@
-﻿using CustomizeItExtended.Extensions;
+﻿using System.Reflection;
+using ColossalFramework.UI;
+using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Internal.Citizens;
+using CustomizeItExtended.Internal.Vehicles;
 using Harmony;
 
 namespace CustomizeItExtended
@@ -11,7 +16,14 @@ namespace CustomizeItExtended
         {
             var info = __instance;
 
-            if (info == null || info.m_buildingAI == null)
+            if (info == null)
+                return;
+
+            if (!CustomizeItExtendedTool.instance.OriginalBuildingNames.TryGetValue(info.name, out NameProperties name))
+                CustomizeItExtendedTool.instance.OriginalBuildingNames.Add(info.name,
+                    new NameProperties(info.name, false));
+
+            if (info.m_buildingAI == null)
                 return;
 
             if (!info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI)))
@@ -22,6 +34,154 @@ namespace CustomizeItExtended
 
             if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(info.name, out var customProps))
                 info.LoadProperties(customProps);
+        }
+    }
+
+    [HarmonyPatch(typeof(HumanWorldInfoPanel), "GetJobTitle")]
+    public static class HumanWorldInfoPanelPatch
+    {
+        public static void Postfix(HumanWorldInfoPanel __instance, ref string __result, uint citizenID)
+        {
+            if (CustomizeItExtendedCitizenTool.instance.CustomJobTitles.TryGetValue(citizenID, out string title))
+                __result = title;
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleInfo), "InitializePrefab")]
+    public static class VehicleInfoPatch
+    {
+        public static void Postfix(VehicleInfo __instance)
+        {
+            var info = __instance;
+
+            if (info == null)
+                return;
+
+            if (!CustomizeItExtendedVehicleTool.instance.OriginalVehicleNames.TryGetValue(info.name, out var props))
+                CustomizeItExtendedVehicleTool.instance.OriginalVehicleNames.Add(info.name,
+                    new NameProperties(info.name, false));
+
+            if (!CustomizeItExtendedVehicleTool.instance.OriginalVehicleData.TryGetValue(info.name,
+                out var originalProps))
+                CustomizeItExtendedVehicleTool.instance.OriginalVehicleData.Add(info.name, info.GetProperties());
+
+            if (CustomizeItExtendedVehicleTool.instance.CustomVehicleData.TryGetValue(info.name, out var customProps))
+                info.LoadProperties(customProps);
+        }
+    }
+
+    [HarmonyPatch(typeof(BuildingWorldInfoPanel), "GetName")]
+    public static class BuildingGetNamePatch
+    {
+        public static void Postfix(BuildingWorldInfoPanel __instance, ref string __result)
+        {
+            InstanceID instanceID = (InstanceID) __instance.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+
+            var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
+
+            if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(building.name,
+                    out NameProperties customName) && customName.DefaultName)
+                __result = customName.CustomName;
+        }
+    }
+
+    [HarmonyPatch(typeof(BuildingWorldInfoPanel), "OnRename")]
+    public static class BuildingRenamePatch
+    {
+        public static void Postfix(BuildingWorldInfoPanel __instance, string text)
+        {
+            InstanceID instanceID = (InstanceID) __instance.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+
+            var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
+
+            if (!CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(building.name,
+                out NameProperties props))
+                CustomizeItExtendedTool.instance.CustomBuildingNames.Add(building.name,
+                    new NameProperties(text, false));
+            else
+                CustomizeItExtendedTool.instance.CustomBuildingNames[building.name].CustomName = text;
+
+            if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                CustomizeItExtendedMod.Settings.Save();
+        }
+    }
+
+    [HarmonyPatch(typeof(BuildingWorldInfoPanel), "OnSetTarget")]
+    public static class BuildingOnSetTargetPatch
+    {
+        public static void Postfix(BuildingWorldInfoPanel __instance)
+        {
+            InstanceID instanceID = (InstanceID) __instance.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+
+            var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
+
+            if (!CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(building.name,
+                out NameProperties props))
+                return;
+
+            var defaultNameCheckbox = __instance.Find("DefaultNameCheckbox").GetComponent<UICheckBox>();
+            defaultNameCheckbox.isChecked = props.DefaultName;
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleWorldInfoPanel), "GetName")]
+    public static class VehicleGetNamePatch
+    {
+        public static void Postfix(VehicleWorldInfoPanel __instance, ref string __result)
+        {
+            InstanceID instanceID = (InstanceID) __instance.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+
+            var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
+
+            if (CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(vehicle.name,
+                out NameProperties props))
+                __result = props.CustomName;
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleWorldInfoPanel), "OnRename")]
+    public static class VehicleRenamePatch
+    {
+        public static void Postfix(VehicleWorldInfoPanel __instance, string text)
+        {
+            InstanceID instanceID = (InstanceID) __instance.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+
+            var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
+
+            if (!CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(vehicle.name,
+                out NameProperties props))
+                CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.Add(vehicle.name,
+                    new NameProperties(text, false));
+            else
+                CustomizeItExtendedVehicleTool.instance.CustomVehicleNames[vehicle.name].CustomName = text;
+
+
+            if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                CustomizeItExtendedMod.Settings.Save();
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleWorldInfoPanel), "OnSetTarget")]
+    public static class VehicleOnSetTargetPatch
+    {
+        public static void Postfix(VehicleWorldInfoPanel __instance)
+        {
+            InstanceID instanceID = (InstanceID) __instance.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+
+            var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
+
+            if (!CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(vehicle.name,
+                out NameProperties props))
+                return;
+
+            var defaultNameCheckbox = __instance.Find("DefaultNameCheckbox").GetComponent<UICheckBox>();
+            defaultNameCheckbox.isChecked = props.DefaultName;
         }
     }
 }

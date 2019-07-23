@@ -63,29 +63,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CitizenHelper.cs" />
+    <Compile Include="Internal\Citizens\CitizenProperties.cs" />
+    <Compile Include="Internal\Citizens\CustomizeItExtendedCitizenTool.cs" />
     <Compile Include="Compatibility\RebalancedIndustries.cs" />
     <Compile Include="CustomizeItExtendedMod.cs" />
-    <Compile Include="GUI\UIUniqueFactoryPanelWrapper.cs" />
-    <Compile Include="GUI\UIWarehousePanelWrapper.cs" />
-    <Compile Include="GUI\UIZonedBuildingPanel.cs" />
-    <Compile Include="GUI\UIZonedBuildingPanelWrapper.cs" />
+    <Compile Include="Extensions\CitizenExtensions.cs" />
+    <Compile Include="Extensions\VehicleInfoExtensions.cs" />
+    <Compile Include="GUI\Citizens\UICitizenPanel.cs" />
+    <Compile Include="GUI\Citizens\UICitizenPanelWrapper.cs" />
+    <Compile Include="GUI\Buildings\UIUniqueFactoryPanelWrapper.cs" />
+    <Compile Include="GUI\Vehicles\UIVehiclePanel.cs" />
+    <Compile Include="GUI\Vehicles\UIVehiclePanelWrapper.cs" />
+    <Compile Include="GUI\Buildings\UIWarehousePanelWrapper.cs" />
+    <Compile Include="GUI\Buildings\UIZonedBuildingPanel.cs" />
+    <Compile Include="GUI\Buildings\UIZonedBuildingPanelWrapper.cs" />
+    <Compile Include="Internal\CustomNameEntry.cs" />
+    <Compile Include="Internal\NameProperties.cs" />
     <Compile Include="Legacy\CustomizeItSettings.cs" />
     <Compile Include="Legacy\Entry.cs" />
     <Compile Include="Extensions\BuildingInfoExtensions.cs" />
-    <Compile Include="GUI\UIPanelWrapper.cs" />
-    <Compile Include="Internal\CustomizeItExtendedTool.cs" />
-    <Compile Include="Internal\Properties.cs" />
-    <Compile Include="Internal\PropertyEntry.cs" />
+    <Compile Include="GUI\Buildings\UIPanelWrapper.cs" />
+    <Compile Include="Internal\Buildings\CustomizeItExtendedTool.cs" />
+    <Compile Include="Internal\Buildings\BuildingProperties.cs" />
+    <Compile Include="Internal\Buildings\PropertyEntry.cs" />
     <Compile Include="Legacy\CustomizableProperties.cs" />
-    <Compile Include="LoadingExtension.cs" />
+    <Compile Include="Extensions\LoadingExtension.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerializationExtension.cs" />
+    <Compile Include="Extensions\SerializationExtension.cs" />
     <Compile Include="Settings\CustomizeItExtendedSettings.cs" />
-    <Compile Include="GUI\UICustomizeItExtendedPanel.cs" />
+    <Compile Include="GUI\Buildings\UICustomizeItExtendedPanel.cs" />
     <Compile Include="GUI\UITitleBar.cs" />
     <Compile Include="GUI\UIUtils.cs" />
-    <Compile Include="ThreadingExtension.cs" />
+    <Compile Include="Extensions\ThreadingExtension.cs" />
+    <Compile Include="Internal\Vehicles\CustomizeItExtendedVehicleTool.cs" />
+    <Compile Include="Internal\Vehicles\CustomVehicleProperties.cs" />
+    <Compile Include="Internal\Vehicles\VehiclePropertyEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

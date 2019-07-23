@@ -7,6 +7,7 @@ using ColossalFramework.IO;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
 using CustomizeItExtended.Legacy;
 using CustomizeItExtended.Settings;
 using Harmony;
@@ -19,7 +20,7 @@ namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
     {
-        internal const string Version = "1.3.1V";
+        internal const string Version = "1.4.0V";
 
         private static CustomizeItExtendedSettings _settings;
 
@@ -53,7 +54,7 @@ namespace CustomizeItExtended
         public string Name => "Customize It! Extended";
 
         public string Description =>
-            $"{Version} - Change various values on buildings such as garbage accumulation, energy consumption and more!";
+            $"{Version} - A Customization and Information Viewer for Buildings, Vehicles and Citizens!";
 
         public void OnEnabled()
         {
@@ -65,7 +66,7 @@ namespace CustomizeItExtended
             }
             catch (Exception e)
             {
-                Debug.Log($"[Customize It Extended] Failed to Patch Building Info. {e.Message} - {e.StackTrace}");
+                Debug.Log($"[Customize It Extended] Failed to Patch. {e.Message} - {e.StackTrace}");
             }
 
             try
@@ -177,7 +178,7 @@ namespace CustomizeItExtended
             }
             catch (Exception e)
             {
-                DebugOutputPanel.AddMessage(PluginManager.MessageType.Error,
+                Debug.Log(
                     $"{e.Message} - {e.StackTrace}");
             }
         }
