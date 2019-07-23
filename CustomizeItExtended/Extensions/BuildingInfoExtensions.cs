@@ -5,7 +5,6 @@ using ColossalFramework.UI;
 using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Buildings;
-using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 

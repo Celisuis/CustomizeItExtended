@@ -146,8 +146,8 @@ namespace CustomizeItExtended.Internal.Buildings
             AddUniqueFactoriesBuildingPropertiesButton(UniqueFactoryWorldInfoPanel, out _uniqueFactoryButton,
                 new Vector3(25f, -90f, 0f));
             AddDefaultNameCheckbox(UniqueFactoryWorldInfoPanel, out SetFactoryDefaultNameCheckbox,
-                new Vector3(-127f, 46f, 0f));
-            AddDefaultNameLabel(UniqueFactoryWorldInfoPanel, out _factoryDefaultNameLabel, new Vector3(-147f, 49f, 0f));
+                new Vector3(-127f, 82f, 0f));
+            AddDefaultNameLabel(UniqueFactoryWorldInfoPanel, out _factoryDefaultNameLabel, new Vector3(-147f, 85f, 0f));
 
             ZoneBuildingPanel = GameObject.Find("(Library) ZonedBuildingWorldInfoPanel")
                 .GetComponent<ZonedBuildingWorldInfoPanel>();

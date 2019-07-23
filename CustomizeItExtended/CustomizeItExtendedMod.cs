@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 using ColossalFramework.IO;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
-using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
 using CustomizeItExtended.Legacy;
 using CustomizeItExtended.Settings;
@@ -84,8 +83,8 @@ namespace CustomizeItExtended
             }
             catch (Exception e)
             {
-                DebugOutputPanel.AddMessage(PluginManager.MessageType.Warning,
-                    "Couldn't Load Exception Message. This message should not prevent mod functionality. ");
+                Debug.Log(
+                    $"Couldn't Load Exception Message. This message should not prevent mod functionality. {e.Message} - {e.StackTrace}");
             }
         }
 

@@ -158,6 +158,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.text = SelectedCitizen.Criminal.ToString();
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
+
             Inputs.Add(inputField);
             _labels.Add(label);
 
@@ -177,6 +178,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.text = CitizenHelper.GetEducationText(SelectedCitizen.EducationLevel);
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
+
 
             Inputs.Add(inputField);
             _labels.Add(label);
@@ -198,6 +200,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.isInteractive = false;
 
             inputField.tooltip = inputField.text;
+
             Inputs.Add(inputField);
             _labels.Add(label);
 
@@ -218,6 +221,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
 
+
             Inputs.Add(inputField);
             _labels.Add(label);
 
@@ -237,6 +241,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.text = CitizenHelper.GetHealthText(Citizen.GetHealthLevel(SelectedCitizen.m_health));
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
+
 
             Inputs.Add(inputField);
             _labels.Add(label);
@@ -260,6 +265,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.isInteractive = false;
 
             inputField.tooltip = inputField.text;
+
             Inputs.Add(inputField);
             _labels.Add(label);
 
@@ -279,8 +285,13 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.text = Citizen
                 .GetHappinessLevel(Citizen.GetHappiness(SelectedCitizen.m_health, SelectedCitizen.m_wellbeing))
                 .ToString();
+
+            if (inputField.text == "Suberb")
+                inputField.text = "Superb";
+
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
+
 
             Inputs.Add(inputField);
             _labels.Add(label);
@@ -301,6 +312,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.text = Citizen.GetWorkEfficiency(Citizen.GetHealthLevel(SelectedCitizen.m_health)).ToString();
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
+
 
             Inputs.Add(inputField);
             _labels.Add(label);
@@ -324,6 +336,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
 
+
             Inputs.Add(inputField);
             _labels.Add(label);
 
@@ -345,6 +358,7 @@ namespace CustomizeItExtended.GUI.Citizens
                     SelectedCitizen.Unemployed, SelectedCitizen.Criminal).ToString();
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
+
 
             Inputs.Add(inputField);
             _labels.Add(label);
@@ -369,6 +383,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
 
+
             Inputs.Add(inputField);
             _labels.Add(label);
 
@@ -379,7 +394,7 @@ namespace CustomizeItExtended.GUI.Citizens
         private void AgeGroup(ref float widestWidth)
         {
             var label = AddUIComponent<UILabel>();
-            label.name = "AgeGroupLabel";
+            label.name = "AgeLabel2";
             label.text = "Age Group";
             label.textScale = 0.9f;
             label.isInteractive = false;
@@ -388,6 +403,7 @@ namespace CustomizeItExtended.GUI.Citizens
             inputField.text = Citizen.GetAgeGroup(SelectedCitizen.Age).ToString();
             inputField.isInteractive = false;
             inputField.tooltip = inputField.text;
+
 
             Inputs.Add(inputField);
             _labels.Add(label);

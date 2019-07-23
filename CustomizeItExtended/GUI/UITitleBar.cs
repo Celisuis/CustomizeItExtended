@@ -44,7 +44,11 @@ namespace CustomizeItExtended.GUI
             };
 
             _titleLabel = AddUIComponent<UILabel>();
-            _titleLabel.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
+            _titleLabel.text =
+                CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(
+                    CustomizeItExtendedTool.instance.CurrentSelectedBuilding.name, out var props)
+                    ? props.CustomName
+                    : CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
             _titleLabel.textScale = 0.9f;
             _titleLabel.isInteractive = false;
 
@@ -105,7 +109,11 @@ namespace CustomizeItExtended.GUI
             };
 
             _titleLabel = AddUIComponent<UILabel>();
-            _titleLabel.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
+            _titleLabel.text =
+                CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(
+                    CustomizeItExtendedTool.instance.CurrentSelectedBuilding.name, out var props)
+                    ? props.CustomName
+                    : CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
             _titleLabel.textScale = 0.9f;
             _titleLabel.isInteractive = false;
 
@@ -166,7 +174,11 @@ namespace CustomizeItExtended.GUI
             };
 
             _titleLabel = AddUIComponent<UILabel>();
-            _titleLabel.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
+            _titleLabel.text =
+                CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(
+                    CustomizeItExtendedTool.instance.CurrentSelectedBuilding.name, out var props)
+                    ? props.CustomName
+                    : CustomizeItExtendedTool.instance.CurrentSelectedBuilding.GetUncheckedLocalizedTitle();
             _titleLabel.textScale = 0.9f;
             _titleLabel.isInteractive = false;
 

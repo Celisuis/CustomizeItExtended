@@ -8,7 +8,7 @@ namespace CustomizeItExtended.Helpers
     public class CitizenHelper
     {
         /// <summary>
-        /// Adapted from C.S Source Code
+        ///     Adapted from C.S Source Code
         /// </summary>
         /// <param name="citizenId"></param>
         /// <returns></returns>

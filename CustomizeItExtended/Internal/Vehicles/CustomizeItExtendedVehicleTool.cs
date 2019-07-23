@@ -48,8 +48,6 @@ namespace CustomizeItExtended.Internal.Vehicles
 
         internal PublicTransportVehicleWorldInfoPanel PublicTransportWorldInfoPanel;
 
-        internal UIButton ResetAll;
-
         internal InstanceID SelectedInstanceID;
 
         internal VehicleInfo SelectedVehicle;
@@ -177,6 +175,9 @@ namespace CustomizeItExtended.Internal.Vehicles
                     {
                         Debug.Log($"{e.Message} - {e.StackTrace}");
                     }
+
+                    if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                        CustomizeItExtendedMod.Settings.Save();
                 });
         }
 

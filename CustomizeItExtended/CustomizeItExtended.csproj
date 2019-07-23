@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\CitizenHelper.cs" />
+    <Compile Include="Internal\Citizens\CitizenEntry.cs" />
     <Compile Include="Internal\Citizens\CitizenProperties.cs" />
     <Compile Include="Internal\Citizens\CustomizeItExtendedCitizenTool.cs" />
     <Compile Include="Compatibility\RebalancedIndustries.cs" />

@@ -2,12 +2,15 @@
 
 New Features:
 
-- Added New Windows to Escape Chain.
 - Default Names - You now have the option to set a Default Name for Buildings and Vehicles. You must rename the building/vehicle first, and then toggle the checkbox.
-  If a building/vehicle has a default name, any building/vehicle of the same type will spawn/plop with that name. 
+  If a building/vehicle has a default name, any building/vehicle of the same type will spawn/plop with that name. It will also change the name of any that have already spawned/plopped.
 - Vehicle Manager - Vehicles now have a properties button allowing you to alter various values.
 - Citizen Manager - Citizens now have a properties button. This currently allows you to view various statistics about the selected Citizen. These values apart from `Job Title` are for information only, and are not current editable.
 - Custom Job Names - Citizens can now have Custom Job Names. From the new properties button, you can alter the `Job Title` field for a custom job name.
+
+Updated:
+
+- Added New Windows to Escape Chain.
 
 Developer Notes:
 
