@@ -7,6 +7,11 @@ namespace CustomizeItExtended.Helpers
 {
     public class CitizenHelper
     {
+        /// <summary>
+        /// Adapted from C.S Source Code
+        /// </summary>
+        /// <param name="citizenId"></param>
+        /// <returns></returns>
         public static string GetDefaultJobTitle(uint citizenId)
         {
             string title = string.Empty;
