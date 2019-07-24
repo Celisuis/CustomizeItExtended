@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CustomizeItExtended.Internal
 {
+    [Serializable]
     public class CustomNameEntry
     {
         public string Key;

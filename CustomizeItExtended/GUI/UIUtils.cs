@@ -280,6 +280,30 @@ namespace CustomizeItExtended.GUI
             return uibutton;
         }
 
+        public static UIButton CreateMovableButton(UIComponent parent, Vector3 position, MouseEventHandler clickHandler)
+        {
+            var uibutton = parent.AddUIComponent<UIButton>();
+            uibutton.name = "CustomizeItExtendedButton";
+            uibutton.width = 26f;
+            uibutton.height = 26f;
+            uibutton.normalFgSprite = "Options";
+            uibutton.disabledFgSprite = "OptionsDisabled";
+            uibutton.hoveredFgSprite = "OptionsHovered";
+            uibutton.focusedFgSprite = "OptionsFocused";
+            uibutton.pressedFgSprite = "OptionsPressed";
+            uibutton.normalBgSprite = "OptionBase";
+            uibutton.disabledBgSprite = "OptionBaseDisabled";
+            uibutton.hoveredBgSprite = "OptionBaseHovered";
+            uibutton.focusedBgSprite = "OptionBaseFocused";
+            uibutton.pressedBgSprite = "OptionBasePressed";
+            uibutton.eventClick += clickHandler;
+            uibutton.relativePosition = position;
+
+            return uibutton;
+
+
+        }
+
         public static UICheckBox CreateCheckBox(UIComponent parent, string fieldName)
         {
             var checkBox = parent.AddUIComponent<UICheckBox>();

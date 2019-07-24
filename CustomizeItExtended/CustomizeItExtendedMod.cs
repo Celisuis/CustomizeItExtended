@@ -6,7 +6,9 @@ using System.Xml.Serialization;
 using ColossalFramework.IO;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
+using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Internal.Vehicles;
 using CustomizeItExtended.Legacy;
 using CustomizeItExtended.Settings;
 using Harmony;
@@ -131,7 +133,6 @@ namespace CustomizeItExtended
                     }
                 });
             });
-            Instance.ToggleOptionsPanel(false);
             helper.AddSpace(10);
 
             var importButton = (UIButton) helper.AddButton("Import Old Settings", ImportOldSettings);
@@ -141,8 +142,49 @@ namespace CustomizeItExtended
                 : "No Old Settings Found.";
             importButton.disabledColor = Color.gray;
             helper.AddSpace(10);
+            var configGroup = helper.AddGroup("City Configuration");
+            Instance.ImportDefaultConfig = (UIButton) configGroup.AddButton("Import Default Config", () =>
+            {
+                _settings = CustomizeItExtendedSettings.LoadDefaultConfig();
+
+                SimulationManager.instance.AddAction(() =>
+                {
+                    for (uint i = 0; i < PrefabCollection<BuildingInfo>.LoadedCount(); i++)
+                    {
+                        var building = PrefabCollection<BuildingInfo>.GetLoaded(i);
+                        if (building == null || building.m_buildingAI == null ||
+                            !building.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI)))
+                            continue;
+
+                        if (CustomizeItExtendedTool.instance.CustomData.TryGetValue(building.name, out var props))
+                            building.LoadProperties(props);
+                    }
+                });
+
+                SimulationManager.instance.AddAction(() =>
+                {
+                    for (uint i = 0; i < PrefabCollection<VehicleInfo>.LoadedCount(); i++)
+                    {
+                        var vehicle = PrefabCollection<VehicleInfo>.GetLoaded(i);
+                        if (vehicle == null)
+                            continue;
+
+                        if (CustomizeItExtendedVehicleTool.instance.CustomVehicleData.TryGetValue(vehicle.name, out var props))
+                            vehicle.LoadProperties(props);
+                    }
+                });
+
+                if(!Settings.SavePerCity)
+                    Settings.Save();
+
+            });
+            helper.AddSpace(10);
+            Instance.ExportToDefaultConfig = (UIButton) configGroup.AddButton("Export Current City to Default",
+                () => { Settings.SaveDefaultConfig(); });
+            helper.AddSpace(10);
             var version = (UITextField) helper.AddTextfield("Version", Version, text => { }, text => { });
             version.isInteractive = false;
+            Instance.ToggleOptionsPanel(false);
         }
 
         private static void ImportOldSettings()

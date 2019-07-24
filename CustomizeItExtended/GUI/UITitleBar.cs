@@ -371,11 +371,7 @@ namespace CustomizeItExtended.GUI
                 _titleLabel.text = props.CustomName;
             else
                 _titleLabel.text = CustomizeItExtendedVehicleTool.instance
-                    .OriginalVehicleNames
-                    .TryGetValue(CustomizeItExtendedVehicleTool.instance.SelectedVehicle.name,
-                        out NameProperties origProps)
-                    ? origProps.CustomName
-                    : "No Name Found";
+                    .SelectedVehicle.GetUncheckedLocalizedTitle();
 
             _titleLabel.textScale = 0.9f;
             _titleLabel.isInteractive = false;

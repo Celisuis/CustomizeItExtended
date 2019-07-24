@@ -1,4 +1,19 @@
-﻿Version 1.4.0 - 
+﻿Version 1.4.1 - 
+
+New Features:
+
+-  Import and Export a Default City Config - Import and Exporting is only available when you use the Save Per City option. This allows you to export your current city settings to an external file so you can load it 
+back up on a new city. It allows the transfer of settings between citys without resorting to using your settings on All Cities. Note - Importing a default config will override your current city settings.
+
+Bug Fixes:
+
+- Updated Serialization Routines. It should be more stable now and not cause TypeLoadErrors.
+- Moved Service Customize It Button to account for Landfills, and anything else with an empty button.
+- Moved Various Default Name Checkboxs to account for the Notification Banner.
+
+
+
+Version 1.4.0 - 
 
 New Features:
 

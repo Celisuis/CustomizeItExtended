@@ -224,7 +224,7 @@ namespace CustomizeItExtended.Extensions
 
                 using (var stream = new MemoryStream(data))
                 {
-                    CustomDataList = (List<PropertyEntry>) formatter.Deserialize(stream);
+                    CustomDataList = formatter.Deserialize(stream) as List<PropertyEntry>;
                 }
 
                 SimulationManager.instance.AddAction(() =>
@@ -244,7 +244,7 @@ namespace CustomizeItExtended.Extensions
 
                 using (var stream = new MemoryStream(data))
                 {
-                    CustomBuildingNames = (List<CustomNameEntry>) formatter.Deserialize(stream);
+                    CustomBuildingNames = formatter.Deserialize(stream) as List<CustomNameEntry>;
                 }
             }
 
@@ -256,7 +256,7 @@ namespace CustomizeItExtended.Extensions
 
                 using (var stream = new MemoryStream(data))
                 {
-                    CustomVehicleNames = (List<CustomNameEntry>) formatter.Deserialize(stream);
+                    CustomVehicleNames = formatter.Deserialize(stream) as List<CustomNameEntry>;
                 }
             }
 
@@ -268,7 +268,7 @@ namespace CustomizeItExtended.Extensions
 
                 using (var stream = new MemoryStream(data))
                 {
-                    CustomJobTitles = (Dictionary<uint, string>) formatter.Deserialize(stream);
+                    CustomJobTitles = formatter.Deserialize(stream) as Dictionary<uint, string>;
                 }
             }
 
@@ -280,7 +280,7 @@ namespace CustomizeItExtended.Extensions
 
                 using (var stream = new MemoryStream(data))
                 {
-                    CustomVehicleProperties = (List<VehiclePropertyEntry>) formatter.Deserialize(stream);
+                    CustomVehicleProperties = formatter.Deserialize(stream) as List<VehiclePropertyEntry>;
                 }
 
                 SimulationManager.instance.AddAction(() =>

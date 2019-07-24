@@ -49,6 +49,9 @@ namespace CustomizeItExtended.Internal.Buildings
 
         internal UIButton ResetAll;
 
+        internal UIButton ImportDefaultConfig;
+        internal UIButton ExportToDefaultConfig;
+
         internal UICheckBox SavePerCity;
         internal CityServiceWorldInfoPanel ServiceBuildingPanel;
 
@@ -74,6 +77,14 @@ namespace CustomizeItExtended.Internal.Buildings
             ? null
             : "This option is only available in the main menu.";
 
+        internal string ImportDefaultConfigTooltip => ImportDefaultConfig != null && ImportDefaultConfig.isEnabled
+            ? "This will import your Default City Customize Config. WARNING - This will overwrite all current values."
+            : "This option is only available in game and when Save Per City is enabled.";
+
+
+        internal string ExportDefaultConfigTooltip => ExportToDefaultConfig != null && ExportToDefaultConfig.isEnabled
+            ? "This will export your Current City Customized Options to the Default Profile"
+            : "This option is only available in game and when Save Per City is enabled.";
         public void Initialize()
         {
             if (_isInitialized)
@@ -122,9 +133,9 @@ namespace CustomizeItExtended.Internal.Buildings
                 return;
 
             AddDefaultBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton,
-                new Vector3(120f, 5f, 0f));
-            AddDefaultNameCheckbox(ServiceBuildingPanel, out SetDefaultNameCheckbox, new Vector3(-127f, 85f, 0f));
-            AddDefaultNameLabel(ServiceBuildingPanel, out _defaultNameLabel, new Vector3(-156f, 89f, 0f));
+                new Vector3(160f, 5f, 0f));
+            AddDefaultNameCheckbox(ServiceBuildingPanel, out SetDefaultNameCheckbox, new Vector3(-8f, 139f, 0f));
+            AddDefaultNameLabel(ServiceBuildingPanel, out _defaultNameLabel, new Vector3(-37f, 143f, 0f));
 
             WarehousePanel = GameObject.Find("(Library) WarehouseWorldInfoPanel")
                 .GetComponent<WarehouseWorldInfoPanel>();
@@ -133,8 +144,8 @@ namespace CustomizeItExtended.Internal.Buildings
                 return;
 
             AddWarehouseBuildingPropertiesButton(WarehousePanel, out _warehouseButton, new Vector3(68f, -35f, 0f));
-            AddDefaultNameCheckbox(WarehousePanel, out SetWarehouseDefaultNameCheckbox, new Vector3(-127f, 46f, 0f));
-            AddDefaultNameLabel(WarehousePanel, out _warehouseDefaultNameLabel, new Vector3(-147f, 49f, 0f));
+            AddDefaultNameCheckbox(WarehousePanel, out SetWarehouseDefaultNameCheckbox, new Vector3(-27f, 93f, 0f));
+            AddDefaultNameLabel(WarehousePanel, out _warehouseDefaultNameLabel, new Vector3(-47f, 96f, 0f));
 
 
             UniqueFactoryWorldInfoPanel = GameObject.Find("(Library) UniqueFactoryWorldInfoPanel")
@@ -146,8 +157,8 @@ namespace CustomizeItExtended.Internal.Buildings
             AddUniqueFactoriesBuildingPropertiesButton(UniqueFactoryWorldInfoPanel, out _uniqueFactoryButton,
                 new Vector3(25f, -90f, 0f));
             AddDefaultNameCheckbox(UniqueFactoryWorldInfoPanel, out SetFactoryDefaultNameCheckbox,
-                new Vector3(-127f, 82f, 0f));
-            AddDefaultNameLabel(UniqueFactoryWorldInfoPanel, out _factoryDefaultNameLabel, new Vector3(-147f, 85f, 0f));
+                new Vector3(-150f, 74f, 0f));
+            AddDefaultNameLabel(UniqueFactoryWorldInfoPanel, out _factoryDefaultNameLabel, new Vector3(-170f, 80f, 0f));
 
             ZoneBuildingPanel = GameObject.Find("(Library) ZonedBuildingWorldInfoPanel")
                 .GetComponent<ZonedBuildingWorldInfoPanel>();
@@ -331,6 +342,10 @@ namespace CustomizeItExtended.Internal.Buildings
             SavePerCity.Find<UISprite>("Unchecked").spriteName = isInGame ? "ToggleBaseDisabled" : "ToggleBase";
             ((UISprite) SavePerCity.checkedBoxObject).spriteName =
                 isInGame ? "ToggleBaseDisabled" : "ToggleBaseFocused";
+
+            ImportDefaultConfig.isEnabled = CustomizeItExtendedMod.Settings.SavePerCity && isInGame;
+
+            ExportToDefaultConfig.isEnabled = CustomizeItExtendedMod.Settings.SavePerCity && isInGame;
         }
     }
 }
