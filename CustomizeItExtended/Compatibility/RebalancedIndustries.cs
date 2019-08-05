@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using ColossalFramework.Plugins;
 
 namespace CustomizeItExtended.Compatibility
 {
@@ -16,5 +18,12 @@ namespace CustomizeItExtended.Compatibility
             "m_extractRadius",
             "m_truckCount"
         };
+
+        public static bool IsRebalancedIndustriesActive()
+        {
+            var plugins = PluginManager.instance.GetPluginsInfo();
+
+            return plugins.Where(x => x.isEnabled).Any(plugin => plugin.publishedFileID.AsUInt64 == 1562650024);
+        }
     }
 }

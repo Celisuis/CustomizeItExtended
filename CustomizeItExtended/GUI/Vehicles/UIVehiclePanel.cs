@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ColossalFramework.UI;
+using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Vehicles;
 using UnityEngine;
 
@@ -63,6 +64,47 @@ namespace CustomizeItExtended.GUI.Vehicles
                 if (label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
                     widestWidth = label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
             }
+
+
+            Inputs.Add(UiUtils.CreateNameTextfield(this, "DefaultName", (component, value) =>
+            {
+                if(!string.IsNullOrEmpty(value))
+                {
+                    if (CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(SelectedVehicle.name,
+                        out var props))
+                    {
+                        props.CustomName = value;
+                        props.DefaultName = true;
+                    }
+                    else
+                    {
+                        CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.Add(SelectedVehicle.name,
+                            new NameProperties(value, true));
+                    }
+                }
+                else
+                {
+                    if (CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(SelectedVehicle.name,
+                        out var _))
+                        CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.Remove(SelectedVehicle.name);
+                }
+
+                if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                    CustomizeItExtendedMod.Settings.Save();
+
+            }, CustomizeItExtendedVehicleTool
+                .instance.CustomVehicleNames.TryGetValue(SelectedVehicle.name, out var customName) ? customName.CustomName : string.Empty));
+
+            var nameLabel = AddUIComponent<UILabel>();
+            nameLabel.name = "DefaultNameLabel";
+            nameLabel.text = "Default Name";
+            nameLabel.textScale = 0.9f;
+            nameLabel.isInteractive = false;
+
+            if (nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
+                widestWidth = nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
+
+            _labels.Add(nameLabel);
 
             Inputs.Sort((x, y) => x.name.CompareTo(y.name));
             _labels.Sort((x, y) => x.name.CompareTo(y.name));

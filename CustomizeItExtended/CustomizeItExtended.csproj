@@ -47,6 +47,9 @@
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="ModTools">
+      <HintPath>..\..\..\..\Games\Steam\steamapps\workshop\content\255710\450877484\ModTools.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\ModToolsCompatibilityPatch.cs" />
     <Compile Include="Helpers\CitizenHelper.cs" />
     <Compile Include="Internal\Citizens\CitizenEntry.cs" />
     <Compile Include="Internal\Citizens\CitizenProperties.cs" />
@@ -101,6 +105,11 @@
     <Compile Include="Internal\Vehicles\CustomizeItExtendedVehicleTool.cs" />
     <Compile Include="Internal\Vehicles\CustomVehicleProperties.cs" />
     <Compile Include="Internal\Vehicles\VehiclePropertyEntry.cs" />
+    <Compile Include="Translations\BaseLanguage.cs" />
+    <Compile Include="Translations\Languages\English.cs" />
+    <Compile Include="Translations\Languages\German.cs" />
+    <Compile Include="Translations\StringExtensions.cs" />
+    <Compile Include="Translations\TranslationFramework.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using ColossalFramework;
 using ColossalFramework.UI;
+using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Buildings;
+using CustomizeItExtended.Translations;
 using UnityEngine;
 
 namespace CustomizeItExtended.Internal.Buildings
@@ -71,20 +73,20 @@ namespace CustomizeItExtended.Internal.Buildings
         internal UIZonedBuildingPanelWrapper ZonedBuildingPanelWrapper;
 
         internal string ButtonTooltip =>
-            ResetAll != null && ResetAll.isEnabled ? null : "This option is only available in game.";
+            ResetAll != null && ResetAll.isEnabled ? null : "This option is only available in game.".TranslateInformation();
 
         internal string CheckboxTooltip => SavePerCity != null && SavePerCity.isEnabled
             ? null
-            : "This option is only available in the main menu.";
+            : "This option is only available in the main menu.".TranslateInformation();
 
         internal string ImportDefaultConfigTooltip => ImportDefaultConfig != null && ImportDefaultConfig.isEnabled
-            ? "This will import your Default City Customize Config. WARNING - This will overwrite all current values."
-            : "This option is only available in game and when Save Per City is enabled.";
+            ? "This will import your Default City Customize Config. WARNING - This will overwrite all current values.".TranslateInformation()
+            : "This option is only available in game and when Save Per City is enabled.".TranslateInformation();
 
 
         internal string ExportDefaultConfigTooltip => ExportToDefaultConfig != null && ExportToDefaultConfig.isEnabled
-            ? "This will export your Current City Customized Options to the Default Profile"
-            : "This option is only available in game and when Save Per City is enabled.";
+            ? "This will export your Current City Customized Options to the Default Profile".TranslateInformation()
+            : "This option is only available in game and when Save Per City is enabled.".TranslateInformation();
         public void Initialize()
         {
             if (_isInitialized)
@@ -132,11 +134,14 @@ namespace CustomizeItExtended.Internal.Buildings
             if (ServiceBuildingPanel == null)
                 return;
 
-            AddDefaultBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton,
-                new Vector3(160f, 5f, 0f));
-            AddDefaultNameCheckbox(ServiceBuildingPanel, out SetDefaultNameCheckbox, new Vector3(-8f, 139f, 0f));
-            AddDefaultNameLabel(ServiceBuildingPanel, out _defaultNameLabel, new Vector3(-37f, 143f, 0f));
+            var defaultPosition = new Vector3(160f, 5f, 0f);
 
+            if(ModToolsCompatibilityPatch.IsModToolsActive() && ModToolsCompatibilityPatch.AreGamePanelExtensionsActive())
+                defaultPosition = new Vector3(160, -75f, 0f);
+
+            AddDefaultBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton,
+                defaultPosition);
+           
             WarehousePanel = GameObject.Find("(Library) WarehouseWorldInfoPanel")
                 .GetComponent<WarehouseWorldInfoPanel>();
 
@@ -144,8 +149,6 @@ namespace CustomizeItExtended.Internal.Buildings
                 return;
 
             AddWarehouseBuildingPropertiesButton(WarehousePanel, out _warehouseButton, new Vector3(68f, -35f, 0f));
-            AddDefaultNameCheckbox(WarehousePanel, out SetWarehouseDefaultNameCheckbox, new Vector3(-27f, 93f, 0f));
-            AddDefaultNameLabel(WarehousePanel, out _warehouseDefaultNameLabel, new Vector3(-47f, 96f, 0f));
 
 
             UniqueFactoryWorldInfoPanel = GameObject.Find("(Library) UniqueFactoryWorldInfoPanel")
@@ -156,9 +159,6 @@ namespace CustomizeItExtended.Internal.Buildings
 
             AddUniqueFactoriesBuildingPropertiesButton(UniqueFactoryWorldInfoPanel, out _uniqueFactoryButton,
                 new Vector3(25f, -90f, 0f));
-            AddDefaultNameCheckbox(UniqueFactoryWorldInfoPanel, out SetFactoryDefaultNameCheckbox,
-                new Vector3(-150f, 74f, 0f));
-            AddDefaultNameLabel(UniqueFactoryWorldInfoPanel, out _factoryDefaultNameLabel, new Vector3(-170f, 80f, 0f));
 
             ZoneBuildingPanel = GameObject.Find("(Library) ZonedBuildingWorldInfoPanel")
                 .GetComponent<ZonedBuildingWorldInfoPanel>();

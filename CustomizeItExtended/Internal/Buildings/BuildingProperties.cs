@@ -213,7 +213,7 @@ namespace CustomizeItExtended.Internal.Buildings
             if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
                 foreach (var customField in fields)
                 {
-                    if (CustomizeItExtendedMod.IsRebalancedIndustriesActive() &&
+                    if (RebalancedIndustries.IsRebalancedIndustriesActive() &&
                         RebalancedIndustries.RebalancedFields.Contains(customField.Name))
                         continue;
 
@@ -237,7 +237,7 @@ namespace CustomizeItExtended.Internal.Buildings
             if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
                 foreach (var customField in fields)
                 {
-                    if (CustomizeItExtendedMod.IsRebalancedIndustriesActive() &&
+                    if (RebalancedIndustries.IsRebalancedIndustriesActive() &&
                         RebalancedIndustries.RebalancedFields.Contains(customField.Name))
                         continue;
 

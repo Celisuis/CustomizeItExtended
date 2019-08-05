@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace CustomizeItExtended.Internal.Vehicles
 {
+    [Serializable]
     public class CustomVehicleProperties
     {
         public float m_acceleration;

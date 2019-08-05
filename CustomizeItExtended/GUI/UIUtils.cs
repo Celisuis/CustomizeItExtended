@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ColossalFramework.UI;
 using CustomizeItExtended.GUI.Buildings;
+using CustomizeItExtended.GUI.Vehicles;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal.Buildings;
 using CustomizeItExtended.Internal.Citizens;
@@ -238,7 +239,7 @@ namespace CustomizeItExtended.GUI
                 var selectedVehicle = CustomizeItExtendedVehicleTool.instance.SelectedVehicle;
                 CustomizeItExtendedVehicleTool.instance.ResetVehicle(selectedVehicle);
 
-                foreach (var input in UiCustomizeItExtendedPanel.Instance.Inputs)
+                foreach (var input in UIVehiclePanel.Instance.Inputs)
                     switch (input)
                     {
                         case UITextField field:
@@ -481,6 +482,36 @@ namespace CustomizeItExtended.GUI
 
             return textField;
         }
+
+        public static UITextField CreateNameTextfield(UIComponent parent, string fieldName, PropertyChangedEventHandler<string> handler, string defaultText)
+        {
+            var textField = parent.AddUIComponent<UITextField>();
+
+            textField.name = fieldName;
+            textField.builtinKeyNavigation = true;
+            textField.isInteractive = true;
+            textField.readOnly = false;
+
+            textField.selectionSprite = "EmptySprite";
+            textField.selectionBackgroundColor = new Color32(0, 172, 234, 255);
+
+            textField.width = FieldWidth;
+            textField.height = FieldHeight;
+            textField.padding = new RectOffset(6, 6, 6, 6);
+            textField.normalBgSprite = "LevelBarBackground";
+            textField.hoveredBgSprite = "LevelBarBackground";
+            textField.disabledBgSprite = "LevelBarBackground";
+            textField.focusedBgSprite = "LevelBarBackground";
+            textField.horizontalAlignment = UIHorizontalAlignment.Center;
+            textField.textColor = Color.white;
+            textField.textScale = 0.85f;
+            textField.selectOnFocus = true;
+            textField.eventTextSubmitted += handler;
+            textField.text = defaultText;
+
+            return textField;
+        }
+
 
         public static UITextField CreateCitizenInputField(UIComponent parent, string fieldName,
             PropertyChangedEventHandler<string> handler)

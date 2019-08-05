@@ -18,12 +18,7 @@ namespace CustomizeItExtended.Extensions
 
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                if (UiPanelWrapper.Instance != null && UiPanelWrapper.Instance.isVisible)
-                {
-                    UiPanelWrapper.Instance.isVisible = false;
-                    UiUtils.DeepDestroy(UiPanelWrapper.Instance);
-                    return;
-                }
+               
 
                 if (UIWarehousePanelWrapper.Instance != null && UIWarehousePanelWrapper.Instance.isVisible)
                 {
@@ -50,6 +45,13 @@ namespace CustomizeItExtended.Extensions
                     UICitizenPanelWrapper.Instance.isVisible = false;
 
                     UiUtils.DeepDestroy(UICitizenPanelWrapper.Instance);
+                }
+
+                if (UiPanelWrapper.Instance != null && UiPanelWrapper.Instance.isVisible)
+                {
+                    UiPanelWrapper.Instance.isVisible = false;
+                    UiUtils.DeepDestroy(UiPanelWrapper.Instance);
+                    return;
                 }
             }
         }

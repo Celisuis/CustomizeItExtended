@@ -6,11 +6,13 @@ using System.Xml.Serialization;
 using ColossalFramework.IO;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
+using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Internal.Buildings;
 using CustomizeItExtended.Internal.Vehicles;
 using CustomizeItExtended.Legacy;
 using CustomizeItExtended.Settings;
+using CustomizeItExtended.Translations;
 using Harmony;
 using ICities;
 using UnityEngine;
@@ -21,7 +23,7 @@ namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
     {
-        internal const string Version = "1.4.0V";
+        internal const string Version = "1.4.6V";
 
         private static CustomizeItExtendedSettings _settings;
 
@@ -55,7 +57,7 @@ namespace CustomizeItExtended
         public string Name => "Customize It! Extended";
 
         public string Description =>
-            $"{Version} - A Customization and Information Viewer for Buildings, Vehicles and Citizens!";
+            $"{Version} - A Customization and Information Viewer for Buildings, Vehicles and Citizens!".TranslateInformation();
 
         public void OnEnabled()
         {
@@ -72,11 +74,11 @@ namespace CustomizeItExtended
 
             try
             {
-                if (!IsRebalancedIndustriesActive() || Settings.RebalancedMessageShown)
+                if (!RebalancedIndustries.IsRebalancedIndustriesActive() || Settings.RebalancedMessageShown)
                     return;
 
                 UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel").SetMessage(
-                    "[Customize It Extended] Rebalanced Industries Detected.",
+                    "Customize It Extended.",
                     "Rebalanced Industries has been detected. For compatibility, certain industry properties have been disabled from being altered." +
                     Environment.NewLine +
                     "This can be overridden within the Main Menu Options.", false);
@@ -88,6 +90,8 @@ namespace CustomizeItExtended
                 Debug.Log(
                     $"Couldn't Load Exception Message. This message should not prevent mod functionality. {e.Message} - {e.StackTrace}");
             }
+
+           
         }
 
         public void OnDisabled()
@@ -95,17 +99,24 @@ namespace CustomizeItExtended
             _harmony.UnpatchAll();
         }
 
+        internal UIDropDown LanguageDropdown;
+
         public void OnSettingsUI(UIHelperBase helper)
         {
+            TranslationFramework.Initialize();
+            var languageGroup = helper.AddGroup("Languages");
+            LanguageDropdown = (UIDropDown) languageGroup.AddDropdown("Language",
+                TranslationFramework.Languages.Select(x => x.Name).ToArray(), 0, LanguageSelectionChanged);
+            LanguageDropdown.selectedIndex = Array.IndexOf(LanguageDropdown.items, Settings.Language);
             helper.AddSpace(10);
-            Instance.SavePerCity = (UICheckBox) helper.AddCheckbox("Save Per City", Settings.SavePerCity, x =>
+            Instance.SavePerCity = (UICheckBox) helper.AddCheckbox("Save Per City".TranslateInformation(), Settings.SavePerCity, x =>
             {
                 Settings.SavePerCity = x;
                 Settings.Save();
             });
             Instance.SavePerCity.parent.Find<UILabel>("Label").disabledTextColor = Color.gray;
             helper.AddSpace(10);
-            var overrideButton = (UICheckBox) helper.AddCheckbox("Override Rebalanced Industries",
+            var overrideButton = (UICheckBox) helper.AddCheckbox("Override Rebalanced Industries".TranslateInformation(),
                 Settings.OverrideRebalancedIndustries,
                 x =>
                 {
@@ -113,12 +124,12 @@ namespace CustomizeItExtended
                     Settings.Save();
                 });
             overrideButton.tooltip =
-                "EXPERIMENTAL - This will cause your Industry buildings to revert back to Vanilla";
+                "EXPERIMENTAL - This will cause your Industry buildings to revert back to Vanilla".TranslateInformation();
 
-            overrideButton.isEnabled = IsRebalancedIndustriesActive();
+            overrideButton.isEnabled = RebalancedIndustries.IsRebalancedIndustriesActive();
             overrideButton.disabledColor = Color.gray;
             helper.AddSpace(10);
-            Instance.ResetAll = (UIButton) helper.AddButton("Reset ALL Buildings", () =>
+            Instance.ResetAll = (UIButton) helper.AddButton("Reset ALL Buildings".TranslateInformation(), () =>
             {
                 SimulationManager.instance.AddAction(() =>
                 {
@@ -135,15 +146,15 @@ namespace CustomizeItExtended
             });
             helper.AddSpace(10);
 
-            var importButton = (UIButton) helper.AddButton("Import Old Settings", ImportOldSettings);
+            var importButton = (UIButton) helper.AddButton("Import Old Settings".TranslateInformation(), ImportOldSettings);
             importButton.isEnabled = File.Exists(Path.Combine(DataLocation.localApplicationData, "CustomizeIt.xml"));
             importButton.tooltip = File.Exists(Path.Combine(DataLocation.localApplicationData, "CustomizeIt.xml"))
-                ? "Note: This will import your old Customize It settings into Customize It Extended."
-                : "No Old Settings Found.";
+                ? "Note: This will import your old Customize It settings into Customize It Extended.".TranslateInformation()
+                : "No Old Settings Found.".TranslateInformation();
             importButton.disabledColor = Color.gray;
             helper.AddSpace(10);
-            var configGroup = helper.AddGroup("City Configuration");
-            Instance.ImportDefaultConfig = (UIButton) configGroup.AddButton("Import Default Config", () =>
+            var configGroup = helper.AddGroup("City Configuration".TranslateInformation());
+            Instance.ImportDefaultConfig = (UIButton) configGroup.AddButton("Import Default Config".TranslateInformation(), () =>
             {
                 _settings = CustomizeItExtendedSettings.LoadDefaultConfig();
 
@@ -179,12 +190,23 @@ namespace CustomizeItExtended
 
             });
             helper.AddSpace(10);
-            Instance.ExportToDefaultConfig = (UIButton) configGroup.AddButton("Export Current City to Default",
+            Instance.ExportToDefaultConfig = (UIButton) configGroup.AddButton("Export Current City to Default".TranslateInformation(),
                 () => { Settings.SaveDefaultConfig(); });
             helper.AddSpace(10);
             var version = (UITextField) helper.AddTextfield("Version", Version, text => { }, text => { });
             version.isInteractive = false;
             Instance.ToggleOptionsPanel(false);
+        }
+
+        private void LanguageSelectionChanged(int index)
+        {
+            var chosenLanguage = TranslationFramework.Languages.Find(x => x.Name == LanguageDropdown.items[index]);
+
+            TranslationFramework.CurrentBaseLanguage = chosenLanguage;
+
+            Settings.Language = chosenLanguage.Name;
+            Settings.Save();
+
         }
 
         private static void ImportOldSettings()
@@ -224,11 +246,6 @@ namespace CustomizeItExtended
             }
         }
 
-        public static bool IsRebalancedIndustriesActive()
-        {
-            var plugins = PluginManager.instance.GetPluginsInfo();
-
-            return plugins.Where(x => x.isEnabled).Any(plugin => plugin.publishedFileID.AsUInt64 == 1562650024);
-        }
+        
     }
 }

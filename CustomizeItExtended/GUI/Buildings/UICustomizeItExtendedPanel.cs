@@ -2,7 +2,9 @@
 using System.Linq;
 using ColossalFramework.UI;
 using CustomizeItExtended.Compatibility;
+using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Translations;
 using UnityEngine;
 
 namespace CustomizeItExtended.GUI.Buildings
@@ -48,7 +50,7 @@ namespace CustomizeItExtended.GUI.Buildings
             {
                 var label = AddUIComponent<UILabel>();
                 label.name = field.Name + "Label";
-                label.text = UiUtils.FieldNames[field.Name];
+                label.text = UiUtils.FieldNames[field.Name].TranslateField();
                 label.textScale = 0.9f;
                 label.isInteractive = false;
 
@@ -71,16 +73,53 @@ namespace CustomizeItExtended.GUI.Buildings
             if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
                 foreach (var input in Inputs)
                 {
-                    if (!CustomizeItExtendedMod.IsRebalancedIndustriesActive() ||
+                    if (!RebalancedIndustries.IsRebalancedIndustriesActive() ||
                         !RebalancedIndustries.RebalancedFields.Contains(input.name))
                         continue;
 
                     input.isEnabled = false;
                     input.isInteractive = false;
 
-                    if (input is UITextField textField) textField.text = "DISABLED";
+                    if (input is UITextField textField) textField.text = "DISABLED".TranslateInformation();
                 }
 
+            Inputs.Add(UiUtils.CreateNameTextfield(this, "DefaultName", (component, value) =>
+            {
+                if(!string.IsNullOrEmpty(value))
+                {
+                    if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                        out var props))
+                    {
+                        props.CustomName = value;
+                        props.DefaultName = true;
+                    }
+                    else
+                    {
+                        CustomizeItExtendedTool.instance.CustomBuildingNames.Add(SelectedBuilding.name,
+                            new NameProperties(value, true));
+                    }
+                }
+                else
+                {
+                    if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                        out var _))
+                        CustomizeItExtendedTool.instance.CustomBuildingNames.Remove(SelectedBuilding.name);
+                }
+
+                if(!CustomizeItExtendedMod.Settings.SavePerCity)
+                    CustomizeItExtendedMod.Settings.Save();
+            }, CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name, out var customName) ? customName.CustomName : string.Empty));
+
+            var nameLabel = AddUIComponent<UILabel>();
+            nameLabel.name = "DefaultNameLabel";
+            nameLabel.text = "Default Name";
+            nameLabel.textScale = 0.9f;
+            nameLabel.isInteractive = false;
+
+            if (nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
+                widestWidth = nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
+
+            _labels.Add(nameLabel);
 
             Inputs.Sort((x, y) => x.name.CompareTo(y.name));
             _labels.Sort((x, y) => x.name.CompareTo(y.name));

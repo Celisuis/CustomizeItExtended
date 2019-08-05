@@ -46,6 +46,8 @@ namespace CustomizeItExtended.Internal.Vehicles
 
         internal Dictionary<string, NameProperties> OriginalVehicleNames = new Dictionary<string, NameProperties>();
 
+        internal Dictionary<string, VehicleInfo> AllLoadedVehicles = new Dictionary<string, VehicleInfo>();
+
         internal PublicTransportVehicleWorldInfoPanel PublicTransportWorldInfoPanel;
 
         internal InstanceID SelectedInstanceID;
@@ -62,6 +64,20 @@ namespace CustomizeItExtended.Internal.Vehicles
                 return;
 
             AddPanelButton();
+
+            for (uint x = 0; x < PrefabCollection<VehicleInfo>.LoadedCount(); x++)
+            {
+                var vehicleInfo = PrefabCollection<VehicleInfo>.GetLoaded(x);
+
+                var vehicleName = vehicleInfo.name;
+
+                if (CustomVehicleNames.TryGetValue(vehicleInfo.name, out var props))
+                    vehicleName = props.CustomName;
+
+                if (AllLoadedVehicles.TryGetValue(vehicleName, out var _))
+                    continue;
+            }
+
             _isInitialized = true;
         }
 
@@ -107,9 +123,6 @@ namespace CustomizeItExtended.Internal.Vehicles
                 return;
 
             AddVehicleCustomizeButton(CitizenVehicleWorldInfoPanel, out _citizenButton, new Vector3(341f, -35f, 0f));
-            AddDefaultNameCheckbox(CitizenVehicleWorldInfoPanel, out _citizenDefaultNameCheckbox,
-                new Vector3(-114f, 49f, 0));
-            AddDefaultNameLabel(CitizenVehicleWorldInfoPanel, out _citizenDefaultLabel, new Vector3(-131f, 52f, 0));
 
             CityServiceVehicleWorldInfoPanel = GameObject.Find("(Library) CityServiceVehicleWorldInfoPanel")
                 .GetComponent<CityServiceVehicleWorldInfoPanel>();
@@ -119,11 +132,6 @@ namespace CustomizeItExtended.Internal.Vehicles
 
             AddVehicleCustomizeButton(CityServiceVehicleWorldInfoPanel, out _cityServiceButton,
                 new Vector3(290f, -63f, 0f));
-            AddDefaultNameCheckbox(CityServiceVehicleWorldInfoPanel, out _cityServiceDefaultNameCheckbox,
-                new Vector3(-148f, 41f, 0));
-            AddDefaultNameLabel(CityServiceVehicleWorldInfoPanel, out _cityServiceDefaultLabel,
-                new Vector3(-168f, 44f, 0));
-
             TouristVehicleInfoPanel = GameObject.Find("(Library) TouristVehicleWorldInfoPanel")
                 .GetComponent<TouristVehicleWorldInfoPanel>();
 
@@ -131,9 +139,6 @@ namespace CustomizeItExtended.Internal.Vehicles
                 return;
 
             AddVehicleCustomizeButton(TouristVehicleInfoPanel, out _touristButton, new Vector3(0f, 25f, 0f));
-            AddDefaultNameCheckbox(TouristVehicleInfoPanel, out _touristDefaultNameCheckbox,
-                new Vector3(-269f, 156f, 0));
-            AddDefaultNameLabel(TouristVehicleInfoPanel, out _touristDefaultLabel, new Vector3(-269f, 49f, 0));
 
             PublicTransportWorldInfoPanel = GameObject.Find("(Library) PublicTransportVehicleWorldInfoPanel")
                 .GetComponent<PublicTransportVehicleWorldInfoPanel>();
@@ -143,10 +148,6 @@ namespace CustomizeItExtended.Internal.Vehicles
 
             AddVehicleCustomizeButton(PublicTransportWorldInfoPanel, out _publicTransportButton,
                 new Vector3(353f, -37f, 0f));
-            AddDefaultNameCheckbox(PublicTransportWorldInfoPanel, out _publicTransportDefaultNameCheckbox,
-                new Vector3(-344f, 40f, 0));
-            AddDefaultNameLabel(PublicTransportWorldInfoPanel, out _publicTransportDefaultLabel,
-                new Vector3(-197f, 43f, 0));
         }
 
         private void AddDefaultNameLabel(VehicleWorldInfoPanel infoPanel, out UILabel label, Vector3 offset)

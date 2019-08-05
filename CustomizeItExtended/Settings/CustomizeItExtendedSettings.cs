@@ -36,6 +36,7 @@ namespace CustomizeItExtended.Settings
 
         public List<VehiclePropertyEntry> VehicleEntries = new List<VehiclePropertyEntry>();
 
+        public string Language = "English";
 
         public void Save()
         {

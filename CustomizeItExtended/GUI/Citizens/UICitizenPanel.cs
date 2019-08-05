@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ColossalFramework.UI;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal.Citizens;
+using CustomizeItExtended.Translations;
 using UnityEngine;
 
 namespace CustomizeItExtended.GUI.Citizens
@@ -105,7 +106,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var jobTitleLabel = AddUIComponent<UILabel>();
             jobTitleLabel.name = "JobTitleLabel";
-            jobTitleLabel.text = "Job Title";
+            jobTitleLabel.text = "Job Title".TranslateCitizen();
             jobTitleLabel.textScale = 0.9f;
             jobTitleLabel.isInteractive = false;
 
@@ -129,7 +130,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var ageLabel = AddUIComponent<UILabel>();
             ageLabel.name = "AgeLabel";
-            ageLabel.text = "Age";
+            ageLabel.text = "Age".TranslateCitizen();
             ageLabel.textScale = 0.9f;
             ageLabel.isInteractive = false;
 
@@ -150,7 +151,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "CriminalLabel";
-            label.text = "Criminal Status";
+            label.text = "Criminal Status".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -170,7 +171,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "EducationLevelLabel";
-            label.text = "Education Level";
+            label.text = "Education Level".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -191,7 +192,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "WealthLabel";
-            label.text = "Wealth Status";
+            label.text = "Wealth Status".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -212,7 +213,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "GenderLevel";
-            label.text = "Gender";
+            label.text = "Gender".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -233,7 +234,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "HealthLabel";
-            label.text = "Health Level";
+            label.text = "Health Level".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -254,7 +255,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "WellbeingLabel";
-            label.text = "Wellbeing Level";
+            label.text = "Wellbeing Level".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -277,7 +278,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "HappinessLabel";
-            label.text = "Happiness Level";
+            label.text = "Happiness Level".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -304,7 +305,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "WorkEfficiencyLabel";
-            label.text = "Work Efficiency";
+            label.text = "Work Efficiency".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -325,7 +326,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "IncomeRateLabel";
-            label.text = "Income Rate";
+            label.text = "Income Rate".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -348,7 +349,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "CrimeRateLabel";
-            label.text = "Crime Rate";
+            label.text = "Crime Rate".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -371,7 +372,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "WorkProbabilityLabel";
-            label.text = "Work Probability";
+            label.text = "Work Probability".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 
@@ -395,7 +396,7 @@ namespace CustomizeItExtended.GUI.Citizens
         {
             var label = AddUIComponent<UILabel>();
             label.name = "AgeLabel2";
-            label.text = "Age Group";
+            label.text = "Age Group".TranslateCitizen();
             label.textScale = 0.9f;
             label.isInteractive = false;
 

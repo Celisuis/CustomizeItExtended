@@ -1,4 +1,16 @@
-﻿Version 1.4.1 - 
+﻿Version 1.4.6 - 
+
+Moved: 
+
+ Default Naming has been moved to Customize Extended It Panel - This was done in order to consolidate all editable fields into one panel. It also has the added benefit of clearing up the Info Panels, and removing the default name checkbox. 
+
+Version 1.4.5 - 
+
+New Features:
+
+- German Translation -  A German Translation can now be activated from the options menu. Note this requires a game restart to change the options text. Credit to 7R0J4N for the translation.
+
+Version 1.4.1 - 
 
 New Features:
 
@@ -9,7 +21,7 @@ Bug Fixes:
 
 - Updated Serialization Routines. It should be more stable now and not cause TypeLoadErrors.
 - Moved Service Customize It Button to account for Landfills, and anything else with an empty button.
-- Moved Various Default Name Checkboxs to account for the Notification Banner.
+- Moved Various Default Name Checkboxes to account for the Notification Banner.
 
 
 

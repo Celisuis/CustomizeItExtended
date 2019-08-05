@@ -32,7 +32,7 @@ namespace CustomizeItExtended.Extensions
                 foreach (var originalField in originalFields)
                     try
                     {
-                        if (CustomizeItExtendedMod.IsRebalancedIndustriesActive() &&
+                        if (RebalancedIndustries.IsRebalancedIndustriesActive() &&
                             RebalancedIndustries.RebalancedFields.Contains(originalField.Name))
                             continue;
 
