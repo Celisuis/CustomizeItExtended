@@ -12,6 +12,7 @@ namespace CustomizeItExtended.Internal
         public bool DefaultName;
 
         public List<ushort> Unaffected;
+
         public NameProperties()
         {
         }
@@ -22,6 +23,5 @@ namespace CustomizeItExtended.Internal
             DefaultName = defaultStatus;
             Unaffected = new List<ushort>();
         }
-
     }
 }

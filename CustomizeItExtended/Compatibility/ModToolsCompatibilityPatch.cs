@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ColossalFramework.Plugins;
+using ModTools;
 
 namespace CustomizeItExtended.Compatibility
 {
@@ -16,7 +14,7 @@ namespace CustomizeItExtended.Compatibility
 
         public static bool AreGamePanelExtensionsActive()
         {
-            return ModTools.ModConfiguration.Deserialize("ModToolsConfig.xml").ExtendGamePanels;
+            return ModConfiguration.Deserialize("ModToolsConfig.xml").ExtendGamePanels;
         }
     }
 }

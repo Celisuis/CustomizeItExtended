@@ -70,7 +70,7 @@ namespace CustomizeItExtended.GUI.Vehicles
 
             Inputs.Add(UiUtils.CreateNameTextfield(this, "DefaultName", (component, value) =>
             {
-                if(!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     if (CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(SelectedVehicle.name,
                         out var props))
@@ -93,9 +93,10 @@ namespace CustomizeItExtended.GUI.Vehicles
 
                 if (!CustomizeItExtendedMod.Settings.SavePerCity)
                     CustomizeItExtendedMod.Settings.Save();
-
             }, CustomizeItExtendedVehicleTool
-                .instance.CustomVehicleNames.TryGetValue(SelectedVehicle.name, out var customName) ? customName.CustomName : string.Empty));
+                .instance.CustomVehicleNames.TryGetValue(SelectedVehicle.name, out var customName)
+                ? customName.CustomName
+                : string.Empty));
 
             var nameLabel = AddUIComponent<UILabel>();
             nameLabel.name = "DefaultNameLabel";
@@ -117,9 +118,10 @@ namespace CustomizeItExtended.GUI.Vehicles
                 (component, value) =>
                 {
                     var newVehicle = VehicleHelper.GetAllVehicles()
-                        .Find(x => x.name == VehicleHelper.RetrieveOriginalVehicleName(((UIDropDown)component).items[value]));
+                        .Find(x =>
+                            x.name == VehicleHelper.RetrieveOriginalVehicleName(((UIDropDown) component).items[value]));
 
-                 
+
                     UiUtils.DeepDestroy(CustomizeItExtendedVehicleTool.instance.VehiclePanelWrapper);
                     CustomizeItExtendedVehicleTool.instance.SelectedVehicle = newVehicle;
                     newVehicle.GenerateVehiclePanel();
@@ -130,7 +132,8 @@ namespace CustomizeItExtended.GUI.Vehicles
             UiVehicleTitleBar.Instance.RecenterElements();
             Align();
 
-            Inputs.Find(x => x.name == "SelectedVehicle").relativePosition = new Vector3(12, Inputs.Find(x => x.name == "CustomizeItExtendedVehicleResetButton").relativePosition.y);
+            Inputs.Find(x => x.name == "SelectedVehicle").relativePosition = new Vector3(12,
+                Inputs.Find(x => x.name == "CustomizeItExtendedVehicleResetButton").relativePosition.y);
 
 
             height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;

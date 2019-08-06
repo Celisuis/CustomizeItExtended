@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ColossalFramework.Globalization;
 using CustomizeItExtended.Translations;
 using CustomizeItExtended.Translations.Languages;
 
 namespace CustomizeItExtended
 {
-    public class TranslationFramework 
+    public class TranslationFramework
     {
+        public enum TextType
+        {
+            Field,
+            Information,
+            Citizen
+        }
+
         public static List<BaseLanguage> Languages = new List<BaseLanguage>();
 
         public static BaseLanguage CurrentBaseLanguage = new English();
@@ -17,17 +22,12 @@ namespace CustomizeItExtended
 
         public static void Initialize()
         {
-            var types = typeof(BaseLanguage).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(BaseLanguage))).ToArray();
+            var types = typeof(BaseLanguage).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(BaseLanguage)))
+                .ToArray();
 
             Languages = types.Select(type => (BaseLanguage) Activator.CreateInstance(type)).ToList();
 
             CurrentBaseLanguage = Languages.Find(x => x.Name == CustomizeItExtendedMod.Settings.Language);
-        }
-        public enum TextType
-        {
-            Field,
-            Information,
-            Citizen
         }
 
         public static string GetTranslation(string text, TextType type)
@@ -49,7 +49,6 @@ namespace CustomizeItExtended
         private static string GetFieldTranslation(string text)
         {
             return CurrentBaseLanguage.FieldTranslations.TryGetValue(text, out string value) ? value : text;
-
         }
 
         private static string GetInformationTranslation(string text)

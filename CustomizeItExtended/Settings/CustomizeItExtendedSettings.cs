@@ -1,11 +1,11 @@
-﻿using ColossalFramework.IO;
-using CustomizeItExtended.Internal;
-using CustomizeItExtended.Internal.Buildings;
-using CustomizeItExtended.Internal.Vehicles;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using ColossalFramework.IO;
+using CustomizeItExtended.Internal;
+using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Internal.Vehicles;
 
 namespace CustomizeItExtended.Settings
 {
@@ -18,6 +18,8 @@ namespace CustomizeItExtended.Settings
         [XmlIgnore] private static readonly string DefaultConfigPath =
             Path.Combine(DataLocation.localApplicationData, "CustomizeIt-Extended-Default.xml");
 
+        public bool AbsoluteNames;
+
         public float ButtonX;
         public float ButtonY;
 
@@ -27,6 +29,8 @@ namespace CustomizeItExtended.Settings
 
         public List<PropertyEntry> Entries = new List<PropertyEntry>();
 
+        public string Language = "English";
+
         public bool OverrideRebalancedIndustries;
         public float PanelX = 8f;
         public float PanelY = 65f;
@@ -34,11 +38,7 @@ namespace CustomizeItExtended.Settings
         public bool RebalancedMessageShown;
         public bool SavePerCity;
 
-        public bool AbsoluteNames;
-
         public List<VehiclePropertyEntry> VehicleEntries = new List<VehiclePropertyEntry>();
-
-        public string Language = "English";
 
         public void Save()
         {
@@ -109,7 +109,6 @@ namespace CustomizeItExtended.Settings
             {
                 serializer.Serialize(writer, CustomizeItExtendedMod.Settings);
             }
-
         }
 
         public static CustomizeItExtendedSettings Load()

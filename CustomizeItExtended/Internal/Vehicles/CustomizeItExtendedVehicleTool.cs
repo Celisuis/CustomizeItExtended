@@ -31,6 +31,8 @@ namespace CustomizeItExtended.Internal.Vehicles
         private UILabel _touristDefaultLabel;
         private UICheckBox _touristDefaultNameCheckbox;
 
+        internal Dictionary<string, VehicleInfo> AllLoadedVehicles = new Dictionary<string, VehicleInfo>();
+
 
         internal CitizenVehicleWorldInfoPanel CitizenVehicleWorldInfoPanel;
 
@@ -45,8 +47,6 @@ namespace CustomizeItExtended.Internal.Vehicles
             new Dictionary<string, CustomVehicleProperties>();
 
         internal Dictionary<string, NameProperties> OriginalVehicleNames = new Dictionary<string, NameProperties>();
-
-        internal Dictionary<string, VehicleInfo> AllLoadedVehicles = new Dictionary<string, VehicleInfo>();
 
         internal PublicTransportVehicleWorldInfoPanel PublicTransportWorldInfoPanel;
 

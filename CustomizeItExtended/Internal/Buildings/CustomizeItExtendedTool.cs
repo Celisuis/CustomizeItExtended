@@ -44,15 +44,15 @@ namespace CustomizeItExtended.Internal.Buildings
         internal Dictionary<string, BuildingProperties> CustomData = new Dictionary<string, BuildingProperties>();
 
         internal UiPanelWrapper CustomizeItExtendedPanel;
+        internal UIButton ExportToDefaultConfig;
+
+        internal UIButton ImportDefaultConfig;
         internal Dictionary<string, NameProperties> OriginalBuildingNames = new Dictionary<string, NameProperties>();
         internal Dictionary<string, BuildingProperties> OriginalData = new Dictionary<string, BuildingProperties>();
 
         internal InfoPanelType PanelType;
 
         internal UIButton ResetAll;
-
-        internal UIButton ImportDefaultConfig;
-        internal UIButton ExportToDefaultConfig;
 
         internal UICheckBox SavePerCity;
         internal CityServiceWorldInfoPanel ServiceBuildingPanel;
@@ -73,20 +73,24 @@ namespace CustomizeItExtended.Internal.Buildings
         internal UIZonedBuildingPanelWrapper ZonedBuildingPanelWrapper;
 
         internal string ButtonTooltip =>
-            ResetAll != null && ResetAll.isEnabled ? null : "This option is only available in game.".TranslateInformation();
+            ResetAll != null && ResetAll.isEnabled
+                ? null
+                : "This option is only available in game.".TranslateInformation();
 
         internal string CheckboxTooltip => SavePerCity != null && SavePerCity.isEnabled
             ? null
             : "This option is only available in the main menu.".TranslateInformation();
 
         internal string ImportDefaultConfigTooltip => ImportDefaultConfig != null && ImportDefaultConfig.isEnabled
-            ? "This will import your Default City Customize Config. WARNING - This will overwrite all current values.".TranslateInformation()
+            ? "This will import your Default City Customize Config. WARNING - This will overwrite all current values."
+                .TranslateInformation()
             : "This option is only available in game and when Save Per City is enabled.".TranslateInformation();
 
 
         internal string ExportDefaultConfigTooltip => ExportToDefaultConfig != null && ExportToDefaultConfig.isEnabled
             ? "This will export your Current City Customized Options to the Default Profile".TranslateInformation()
             : "This option is only available in game and when Save Per City is enabled.".TranslateInformation();
+
         public void Initialize()
         {
             if (_isInitialized)
@@ -136,12 +140,13 @@ namespace CustomizeItExtended.Internal.Buildings
 
             var defaultPosition = new Vector3(160f, 5f, 0f);
 
-            if(ModToolsCompatibilityPatch.IsModToolsActive() && ModToolsCompatibilityPatch.AreGamePanelExtensionsActive())
+            if (ModToolsCompatibilityPatch.IsModToolsActive() &&
+                ModToolsCompatibilityPatch.AreGamePanelExtensionsActive())
                 defaultPosition = new Vector3(160, -75f, 0f);
 
             AddDefaultBuildingPropertiesButton(ServiceBuildingPanel, out _customizeItExtendedButton,
                 defaultPosition);
-           
+
             WarehousePanel = GameObject.Find("(Library) WarehouseWorldInfoPanel")
                 .GetComponent<WarehouseWorldInfoPanel>();
 

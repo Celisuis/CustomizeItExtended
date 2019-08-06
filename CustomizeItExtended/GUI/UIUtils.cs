@@ -301,8 +301,6 @@ namespace CustomizeItExtended.GUI
             uibutton.relativePosition = position;
 
             return uibutton;
-
-
         }
 
         public static UICheckBox CreateCheckBox(UIComponent parent, string fieldName)
@@ -483,7 +481,8 @@ namespace CustomizeItExtended.GUI
             return textField;
         }
 
-        public static UITextField CreateNameTextfield(UIComponent parent, string fieldName, PropertyChangedEventHandler<string> handler, string defaultText)
+        public static UITextField CreateNameTextfield(UIComponent parent, string fieldName,
+            PropertyChangedEventHandler<string> handler, string defaultText)
         {
             var textField = parent.AddUIComponent<UITextField>();
 
@@ -663,13 +662,13 @@ namespace CustomizeItExtended.GUI
             dropdown.textColor = Color.white;
             dropdown.textFieldPadding = new RectOffset(15, 0, 5, 0);
             dropdown.itemPadding = new RectOffset(28, 0, 5, 0);
-            
+
             dropdown.items = items;
             dropdown.selectedIndex = Array.IndexOf(dropdown.items, defaultItem);
             dropdown.eventSelectedIndexChanged += handler;
 
             dropdown.tooltip = dropdown.selectedValue + Environment.NewLine +
-                               $"If the vehicle you're looking for isn't listed here, try using Absolute Names in the options menu and reload this panel.";
+                               "If the vehicle you're looking for isn't listed here, try using Absolute Names in the options menu and reload this panel.";
 
             UIButton button = dropdown.AddUIComponent<UIButton>();
             dropdown.triggerButton = button;
@@ -695,8 +694,6 @@ namespace CustomizeItExtended.GUI
             };
 
             return dropdown;
-
-
         }
 
         private static void EventTextSubmittedHandler(UIComponent component, string value)

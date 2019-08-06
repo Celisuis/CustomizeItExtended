@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CustomizeItExtended.Translations
+﻿namespace CustomizeItExtended.Translations
 {
     public static class StringExtensions
     {
         public static string TranslateField(this string text)
         {
-
             return TranslationFramework.GetTranslation(text, TranslationFramework.TextType.Field);
         }
 
@@ -17,6 +11,7 @@ namespace CustomizeItExtended.Translations
         {
             return TranslationFramework.GetTranslation(text, TranslationFramework.TextType.Information);
         }
+
         public static string TranslateCitizen(this string text)
         {
             return TranslationFramework.GetTranslation(text, TranslationFramework.TextType.Citizen);

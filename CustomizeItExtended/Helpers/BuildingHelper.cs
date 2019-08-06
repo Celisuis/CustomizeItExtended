@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using CustomizeItExtended.Internal.Buildings;
 
 namespace CustomizeItExtended.Helpers
@@ -33,27 +30,23 @@ namespace CustomizeItExtended.Helpers
             List<string> buildingNames = new List<string>();
 
             foreach (var building in GetAllBuildings())
-            {
-                buildingNames.Add(CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(building.name, out var nameProps) ? nameProps.CustomName : building.name);
-            }
-            buildingNames.Sort((x,y) => x.CompareTo(y));
+                buildingNames.Add(
+                    CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(building.name, out var nameProps)
+                        ? nameProps.CustomName
+                        : building.name);
+            buildingNames.Sort((x, y) => x.CompareTo(y));
             return buildingNames;
         }
 
         public static string RetrieveOriginalBuildingName(string name)
         {
             foreach (var buildingData in CustomizeItExtendedTool.instance.CustomBuildingNames)
-            {
                 if (buildingData.Value.CustomName == name || buildingData.Key == name)
                     return buildingData.Key;
 
-            }
-
             foreach (var buildingData in CustomizeItExtendedTool.instance.OriginalBuildingNames)
-            {
                 if (buildingData.Key == name)
                     return buildingData.Key;
-            }
 
             return string.Empty;
         }

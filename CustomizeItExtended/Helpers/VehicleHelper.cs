@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using CustomizeItExtended.Internal.Vehicles;
 
 namespace CustomizeItExtended.Helpers
@@ -14,7 +11,7 @@ namespace CustomizeItExtended.Helpers
 
             for (var x = 0; x < PrefabCollection<VehicleInfo>.LoadedCount(); x++)
             {
-                var vehicle = PrefabCollection<VehicleInfo>.GetLoaded((uint)x);
+                var vehicle = PrefabCollection<VehicleInfo>.GetLoaded((uint) x);
 
                 vehicles.Add(vehicle);
             }
@@ -27,37 +24,27 @@ namespace CustomizeItExtended.Helpers
             List<string> vehicleNames = new List<string>();
 
             foreach (var vehicle in GetAllVehicles())
-            {
-                if(!CustomizeItExtendedMod.Settings.AbsoluteNames)
-                {
+                if (!CustomizeItExtendedMod.Settings.AbsoluteNames)
                     vehicleNames.Add(
                         CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(vehicle.name,
                             out var nameProps)
                             ? nameProps.CustomName
                             : vehicle.name);
-                }
                 else
-                {
                     vehicleNames.Add(vehicle.name);
-                }
-            }
-            vehicleNames.Sort((x,y) => x.CompareTo(y));
+            vehicleNames.Sort((x, y) => x.CompareTo(y));
             return vehicleNames;
         }
 
         public static string RetrieveOriginalVehicleName(string name)
         {
             foreach (var vehicleData in CustomizeItExtendedVehicleTool.instance.CustomVehicleNames)
-            {
                 if (vehicleData.Value.CustomName == name || vehicleData.Key == name)
                     return vehicleData.Key;
-            }
 
             foreach (var vehicleData in CustomizeItExtendedVehicleTool.instance.OriginalVehicleNames)
-            {
                 if (vehicleData.Key == name)
                     return vehicleData.Key;
-            }
 
             return name;
         }

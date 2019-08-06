@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using ColossalFramework.UI;
 using CustomizeItExtended.Extensions;
@@ -441,24 +440,26 @@ namespace CustomizeItExtended.GUI
             List<string> vehicleNames = new List<string>();
 
             foreach (var kvp in CustomizeItExtendedVehicleTool.instance.AllLoadedVehicles)
-            {
                 vehicleNames.Add(
                     CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(kvp.Value.name,
                         out var props)
                         ? props.CustomName
                         : kvp.Value.name);
-            }
 
             _titleDropdown.items = vehicleNames.ToArray();
 
-            _titleDropdown.selectedIndex = Array.IndexOf(_titleDropdown.items, CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(
-                CustomizeItExtendedVehicleTool.instance.SelectedVehicle.name, out var nameprops) ? nameprops.CustomName : CustomizeItExtendedVehicleTool.instance.SelectedVehicle.name);
+            _titleDropdown.selectedIndex = Array.IndexOf(_titleDropdown.items,
+                CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(
+                    CustomizeItExtendedVehicleTool.instance.SelectedVehicle.name, out var nameprops)
+                    ? nameprops.CustomName
+                    : CustomizeItExtendedVehicleTool.instance.SelectedVehicle.name);
 
             _titleDropdown.textScale = 0.9f;
             _titleDropdown.isInteractive = true;
 
             _titleDropdown.eventSelectedIndexChanged += (component, index) =>
-            {;
+            {
+                ;
                 var vehicleInfo =
                     CustomizeItExtendedVehicleTool.instance.AllLoadedVehicles[_titleDropdown.items[index]];
 
@@ -466,7 +467,8 @@ namespace CustomizeItExtended.GUI
                 if (CustomizeItExtendedVehicleTool.instance.SelectedVehicle == vehicleInfo)
                     return;
 
-                CustomizeItExtendedVehicleTool.instance.SaveVehicle(CustomizeItExtendedVehicleTool.instance.SelectedVehicle);
+                CustomizeItExtendedVehicleTool.instance.SaveVehicle(CustomizeItExtendedVehicleTool.instance
+                    .SelectedVehicle);
                 CustomizeItExtendedVehicleTool.instance.SelectedVehicle = vehicleInfo;
 
                 UiUtils.DeepDestroy(CustomizeItExtendedVehicleTool.instance.VehiclePanelWrapper);

@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using ColossalFramework.UI;
+﻿using ColossalFramework.UI;
 using CustomizeItExtended.Internal.Buildings;
 using UnityEngine;
 
@@ -19,7 +18,6 @@ namespace CustomizeItExtended.GUI.Buildings
             Setup();
         }
 
-      
 
         public override void OnDestroy()
         {

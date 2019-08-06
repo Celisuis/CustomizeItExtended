@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CustomizeItExtended.Translations.Languages
 {
@@ -169,7 +166,7 @@ namespace CustomizeItExtended.Translations.Languages
                     "Damit wird deine jetzige Stadt als Standart-Profil gespeichert"
                 },
                 {"Set as Default Name?", "Standart Name"},
-                {"DISABLED", "DEAKTIVIERT" }
+                {"DISABLED", "DEAKTIVIERT"}
             };
 
             CitizenTranslations = new Dictionary<string, string>

@@ -53,7 +53,6 @@ namespace CustomizeItExtended.Extensions
                 {
                     UiPanelWrapper.Instance.isVisible = false;
                     UiUtils.DeepDestroy(UiPanelWrapper.Instance);
-                    return;
                 }
             }
         }

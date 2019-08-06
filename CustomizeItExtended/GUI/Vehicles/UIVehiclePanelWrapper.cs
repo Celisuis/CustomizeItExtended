@@ -20,7 +20,7 @@ namespace CustomizeItExtended.GUI.Vehicles
             Setup();
         }
 
-     
+
         public override void OnDestroy()
         {
             base.OnDestroy();

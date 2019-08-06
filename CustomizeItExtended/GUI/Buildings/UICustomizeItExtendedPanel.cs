@@ -2,7 +2,6 @@
 using System.Linq;
 using ColossalFramework.UI;
 using CustomizeItExtended.Compatibility;
-using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
 using CustomizeItExtended.Translations;
@@ -85,31 +84,35 @@ namespace CustomizeItExtended.GUI.Buildings
                 }
 
             Inputs.Add(UiUtils.CreateNameTextfield(this, "DefaultName", (component, value) =>
-            {
-                if(!string.IsNullOrEmpty(value))
                 {
-                    if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
-                        out var props))
+                    if (!string.IsNullOrEmpty(value))
                     {
-                        props.CustomName = value;
-                        props.DefaultName = true;
+                        if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                            out var props))
+                        {
+                            props.CustomName = value;
+                            props.DefaultName = true;
+                        }
+                        else
+                        {
+                            CustomizeItExtendedTool.instance.CustomBuildingNames.Add(SelectedBuilding.name,
+                                new NameProperties(value, true));
+                        }
                     }
                     else
                     {
-                        CustomizeItExtendedTool.instance.CustomBuildingNames.Add(SelectedBuilding.name,
-                            new NameProperties(value, true));
+                        if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                            out var _))
+                            CustomizeItExtendedTool.instance.CustomBuildingNames.Remove(SelectedBuilding.name);
                     }
-                }
-                else
-                {
-                    if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
-                        out var _))
-                        CustomizeItExtendedTool.instance.CustomBuildingNames.Remove(SelectedBuilding.name);
-                }
 
-                if(!CustomizeItExtendedMod.Settings.SavePerCity)
-                    CustomizeItExtendedMod.Settings.Save();
-            }, CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name, out var customName) ? customName.CustomName : string.Empty));
+                    if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                        CustomizeItExtendedMod.Settings.Save();
+                },
+                CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                    out var customName)
+                    ? customName.CustomName
+                    : string.Empty));
 
             var nameLabel = AddUIComponent<UILabel>();
             nameLabel.name = "DefaultNameLabel";
@@ -127,7 +130,7 @@ namespace CustomizeItExtended.GUI.Buildings
 
             Inputs.Add(UiUtils.CreateResetButton(this));
 
-          
+
             switch (CustomizeItExtendedTool.instance.PanelType)
             {
                 case CustomizeItExtendedTool.InfoPanelType.Warehouse:

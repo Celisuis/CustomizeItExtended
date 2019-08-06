@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using ColossalFramework.UI;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
@@ -81,7 +80,8 @@ namespace CustomizeItExtended
             var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
 
             if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(building.name,
-                    out NameProperties customName) && customName.DefaultName && !customName.Unaffected.Contains(instanceID.Building))
+                    out NameProperties customName) && customName.DefaultName &&
+                !customName.Unaffected.Contains(instanceID.Building))
                 __result = customName.CustomName;
         }
     }
@@ -91,7 +91,7 @@ namespace CustomizeItExtended
     {
         public static void Postfix(BuildingWorldInfoPanel __instance, string text)
         {
-            InstanceID instanceID = (InstanceID)__instance.GetType()
+            InstanceID instanceID = (InstanceID) __instance.GetType()
                 .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
 
             var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
@@ -108,7 +108,7 @@ namespace CustomizeItExtended
         }
     }
 
-  
+
     [HarmonyPatch(typeof(VehicleWorldInfoPanel), "GetName")]
     public static class VehicleGetNamePatch
     {
@@ -120,7 +120,7 @@ namespace CustomizeItExtended
             var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
 
             if (CustomizeItExtendedVehicleTool.instance.CustomVehicleNames.TryGetValue(vehicle.name,
-                out NameProperties props) && props.DefaultName && !props.Unaffected.Contains(instanceID.Vehicle))
+                    out NameProperties props) && props.DefaultName && !props.Unaffected.Contains(instanceID.Vehicle))
                 __result = props.CustomName;
         }
     }
@@ -129,23 +129,22 @@ namespace CustomizeItExtended
     public static class VehicleRenamePatch
 
     {
-    public static void Postfix(VehicleWorldInfoPanel __instance, string text)
-    {
-        InstanceID instanceID = (InstanceID) __instance.GetType()
-            .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+        public static void Postfix(VehicleWorldInfoPanel __instance, string text)
+        {
+            InstanceID instanceID = (InstanceID) __instance.GetType()
+                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
 
-        var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
+            var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
 
 
-        if (!CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(vehicle.name, out var nameProps))
-            return;
+            if (!CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(vehicle.name, out var nameProps))
+                return;
 
-        if (!nameProps.Unaffected.Contains(instanceID.Vehicle))
-            nameProps.Unaffected.Add(instanceID.Vehicle);
+            if (!nameProps.Unaffected.Contains(instanceID.Vehicle))
+                nameProps.Unaffected.Add(instanceID.Vehicle);
 
-        if (!CustomizeItExtendedMod.Settings.SavePerCity)
-            CustomizeItExtendedMod.Settings.Save();
+            if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                CustomizeItExtendedMod.Settings.Save();
         }
     }
-
 }
