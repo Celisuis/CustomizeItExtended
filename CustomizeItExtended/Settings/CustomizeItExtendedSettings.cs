@@ -34,6 +34,8 @@ namespace CustomizeItExtended.Settings
         public bool RebalancedMessageShown;
         public bool SavePerCity;
 
+        public bool AbsoluteNames;
+
         public List<VehiclePropertyEntry> VehicleEntries = new List<VehiclePropertyEntry>();
 
         public string Language = "English";

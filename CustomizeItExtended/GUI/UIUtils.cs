@@ -637,6 +637,68 @@ namespace CustomizeItExtended.GUI
             return textField;
         }
 
+        public static UIDropDown CreateDropdown(UIComponent parent, string fieldName, string[] items,
+            PropertyChangedEventHandler<int> handler, string defaultItem)
+        {
+            var dropdown = parent.AddUIComponent<UIDropDown>();
+
+            dropdown.listBackground = "GenericPanelLight";
+            dropdown.itemHeight = 30;
+            dropdown.itemHover = "ListItemHover";
+            dropdown.itemHighlight = "ListItemHighlight";
+            dropdown.normalBgSprite = "ButtonMenu";
+            dropdown.disabledBgSprite = "ButtonMenuDisabled";
+            dropdown.hoveredBgSprite = "ButtonMenuHovered";
+            dropdown.focusedBgSprite = "ButtonMenu";
+            dropdown.foregroundSpriteMode = UIForegroundSpriteMode.Stretch;
+            dropdown.popupColor = new Color32(45, 52, 61, 255);
+            dropdown.popupTextColor = new Color32(170, 170, 170, 255);
+            dropdown.name = fieldName;
+            dropdown.builtinKeyNavigation = true;
+            dropdown.isInteractive = true;
+            dropdown.width = 140f;
+            dropdown.listWidth = (int) dropdown.width;
+            dropdown.height = FieldHeight;
+            dropdown.textScale = 0.75f;
+            dropdown.textColor = Color.white;
+            dropdown.textFieldPadding = new RectOffset(15, 0, 5, 0);
+            dropdown.itemPadding = new RectOffset(28, 0, 5, 0);
+            
+            dropdown.items = items;
+            dropdown.selectedIndex = Array.IndexOf(dropdown.items, defaultItem);
+            dropdown.eventSelectedIndexChanged += handler;
+
+            dropdown.tooltip = dropdown.selectedValue + Environment.NewLine +
+                               $"If the vehicle you're looking for isn't listed here, try using Absolute Names in the options menu and reload this panel.";
+
+            UIButton button = dropdown.AddUIComponent<UIButton>();
+            dropdown.triggerButton = button;
+            button.text = "";
+            button.size = dropdown.size;
+            button.relativePosition = new Vector3(0f, 0f);
+            button.textVerticalAlignment = UIVerticalAlignment.Middle;
+            button.textHorizontalAlignment = UIHorizontalAlignment.Left;
+            button.normalFgSprite = "IconDownArrow";
+            button.hoveredFgSprite = "IconDownArrowHovered";
+            button.pressedFgSprite = "IconDownArrowPressed";
+            button.focusedFgSprite = "IconDownArrowFocused";
+            button.disabledFgSprite = "IconDownArrowDisabled";
+            button.foregroundSpriteMode = UIForegroundSpriteMode.Fill;
+            button.horizontalAlignment = UIHorizontalAlignment.Right;
+            button.verticalAlignment = UIVerticalAlignment.Middle;
+
+
+            dropdown.eventSizeChanged += (component, value) =>
+            {
+                button.size = value;
+                dropdown.width = value.x;
+            };
+
+            return dropdown;
+
+
+        }
+
         private static void EventTextSubmittedHandler(UIComponent component, string value)
         {
             if (!int.TryParse(value, out var result))

@@ -2,6 +2,7 @@
 using System.Linq;
 using ColossalFramework.UI;
 using CustomizeItExtended.Compatibility;
+using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
 using CustomizeItExtended.Translations;
@@ -126,7 +127,7 @@ namespace CustomizeItExtended.GUI.Buildings
 
             Inputs.Add(UiUtils.CreateResetButton(this));
 
-
+          
             switch (CustomizeItExtendedTool.instance.PanelType)
             {
                 case CustomizeItExtendedTool.InfoPanelType.Warehouse:

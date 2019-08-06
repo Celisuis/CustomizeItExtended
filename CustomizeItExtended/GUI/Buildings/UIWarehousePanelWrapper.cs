@@ -21,20 +21,7 @@ namespace CustomizeItExtended.GUI.Buildings
             Setup();
         }
 
-        public override void Update()
-        {
-            base.Update();
-
-            var instanceId = (InstanceID) CustomizeItExtendedTool.instance.WarehousePanel.GetType()
-                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic)
-                ?.GetValue(CustomizeItExtendedTool.instance.WarehousePanel);
-
-            var buildingInfo = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
-
-            if (buildingInfo != CustomizeItExtendedTool.instance.CurrentSelectedBuilding)
-                UiUtils.DeepDestroy(this);
-        }
-
+        
         public override void OnDestroy()
         {
             base.OnDestroy();

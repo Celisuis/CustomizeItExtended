@@ -23,7 +23,7 @@ namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
     {
-        internal const string Version = "1.4.6V";
+        internal const string Version = "1.5.0V";
 
         private static CustomizeItExtendedSettings _settings;
 
@@ -128,6 +128,15 @@ namespace CustomizeItExtended
 
             overrideButton.isEnabled = RebalancedIndustries.IsRebalancedIndustriesActive();
             overrideButton.disabledColor = Color.gray;
+            helper.AddSpace(10);
+            var absoluteNamesCheckbox = (UICheckBox) helper.AddCheckbox("Use Absolute Names", Settings.AbsoluteNames,
+                x =>
+                {
+                    Settings.AbsoluteNames = x;
+                    Settings.Save();
+                });
+            absoluteNamesCheckbox.tooltip =
+                "Absolute Names will list the Asset Names in the Selection Dropdowns rather than custom names. This currently helps to mitigate the bug with multiple custom names being the same.";
             helper.AddSpace(10);
             Instance.ResetAll = (UIButton) helper.AddButton("Reset ALL Buildings".TranslateInformation(), () =>
             {

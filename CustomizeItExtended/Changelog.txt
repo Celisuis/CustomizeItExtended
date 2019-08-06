@@ -1,8 +1,23 @@
-﻿Version 1.4.6 - 
+﻿Version 1.5.0 - 
+
+New Features:
+
+Vehicle Selection - You can now select ANY loaded vehicle from within a Vehicles Customize It Extended Panel. This means you no longer have to go searching for the vehicles on the map. Simply pick one, and then change your selection. This is BETA, and as such
+the UI isn't perfect, it will be cut off at certain points, and the entire vehicle name may not fit in the box. The list will also update upon default name changing, and display the currently used default name(if applicable). There is also currently no categories,
+as such all vehicles will appear in the same list (including trailers and disasters). 
+
+Currently if you have more than one vehicle with the same name, it will only show ONE vehicle in the list. This can be mitigated by using the Absolute Names option in the options menu.
+
+Changed:
+
+UI - The Customize It Extended Panel will no longer close on selecting a different building or vehicle. This has been implemented in order to accomodate the selection features above.
+
+Version 1.4.6 - 
 
 Moved: 
 
- Default Naming has been moved to Customize Extended It Panel - This was done in order to consolidate all editable fields into one panel. It also has the added benefit of clearing up the Info Panels, and removing the default name checkbox. 
+ Default Naming has been moved to Customize Extended It Panel - This was done in order to consolidate all editable fields into one panel. It also has the added benefit of clearing up the Info Panels, and removing the default name checkbox.
+ Renaming a Building Normally when a default Name has been set will `unsubscribe` that building from the default naming scheme.
 
 Version 1.4.5 - 
 

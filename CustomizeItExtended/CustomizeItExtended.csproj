@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compatibility\ModToolsCompatibilityPatch.cs" />
+    <Compile Include="Helpers\BuildingHelper.cs" />
     <Compile Include="Helpers\CitizenHelper.cs" />
+    <Compile Include="Helpers\VehicleHelper.cs" />
     <Compile Include="Internal\Citizens\CitizenEntry.cs" />
     <Compile Include="Internal\Citizens\CitizenProperties.cs" />
     <Compile Include="Internal\Citizens\CustomizeItExtendedCitizenTool.cs" />

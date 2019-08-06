@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ColossalFramework.UI;
+using CustomizeItExtended.Extensions;
+using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Vehicles;
 using UnityEngine;
@@ -111,10 +113,26 @@ namespace CustomizeItExtended.GUI.Vehicles
 
             Inputs.Add(UiUtils.CreateVehicleResetButton(this));
 
+            Inputs.Add(UiUtils.CreateDropdown(this, "SelectedVehicle", VehicleHelper.GetAllVehicleNames().ToArray(),
+                (component, value) =>
+                {
+                    var newVehicle = VehicleHelper.GetAllVehicles()
+                        .Find(x => x.name == VehicleHelper.RetrieveOriginalVehicleName(((UIDropDown)component).items[value]));
+
+                 
+                    UiUtils.DeepDestroy(CustomizeItExtendedVehicleTool.instance.VehiclePanelWrapper);
+                    CustomizeItExtendedVehicleTool.instance.SelectedVehicle = newVehicle;
+                    newVehicle.GenerateVehiclePanel();
+                }, VehicleHelper.RetrieveCurrentVehicleName(SelectedVehicle)));
+
             width = UIVehiclePanelWrapper.Instance.width =
                 UiVehicleTitleBar.Instance.width = UiVehicleTitleBar.Instance.DragHandle.width = widestWidth;
             UiVehicleTitleBar.Instance.RecenterElements();
             Align();
+
+            Inputs.Find(x => x.name == "SelectedVehicle").relativePosition = new Vector3(12, Inputs.Find(x => x.name == "CustomizeItExtendedVehicleResetButton").relativePosition.y);
+
+
             height = Inputs.Count * (UiUtils.FieldHeight + UiUtils.FieldMargin) + UiUtils.FieldMargin * 3;
 
             UIVehiclePanelWrapper.Instance.height = height + UiVehicleTitleBar.Instance.height;

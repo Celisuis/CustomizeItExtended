@@ -20,17 +20,7 @@ namespace CustomizeItExtended.GUI.Vehicles
             Setup();
         }
 
-        public override void Update()
-        {
-            base.Update();
-
-            var instanceId = CustomizeItExtendedVehicleTool.instance.SelectedInstanceID;
-
-            var vehicleInfo = VehicleManager.instance.m_vehicles.m_buffer[instanceId.Vehicle].Info;
-
-            if (vehicleInfo != CustomizeItExtendedVehicleTool.instance.SelectedVehicle) UiUtils.DeepDestroy(this);
-        }
-
+     
         public override void OnDestroy()
         {
             base.OnDestroy();
