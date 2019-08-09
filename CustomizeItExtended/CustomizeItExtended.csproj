@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compatibility\ModToolsCompatibilityPatch.cs" />
+    <Compile Include="External\CustomizeItExtendedAccess.cs" />
     <Compile Include="Helpers\BuildingHelper.cs" />
     <Compile Include="Helpers\CitizenHelper.cs" />
     <Compile Include="Helpers\VehicleHelper.cs" />

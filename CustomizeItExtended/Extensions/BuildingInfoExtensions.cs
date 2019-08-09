@@ -68,7 +68,7 @@ namespace CustomizeItExtended.Extensions
             try
             {
                 CustomizeItExtendedTool.instance.CurrentSelectedBuilding = info;
-                UiUtils.DeepDestroy(UIView.Find("CustomizeItExtendedPanelWrapper"));
+                DestroyUIs();
 
                 return UIView.GetAView().AddUIComponent(typeof(UiPanelWrapper)) as UiPanelWrapper;
             }
@@ -84,7 +84,8 @@ namespace CustomizeItExtended.Extensions
             try
             {
                 CustomizeItExtendedTool.instance.CurrentSelectedBuilding = info;
-                UiUtils.DeepDestroy(UIView.Find("CustomizeItExtendedWarehousePanelWrapper"));
+                DestroyUIs();
+
 
                 return UIView.GetAView().AddUIComponent(typeof(UIWarehousePanelWrapper)) as UIWarehousePanelWrapper;
             }
@@ -100,7 +101,7 @@ namespace CustomizeItExtended.Extensions
             try
             {
                 CustomizeItExtendedTool.instance.CurrentSelectedBuilding = info;
-                UiUtils.DeepDestroy(UIView.Find("CustomizeItExtendedUniqueFactoryPanelWrapper"));
+                DestroyUIs();
 
                 return UIView.GetAView().AddUIComponent(typeof(UIUniqueFactoryPanelWrapper)) as
                     UIUniqueFactoryPanelWrapper;
@@ -128,6 +129,19 @@ namespace CustomizeItExtended.Extensions
                 Debug.Log($"{e.Message} - {e.StackTrace}");
                 return null;
             }
+        }
+
+        private static void DestroyUIs()
+        {
+            if (CustomizeItExtendedTool.instance.CustomizeItExtendedPanel != null)
+                UiUtils.DeepDestroy(CustomizeItExtendedTool.instance.CustomizeItExtendedPanel);
+
+            if (CustomizeItExtendedTool.instance.UniqueFactoryPanelWrapper != null)
+                UiUtils.DeepDestroy(CustomizeItExtendedTool.instance.UniqueFactoryPanelWrapper);
+
+            if (CustomizeItExtendedTool.instance.WarehousePanelWrapper != null)
+                UiUtils.DeepDestroy(CustomizeItExtendedTool.instance.WarehousePanelWrapper);
+
         }
     }
 }

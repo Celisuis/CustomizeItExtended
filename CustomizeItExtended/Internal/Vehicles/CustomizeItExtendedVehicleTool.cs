@@ -14,22 +14,13 @@ namespace CustomizeItExtended.Internal.Vehicles
     {
         private UIButton _citizenButton;
 
-        private UILabel _citizenDefaultLabel;
-
-        private UICheckBox _citizenDefaultNameCheckbox;
         private UIButton _cityServiceButton;
-        private UILabel _cityServiceDefaultLabel;
-        private UICheckBox _cityServiceDefaultNameCheckbox;
 
         private bool _isButtonInitialized;
 
         private bool _isInitialized;
         private UIButton _publicTransportButton;
-        private UILabel _publicTransportDefaultLabel;
-        private UICheckBox _publicTransportDefaultNameCheckbox;
         private UIButton _touristButton;
-        private UILabel _touristDefaultLabel;
-        private UICheckBox _touristDefaultNameCheckbox;
 
         internal Dictionary<string, VehicleInfo> AllLoadedVehicles = new Dictionary<string, VehicleInfo>();
 
@@ -150,37 +141,7 @@ namespace CustomizeItExtended.Internal.Vehicles
                 new Vector3(353f, -37f, 0f));
         }
 
-        private void AddDefaultNameLabel(VehicleWorldInfoPanel infoPanel, out UILabel label, Vector3 offset)
-        {
-            label = UiUtils.CreateDefaultNameLabel(infoPanel.component, offset, UIAlignAnchor.TopRight);
-        }
-
-        private void AddDefaultNameCheckbox(VehicleWorldInfoPanel infoPanel, out UICheckBox checkBox, Vector3 offset)
-        {
-            checkBox = UiUtils.CreateDefaultNameCheckbox(infoPanel.component, offset, UIAlignAnchor.TopRight,
-                (component, value) =>
-                {
-                    InstanceID instanceID = (InstanceID) infoPanel.GetType()
-                        .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(infoPanel);
-
-                    var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
-
-                    try
-                    {
-                        if (!CustomVehicleNames.TryGetValue(vehicle.name, out NameProperties props))
-                            return;
-
-                        CustomVehicleNames[vehicle.name].DefaultName = value;
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.Log($"{e.Message} - {e.StackTrace}");
-                    }
-
-                    if (!CustomizeItExtendedMod.Settings.SavePerCity)
-                        CustomizeItExtendedMod.Settings.Save();
-                });
-        }
+       
 
         private void AddVehicleCustomizeButton(VehicleWorldInfoPanel infoPanel, out UIButton button, Vector3 offset)
         {

@@ -24,9 +24,6 @@ namespace CustomizeItExtended.Internal.Buildings
 
         private UIButton _customizeItExtendedButton;
 
-        private UILabel _defaultNameLabel;
-        private UILabel _factoryDefaultNameLabel;
-
         private bool _isButtonInitialized;
 
         private bool _isInitialized;
@@ -34,7 +31,6 @@ namespace CustomizeItExtended.Internal.Buildings
         private UIButton _uniqueFactoryButton;
 
         private UIButton _warehouseButton;
-        private UILabel _warehouseDefaultNameLabel;
 
         private UIButton _zonedInfoButton;
 
@@ -57,9 +53,6 @@ namespace CustomizeItExtended.Internal.Buildings
         internal UICheckBox SavePerCity;
         internal CityServiceWorldInfoPanel ServiceBuildingPanel;
 
-        internal UICheckBox SetDefaultNameCheckbox;
-        internal UICheckBox SetFactoryDefaultNameCheckbox;
-        internal UICheckBox SetWarehouseDefaultNameCheckbox;
 
         internal UIUniqueFactoryPanelWrapper UniqueFactoryPanelWrapper;
         internal UniqueFactoryWorldInfoPanel UniqueFactoryWorldInfoPanel;
@@ -71,6 +64,8 @@ namespace CustomizeItExtended.Internal.Buildings
         internal ZonedBuildingWorldInfoPanel ZoneBuildingPanel;
 
         internal UIZonedBuildingPanelWrapper ZonedBuildingPanelWrapper;
+
+
 
         internal string ButtonTooltip =>
             ResetAll != null && ResetAll.isEnabled
@@ -172,38 +167,6 @@ namespace CustomizeItExtended.Internal.Buildings
                 AddBuildingInformationButton(ZoneBuildingPanel, out _zonedInfoButton, new Vector3(120f, 5f, 0f));
 
             _isButtonInitialized = true;
-        }
-
-        private void AddDefaultNameLabel(WorldInfoPanel infoPanel, out UILabel label, Vector3 offset)
-        {
-            label = UiUtils.CreateDefaultNameLabel(infoPanel.component, offset, UIAlignAnchor.TopRight);
-        }
-
-        private void AddDefaultNameCheckbox(WorldInfoPanel infoPanel, out UICheckBox checkBox, Vector3 offset)
-        {
-            checkBox = UiUtils.CreateDefaultNameCheckbox(infoPanel.component, offset, UIAlignAnchor.TopRight,
-                (component, value) =>
-                {
-                    InstanceID instanceID = (InstanceID) infoPanel.GetType()
-                        .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(infoPanel);
-
-                    var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
-
-                    try
-                    {
-                        if (!CustomBuildingNames.TryGetValue(building.name, out NameProperties props))
-                            return;
-
-                        CustomBuildingNames[building.name].DefaultName = value;
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.Log($"{e.Message} - {e.StackTrace}");
-                    }
-
-                    if (!CustomizeItExtendedMod.Settings.SavePerCity)
-                        CustomizeItExtendedMod.Settings.Save();
-                });
         }
 
         private void AddBuildingInformationButton(WorldInfoPanel infoPanel, out UIButton button, Vector3 offset)
@@ -349,8 +312,10 @@ namespace CustomizeItExtended.Internal.Buildings
                 isInGame ? "ToggleBaseDisabled" : "ToggleBaseFocused";
 
             ImportDefaultConfig.isEnabled = CustomizeItExtendedMod.Settings.SavePerCity && isInGame;
+            ImportDefaultConfig.tooltip = ImportDefaultConfigTooltip;
 
             ExportToDefaultConfig.isEnabled = CustomizeItExtendedMod.Settings.SavePerCity && isInGame;
+            ExportToDefaultConfig.tooltip = ExportDefaultConfigTooltip;
         }
     }
 }
