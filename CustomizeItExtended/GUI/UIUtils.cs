@@ -154,7 +154,15 @@ namespace CustomizeItExtended.GUI
                 ["m_attachOffsetFront"] = "Front Attach Offset",
                 ["m_attachOffsetBack"] = "Back Attach Offset",
                 ["m_maxTrailerCount"] = "Max Trailer Count",
-                ["m_useColorVariations"] = "Color Variations"
+                ["m_useColorVariations"] = "Color Variations",
+                ["numEducatedWorkers"] = "Educated Workers",
+                ["numHighlyEducatedWorkers"] = "Highly Educated Workers",
+                ["numRooms"] = "Number of Rooms",
+                ["capacityModifier"] = "Capacity Modifier",
+                ["numUneducatedWorkers"] = "Uneducated Workers",
+                ["numWellEducatedWorkers"] = "Well Educated Workers",
+                ["operationRadius"] = "Operation Radius",
+                ["quality"] = "Quality"
             };
         }
 
@@ -701,9 +709,12 @@ namespace CustomizeItExtended.GUI
             if (!int.TryParse(value, out var result))
                 return;
 
-            if (component.name == "m_campusAttractiveness")
-                if (!uint.TryParse(value, out uint uintResult))
+            switch (component.name)
+            {
+                case "m_campusAttractiveness" when !uint.TryParse(value, out uint uintResult):
+                case "quality" when result > 5 && result < 0:
                     return;
+            }
 
             var ai = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI;
             var type = ai.GetType();
@@ -713,6 +724,7 @@ namespace CustomizeItExtended.GUI
                 result = 1;
                 ((UITextField) component).text = "1";
             }
+            
 
 
             type.GetField(component.name)?.SetValue(ai, result);

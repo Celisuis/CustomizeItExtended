@@ -195,6 +195,16 @@ namespace CustomizeItExtended.Internal.Buildings
         public int m_workPlaceCount1;
         public int m_workPlaceCount2;
         public int m_workPlaceCount3;
+        
+        // Nursing Home Mod
+        public int numEducatedWorkers;
+        public int numHighlyEducatedWorkers;
+        public int numRooms;
+        public float capacityModifier;
+        public int numUneducatedWorkers;
+        public int numWellEducatedWorkers;
+        public float operationRadius;
+        public int quality;
 
         public BuildingProperties()
         {

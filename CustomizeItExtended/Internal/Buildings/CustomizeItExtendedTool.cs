@@ -7,6 +7,7 @@ using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Buildings;
+using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Translations;
 using UnityEngine;
 
@@ -43,8 +44,8 @@ namespace CustomizeItExtended.Internal.Buildings
         internal UIButton ExportToDefaultConfig;
 
         internal UIButton ImportDefaultConfig;
-        internal Dictionary<string, NameProperties> OriginalBuildingNames = new Dictionary<string, NameProperties>();
-        internal Dictionary<string, BuildingProperties> OriginalData = new Dictionary<string, BuildingProperties>();
+        internal readonly Dictionary<string, NameProperties> OriginalBuildingNames = new Dictionary<string, NameProperties>();
+        internal readonly Dictionary<string, BuildingProperties> OriginalData = new Dictionary<string, BuildingProperties>();
 
         internal InfoPanelType PanelType;
 
@@ -65,7 +66,7 @@ namespace CustomizeItExtended.Internal.Buildings
 
         internal UIZonedBuildingPanelWrapper ZonedBuildingPanelWrapper;
 
-
+        
 
         internal string ButtonTooltip =>
             ResetAll != null && ResetAll.isEnabled
@@ -174,9 +175,9 @@ namespace CustomizeItExtended.Internal.Buildings
             button = UiUtils.CreateToggleButton(ZoneBuildingPanel.component, offset, UIAlignAnchor.BottomLeft,
                 (comp, e) =>
                 {
-                    InstanceID instanceID = (InstanceID) infoPanel.GetType()
-                        .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(infoPanel);
 
+                    InstanceID instanceID = InstanceHelper.GetInstanceID(infoPanel);
+                    
                     var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
                     try
                     {
@@ -207,10 +208,9 @@ namespace CustomizeItExtended.Internal.Buildings
             {
                 PanelType = InfoPanelType.Warehouse;
 
-                InstanceID instanceId = (InstanceID) infoPanel.GetType().GetField("m_InstanceID",
-                        BindingFlags.Instance | BindingFlags.NonPublic)
-                    ?.GetValue(infoPanel);
-                var building = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
+                InstanceID instanceID = InstanceHelper.GetInstanceID(infoPanel);
+                
+                var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
                 try
                 {
                     if (WarehousePanelWrapper == null || building != CurrentSelectedBuilding)
@@ -241,10 +241,9 @@ namespace CustomizeItExtended.Internal.Buildings
             {
                 PanelType = InfoPanelType.Factory;
 
-                InstanceID instanceId = (InstanceID) infoPanel.GetType().GetField("m_InstanceID",
-                        BindingFlags.Instance | BindingFlags.NonPublic)
-                    ?.GetValue(infoPanel);
-                var building = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
+                InstanceID instanceID = InstanceHelper.GetInstanceID(infoPanel);
+                
+                var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
                 try
                 {
                     if (UniqueFactoryPanelWrapper == null || building != CurrentSelectedBuilding)
@@ -274,10 +273,9 @@ namespace CustomizeItExtended.Internal.Buildings
                 {
                     PanelType = InfoPanelType.Default;
 
-                    InstanceID instanceId = (InstanceID) infoPanel.GetType().GetField("m_InstanceID",
-                            BindingFlags.Instance | BindingFlags.NonPublic)
-                        ?.GetValue(infoPanel);
-                    var building = BuildingManager.instance.m_buildings.m_buffer[instanceId.Building].Info;
+                    InstanceID instanceID = InstanceHelper.GetInstanceID(infoPanel);
+                    
+                    var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
                     try
                     {
                         if (CustomizeItExtendedPanel == null || building != CurrentSelectedBuilding)

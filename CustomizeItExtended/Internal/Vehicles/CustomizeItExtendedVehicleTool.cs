@@ -6,6 +6,7 @@ using ColossalFramework.UI;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Vehicles;
+using CustomizeItExtended.Helpers;
 using UnityEngine;
 
 namespace CustomizeItExtended.Internal.Vehicles
@@ -60,13 +61,18 @@ namespace CustomizeItExtended.Internal.Vehicles
             {
                 var vehicleInfo = PrefabCollection<VehicleInfo>.GetLoaded(x);
 
+                if (vehicleInfo == null)
+                    continue;
+                
                 var vehicleName = vehicleInfo.name;
 
-                if (CustomVehicleNames.TryGetValue(vehicleInfo.name, out var props))
+                if (CustomVehicleNames.TryGetValue(vehicleInfo.name, out var props) && props.DefaultName)
                     vehicleName = props.CustomName;
 
                 if (AllLoadedVehicles.TryGetValue(vehicleName, out var _))
                     continue;
+                
+                AllLoadedVehicles.Add(vehicleName, vehicleInfo);
             }
 
             _isInitialized = true;
@@ -147,8 +153,7 @@ namespace CustomizeItExtended.Internal.Vehicles
         {
             button = UiUtils.CreateToggleButton(infoPanel.component, offset, UIAlignAnchor.BottomLeft, (component, e) =>
             {
-                InstanceID instanceID = (InstanceID) infoPanel.GetType()
-                    .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(infoPanel);
+                InstanceID instanceID = InstanceHelper.GetInstanceID(infoPanel);
 
                 SelectedInstanceID = instanceID;
 

@@ -50,6 +50,9 @@
     <Reference Include="ModTools">
       <HintPath>..\..\..\..\Games\Steam\steamapps\workshop\content\255710\450877484\ModTools.dll</HintPath>
     </Reference>
+    <Reference Include="SeniorCitizenCenterMod, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>C:\Users\Rh\Downloads\SeniorCitizenCenterMod-master\SeniorCitizenCenterMod\bin\Debug\SeniorCitizenCenterMod.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -70,6 +73,7 @@
     <Compile Include="External\CustomizeItExtendedAccess.cs" />
     <Compile Include="Helpers\BuildingHelper.cs" />
     <Compile Include="Helpers\CitizenHelper.cs" />
+    <Compile Include="Helpers\InstanceHelper.cs" />
     <Compile Include="Helpers\VehicleHelper.cs" />
     <Compile Include="Internal\Citizens\CitizenEntry.cs" />
     <Compile Include="Internal\Citizens\CitizenProperties.cs" />

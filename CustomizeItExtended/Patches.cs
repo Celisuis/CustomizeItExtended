@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using CustomizeItExtended.Extensions;
+using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
 using CustomizeItExtended.Internal.Citizens;
@@ -64,6 +65,7 @@ namespace CustomizeItExtended
                 out var originalProps))
                 CustomizeItExtendedVehicleTool.instance.OriginalVehicleData.Add(info.name, info.GetProperties());
 
+
             if (CustomizeItExtendedVehicleTool.instance.CustomVehicleData.TryGetValue(info.name, out var customProps))
                 info.LoadProperties(customProps);
         }
@@ -74,8 +76,7 @@ namespace CustomizeItExtended
     {
         public static void Postfix(BuildingWorldInfoPanel __instance, ref string __result)
         {
-            InstanceID instanceID = (InstanceID) __instance.GetType()
-                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+            InstanceID instanceID = InstanceHelper.GetInstanceID(__instance);
 
             var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
 
@@ -91,8 +92,7 @@ namespace CustomizeItExtended
     {
         public static void Postfix(BuildingWorldInfoPanel __instance, string text)
         {
-            InstanceID instanceID = (InstanceID) __instance.GetType()
-                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+            InstanceID instanceID = InstanceHelper.GetInstanceID(__instance);
 
             var building = BuildingManager.instance.m_buildings.m_buffer[instanceID.Building].Info;
 
@@ -114,8 +114,7 @@ namespace CustomizeItExtended
     {
         public static void Postfix(VehicleWorldInfoPanel __instance, ref string __result)
         {
-            InstanceID instanceID = (InstanceID) __instance.GetType()
-                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+            InstanceID instanceID = InstanceHelper.GetInstanceID(__instance);
 
             var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
 
@@ -131,8 +130,8 @@ namespace CustomizeItExtended
     {
         public static void Postfix(VehicleWorldInfoPanel __instance, string text)
         {
-            InstanceID instanceID = (InstanceID) __instance.GetType()
-                .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+            
+            InstanceID instanceID = InstanceHelper.GetInstanceID(__instance);
 
             var vehicle = VehicleManager.instance.m_vehicles.m_buffer[instanceID.Vehicle].Info;
 

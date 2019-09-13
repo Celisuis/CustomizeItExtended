@@ -6,6 +6,7 @@ using ColossalFramework.UI;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Citizens;
+using CustomizeItExtended.Helpers;
 using UnityEngine;
 
 namespace CustomizeItExtended.Internal.Citizens
@@ -58,8 +59,8 @@ namespace CustomizeItExtended.Internal.Citizens
         {
             button = UiUtils.CreateToggleButton(infoPanel.component, offSet, UIAlignAnchor.BottomLeft, (component, e) =>
             {
-                InstanceID instanceID = (InstanceID) infoPanel.GetType()
-                    .GetField("m_InstanceID", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(infoPanel);
+                
+                InstanceID instanceID = InstanceHelper.GetInstanceID(infoPanel);
 
                 var citizen = CitizenManager.instance.m_citizens.m_buffer[instanceID.Citizen];
 

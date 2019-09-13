@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Rh\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Rh\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_CustomizeItExtended.1362634677.00" t="ExcludeRecursive" />
+    <e p="G:\Coding\Cities Skylines Mods\CustomizeItExtended" t="IncludeFlat">
+      <e p="CustomizeItExtended" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Changelog.txt" t="Include" />
+        <e p="Compatibility" t="Include">
+          <e p="ModToolsCompatibilityPatch.cs" t="Include" />
+          <e p="RebalancedIndustries.cs" t="Include" />
+        </e>
+        <e p="CustomizeItExtended.csproj" t="IncludeRecursive" />
+        <e p="CustomizeItExtendedMod.cs" t="Include" />
+        <e p="Extensions" t="Include">
+          <e p="BuildingInfoExtensions.cs" t="Include" />
+          <e p="CitizenExtensions.cs" t="Include" />
+          <e p="LoadingExtension.cs" t="Include" />
+          <e p="SerializationExtension.cs" t="Include" />
+          <e p="ThreadingExtension.cs" t="Include" />
+          <e p="VehicleInfoExtensions.cs" t="Include" />
+        </e>
+        <e p="External" t="Include">
+          <e p="CustomizeItExtendedAccess.cs" t="Include" />
+        </e>
+        <e p="GUI" t="Include">
+          <e p="Buildings" t="Include">
+            <e p="UICustomizeItExtendedPanel.cs" t="Include" />
+            <e p="UIPanelWrapper.cs" t="Include" />
+            <e p="UIUniqueFactoryPanelWrapper.cs" t="Include" />
+            <e p="UIWarehousePanelWrapper.cs" t="Include" />
+            <e p="UIZonedBuildingPanel.cs" t="Include" />
+            <e p="UIZonedBuildingPanelWrapper.cs" t="Include" />
+          </e>
+          <e p="Citizens" t="Include">
+            <e p="UICitizenPanel.cs" t="Include" />
+            <e p="UICitizenPanelWrapper.cs" t="Include" />
+          </e>
+          <e p="UITitleBar.cs" t="Include" />
+          <e p="UIUtils.cs" t="Include" />
+          <e p="Vehicles" t="Include">
+            <e p="UIVehiclePanel.cs" t="Include" />
+            <e p="UIVehiclePanelWrapper.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Helpers" t="Include">
+          <e p="BuildingHelper.cs" t="Include" />
+          <e p="CitizenHelper.cs" t="Include" />
+          <e p="InstanceHelper.cs" t="Include" />
+          <e p="VehicleHelper.cs" t="Include" />
+        </e>
+        <e p="Internal" t="Include">
+          <e p="Buildings" t="Include">
+            <e p="BuildingProperties.cs" t="Include" />
+            <e p="CustomizeItExtendedTool.cs" t="Include" />
+            <e p="PropertyEntry.cs" t="Include" />
+          </e>
+          <e p="Citizens" t="Include">
+            <e p="CitizenEntry.cs" t="Include" />
+            <e p="CitizenProperties.cs" t="Include" />
+            <e p="CustomizeItExtendedCitizenTool.cs" t="Include" />
+          </e>
+          <e p="CustomNameEntry.cs" t="Include" />
+          <e p="NameProperties.cs" t="Include" />
+          <e p="Vehicles" t="Include">
+            <e p="CustomizeItExtendedVehicleTool.cs" t="Include" />
+            <e p="CustomVehicleProperties.cs" t="Include" />
+            <e p="VehiclePropertyEntry.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Legacy" t="Include">
+          <e p="CustomizableProperties.cs" t="Include" />
+          <e p="CustomizeItSettings.cs" t="Include" />
+          <e p="Entry.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Patches.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Settings" t="Include">
+          <e p="CustomizeItExtendedSettings.cs" t="Include" />
+        </e>
+        <e p="Translations" t="Include">
+          <e p="BaseLanguage.cs" t="Include" />
+          <e p="Languages" t="Include">
+            <e p="English.cs" t="Include" />
+            <e p="German.cs" t="Include" />
+          </e>
+          <e p="StringExtensions.cs" t="Include" />
+          <e p="TranslationFramework.cs" t="Include" />
+        </e>
+      </e>
+      <e p="CustomizeItExtended.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
