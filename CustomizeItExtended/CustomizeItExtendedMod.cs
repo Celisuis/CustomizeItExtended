@@ -12,7 +12,7 @@ using CustomizeItExtended.Internal.Vehicles;
 using CustomizeItExtended.Legacy;
 using CustomizeItExtended.Settings;
 using CustomizeItExtended.Translations;
-using Harmony;
+using HarmonyLib;
 using ICities;
 using UnityEngine;
 
@@ -22,11 +22,11 @@ namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
     {
-        internal const string Version = "1.5.0V";
+        internal const string Version = "1.6.0V";
 
         private static CustomizeItExtendedSettings _settings;
 
-        private static HarmonyInstance _harmony;
+        private static Harmony _harmony;
 
         public static bool DebugMode =
             File.Exists(Path.Combine(DataLocation.localApplicationData, "CSharpDebugMode.txt"));
@@ -63,7 +63,7 @@ namespace CustomizeItExtended
 
         public void OnEnabled()
         {
-            _harmony = HarmonyInstance.Create("com.github.celisuis.csl.customizeitextended");
+            _harmony = new Harmony("com.github.celisuis.csl.customizeitextended");
 
             try
             {
@@ -96,7 +96,7 @@ namespace CustomizeItExtended
 
         public void OnDisabled()
         {
-            _harmony.UnpatchAll();
+            _harmony.UnpatchAll("com.github.celisuis.csl.customizeitextended");
         }
 
         public void OnSettingsUI(UIHelperBase helper)

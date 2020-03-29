@@ -2,457 +2,123 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9c679d9-b0d2-4cf4-a400-9abe445a10c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CustomizeItExtended/Helpers/InstanceHelper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICO/CustomizeItExtendedRICOTool.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICOBuildingProperties.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtended.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtended.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtendedMod.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtendedMod.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingInfoExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CustomizeItExtendedCitizenTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CustomizeItExtendedCitizenTool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/packages.config" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="139" column="74" lean-forward="true" selection-start-line="139" selection-start-column="74" selection-end-line="141" />
-              <folding>
-                <marker date="1566291986000" expanded="false" signature="6:370" ph="..." />
-                <marker date="1566291986000" expanded="true" signature="420:12431" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="500:12429" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="540:624" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="3367:3510" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="3541:3639" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="3692:4057" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="4111:4473" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="4513:6297" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="6411:7607" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="6578:7595" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="6818:7342" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="6942:7090" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="7119:7320" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="7383:7497" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="7750:8881" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="7889:8869" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="8166:8644" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="8278:8424" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="8449:8626" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="8681:8783" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="9046:10195" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="9185:10183" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="9460:9958" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="9576:9730" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="9755:9940" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="9995:10097" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="10315:11559" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="10474:11547" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="10769:11294" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="10892:11044" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="11073:11272" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="11335:11449" ph="{...}" />
-                <marker date="1566291986000" expanded="true" signature="11616:12423" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CustomizeItExtendedCitizenTool.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="62" column="80" selection-start-line="62" selection-start-column="80" selection-end-line="62" selection-end-column="80" />
-              <folding>
-                <marker date="1566292582000" expanded="false" signature="6:288" ph="..." />
-                <marker date="1566292582000" expanded="true" signature="337:2806" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="431:2804" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="997:1139" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="1177:1621" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="1723:2798" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="1867:2786" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="2083:2551" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="2195:2335" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="2360:2533" ph="{...}" />
-                <marker date="1566292582000" expanded="true" signature="2588:2690" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-890">
-              <caret line="64" column="29" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
-              <folding>
-                <marker date="1566292552000" expanded="false" signature="6:288" ph="..." />
-                <marker date="1566292552000" expanded="true" signature="337:6576" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="431:6574" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="1843:2664" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="2024:2618" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="2695:2793" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="2844:3261" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="3313:3720" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="3759:5357" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="5484:6568" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="5628:6556" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="5882:6321" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="5983:6105" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="6130:6303" ph="{...}" />
-                <marker date="1566292552000" expanded="true" signature="6358:6460" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UITitleBar.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="441" column="72" selection-start-line="441" selection-start-column="72" selection-end-line="441" selection-end-column="72" />
-              <folding>
-                <marker date="1565094906000" expanded="false" signature="6:329" ph="..." />
-                <marker date="1565094906000" expanded="true" signature="364:20193" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="404:2981" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="607:711" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="749:2678" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="1264:1503" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="2463:2667" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="2718:2975" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="3029:5618" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="3241:3345" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="3383:5315" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="3907:4146" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="5106:5304" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="5355:5612" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="5670:8269" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="5886:5990" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="6028:7966" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="6550:6789" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="7749:7955" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="8006:8263" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="8312:10658" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="8519:8623" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="8661:10355" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="9180:9419" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="10138:10344" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="10395:10652" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="10704:13428" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="10914:11018" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="11056:13125" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="11578:11817" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="12906:13114" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="13165:13422" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="13474:16117" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="13684:13788" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="13826:15814" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="14348:14587" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="15595:15803" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="15854:16111" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="16172:20191" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="16397:16501" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="16539:19879" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="17070:17309" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="18433:19178" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="19660:19868" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="19919:20185" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/ModToolsCompatibilityPatch.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-              <folding>
-                <marker date="1565094900000" expanded="false" signature="6:67" ph="..." />
-                <marker date="1565094900000" expanded="true" signature="112:566" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="158:564" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="210:391" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="450:558" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/RebalancedIndustries.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-              <folding>
-                <marker date="1565094900000" expanded="false" signature="6:85" ph="..." />
-                <marker date="1565094900000" expanded="true" signature="130:799" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="170:797" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="256:530" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="590:791" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/VehicleInfoExtensions.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-              <folding>
-                <marker date="1565094900000" expanded="false" signature="6:220" ph="..." />
-                <marker date="1565094900000" expanded="true" signature="262:1902" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="310:1900" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="407:628" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="725:1148" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="1232:1306" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="1395:1894" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="1421:1735" ph="{...}" />
-                <marker date="1565094900000" expanded="true" signature="1767:1884" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/BuildingHelper.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-              <folding>
-                <marker date="1565094906000" expanded="false" signature="6:79" ph="..." />
-                <marker date="1565094906000" expanded="true" signature="118:1861" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="152:1859" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="217:780" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="380:739" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="838:1311" ph="{...}" />
-                <marker date="1565094906000" expanded="true" signature="1383:1853" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/InstanceHelper.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-              <folding>
-                <marker date="1566291886000" expanded="true" signature="6:52" ph="..." />
-                <marker date="1566291886000" expanded="true" signature="91:390" ph="{...}" />
-                <marker date="1566291886000" expanded="true" signature="125:388" ph="{...}" />
-                <marker date="1566291886000" expanded="true" signature="203:382" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Patches.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="752">
-              <caret line="66" selection-start-line="66" selection-end-line="66" />
-              <folding>
-                <marker date="1566292428000" expanded="false" signature="6:284" ph="..." />
-                <marker date="1566292428000" expanded="true" signature="315:5769" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="424:1418" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="490:1412" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="1531:1815" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="1641:1809" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="1917:2793" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="1982:2787" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="2901:3500" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="2998:3494" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="3608:4297" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="3697:4291" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="4404:4966" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="4500:4960" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="5073:5767" ph="{...}" />
-                <marker date="1566292428000" expanded="true" signature="5161:5761" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/BuildingHelper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/ModToolsCompatibilityPatch.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/RebalancedIndustries.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UITitleBar.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UICustomizeItExtendedPanel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CustomizeItExtendedCitizenTool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtendedMod.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CustomizeItExtendedCitizenTool.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CitizenProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Patches.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIPanelWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomVehicleProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICOBuildingProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/InstanceHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICO/CustomizeItExtendedRICOTool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/VehicleInfoExtensions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingInfoExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Translations/StringExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UITitleBar.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Translations/TranslationFramework.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Translations/Languages/English.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/RebalancedIndustries.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/ModToolsCompatibilityPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Vehicles/UIVehiclePanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIZonedBuildingPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIPanelWrapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIUniqueFactoryPanelWrapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UICustomizeItExtendedPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/InstanceHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/BuildingHelper.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" />
-        <option value="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Helpers/InstanceHelper.cs" />
-        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CustomizeItExtendedCitizenTool.cs" />
-        <option value="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICOBuildingProperties.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingInfoExtensions.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICO/CustomizeItExtendedRICOTool.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtendedMod.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/indexLayout.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="580" />
-    <option name="y" value="200" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
-  </component>
+  <component name="ProjectId" id="1TQjiq0gmtIdCAEGrFPSfuba3Ds" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectView">
-    <navigator currentView="SolutionExplorer" proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="SolutionExplorer">
-        <subPane>
-          <expand>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Compatibility" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Extensions" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="GUI" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="GUI" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Buildings" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Helpers" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Internal" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Internal" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Buildings" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Internal" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Citizens" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="CustomizeItExtended" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Internal" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Vehicles" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <option name="show-all-files" value="false" />
-      </pane>
-      <pane id="AssemblyExplorer" />
-      <pane id="FileSystemExplorer" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TWShift.4" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
-      <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
-      <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -466,58 +132,44 @@
       <updated>1566290212059</updated>
       <workItem from="1566290214425" duration="1008000" />
       <workItem from="1566291586783" duration="1263000" />
+      <workItem from="1573399347241" duration="864000" />
+      <workItem from="1573468329038" duration="2051000" />
+      <workItem from="1573577124561" duration="1388000" />
+      <workItem from="1573737591174" duration="9261000" />
+      <workItem from="1583600411979" duration="1123000" />
+      <workItem from="1585474853004" duration="1959000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2271000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
-    <layout>
-      <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info id="Image Layers" order="1" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Structure" order="3" side_tool="true" visible="true" weight="0.11879221" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3299923" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="NuGet" order="7" />
-      <window_info anchor="bottom" id="Performance Profiler" order="8" />
-      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info anchor="bottom" id="Unit Tests" order="12" />
-      <window_info anchor="bottom" id="Terminal" order="13" />
-      <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="0" />
-      <window_info anchor="right" id="Errors In Solution" order="1" />
-      <window_info anchor="right" id="Database" order="2" />
-      <window_info anchor="right" id="Unit Tests Coverage" order="3" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="4" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="5" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="6" weight="0.25" />
-      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="7" visible="true" weight="0.12713549" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="999" y="422" key="#Attach_to_Unity_Editor" timestamp="1585477326565">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="999" y="422" key="#Attach_to_Unity_Editor/0.0.2560.1400/-1920.350.1920.1040/-1920.-730.1920.1040@0.0.2560.1400" timestamp="1585477326565" />
+    <state x="768" y="191" key="SettingsEditor" timestamp="1585477361193">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="768" y="191" key="SettingsEditor/0.0.2560.1400/-1920.350.1920.1040/-1920.-730.1920.1040@0.0.2560.1400" timestamp="1585477361193" />
+    <state x="768" y="191" key="SettingsEditor/2560.1440/1920.1080" timestamp="1585477324762" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -527,395 +179,5 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingInfoExtensions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="38" column="97" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="97" />
-          <folding>
-            <marker date="1565260986000" expanded="false" signature="6:263" ph="..." />
-            <marker date="1565260986000" expanded="true" signature="305:5612" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="354:5610" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="466:687" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="799:2494" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="1201:1659" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="1699:1900" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="2003:2243" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="2283:2484" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="2593:2681" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="2776:3200" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="2802:3041" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="3073:3190" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="3313:3756" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="3339:3597" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="3629:3746" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="3877:4347" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="3903:4188" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="4220:4337" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="4450:5006" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="4476:4847" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="4879:4996" ph="{...}" />
-            <marker date="1565260986000" expanded="true" signature="5048:5604" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10384">
-          <caret line="717" selection-start-line="717" selection-end-line="717" />
-          <folding>
-            <marker date="1566291218000" expanded="false" signature="6:381" ph="..." />
-            <marker date="1566291218000" expanded="true" signature="416:34457" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="450:34455" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="740:9362" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="813:9351" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="9420:9823" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="9893:11703" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="10771:11664" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="11069:11650" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="11780:13532" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="12665:13493" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="12954:13479" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="13690:14678" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="14800:15710" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="15797:16897" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="16992:18067" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="18240:19245" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="19357:19683" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="19772:19985" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="20071:20243" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="20328:20514" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="20603:22022" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="22118:23512" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="23682:24807" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="24962:26093" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="26245:28393" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="27466:27534" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="27551:28304" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="27760:27848" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="27869:28290" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="28542:30068" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="29696:29769" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="29786:29926" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="30245:32965" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="32830:32924" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="33057:33834" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="33182:33395" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="33634:33744" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="33928:34194" ph="{...}" />
-            <marker date="1566291218000" expanded="true" signature="34301:34449" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-          <folding>
-            <marker date="1566291146000" expanded="false" signature="6:107" ph="..." />
-            <marker date="1566291146000" expanded="true" signature="198:8378" ph="{...}" />
-            <marker date="1566291146000" expanded="true" signature="255:8376" ph="{...}" />
-            <marker date="1566291146000" expanded="true" signature="540:572" ph="/* Warehouses ... */" />
-            <marker date="1566291146000" expanded="true" signature="6092:6112" ph="{...}" />
-            <marker date="1566291146000" expanded="true" signature="6166:7153" ph="{...}" />
-            <marker date="1566291146000" expanded="true" signature="6516:6915" ph="{...}" />
-            <marker date="1566291146000" expanded="true" signature="7221:8210" ph="{...}" />
-            <marker date="1566291146000" expanded="true" signature="7541:7956" ph="{...}" />
-            <marker date="1566291146000" expanded="true" signature="8300:8370" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIPanelWrapper.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <marker date="1565094900000" expanded="false" signature="6:92" ph="..." />
-            <marker date="1565094900000" expanded="true" signature="137:1241" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="181:1239" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="380:477" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="520:687" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="717:1233" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UICustomizeItExtendedPanel.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2304">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <marker date="1565094906000" expanded="false" signature="6:262" ph="..." />
-            <marker date="1565094906000" expanded="true" signature="307:9713" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="363:9711" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="659:755" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="785:5793" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="1472:2461" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="1899:2050" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="2108:2258" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="2587:3026" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3138:4302" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3193:3812" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3375:3535" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3564:3790" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3837:4149" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="5238:5783" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="5885:6595" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="6698:7462" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="7573:8401" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="8431:9228" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="8572:9218" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="8712:8917" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="9264:9705" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="9338:9695" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/BuildingHelper.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding>
-            <marker date="1565094906000" expanded="false" signature="6:79" ph="..." />
-            <marker date="1565094906000" expanded="true" signature="118:1861" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="152:1859" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="217:780" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="380:739" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="838:1311" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="1383:1853" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Citizens/CustomizeItExtendedCitizenTool.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="62" column="80" selection-start-line="62" selection-start-column="80" selection-end-line="62" selection-end-column="80" />
-          <folding>
-            <marker date="1566292582000" expanded="false" signature="6:288" ph="..." />
-            <marker date="1566292582000" expanded="true" signature="337:2806" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="431:2804" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="997:1139" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="1177:1621" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="1723:2798" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="1867:2786" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="2083:2551" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="2195:2335" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="2360:2533" ph="{...}" />
-            <marker date="1566292582000" expanded="true" signature="2588:2690" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/VehicleInfoExtensions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-          <folding>
-            <marker date="1565094900000" expanded="false" signature="6:220" ph="..." />
-            <marker date="1565094900000" expanded="true" signature="262:1902" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="310:1900" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="407:628" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="725:1148" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="1232:1306" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="1395:1894" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="1421:1735" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="1767:1884" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Patches.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="752">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-          <folding>
-            <marker date="1566292428000" expanded="false" signature="6:284" ph="..." />
-            <marker date="1566292428000" expanded="true" signature="315:5769" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="424:1418" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="490:1412" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="1531:1815" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="1641:1809" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="1917:2793" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="1982:2787" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="2901:3500" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="2998:3494" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="3608:4297" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="3697:4291" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="4404:4966" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="4500:4960" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="5073:5767" ph="{...}" />
-            <marker date="1566292428000" expanded="true" signature="5161:5761" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-890">
-          <caret line="64" column="29" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
-          <folding>
-            <marker date="1566292552000" expanded="false" signature="6:288" ph="..." />
-            <marker date="1566292552000" expanded="true" signature="337:6576" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="431:6574" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="1843:2664" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="2024:2618" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="2695:2793" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="2844:3261" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="3313:3720" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="3759:5357" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="5484:6568" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="5628:6556" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="5882:6321" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="5983:6105" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="6130:6303" ph="{...}" />
-            <marker date="1566292552000" expanded="true" signature="6358:6460" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/InstanceHelper.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-          <folding>
-            <marker date="1566291886000" expanded="true" signature="6:52" ph="..." />
-            <marker date="1566291886000" expanded="true" signature="91:390" ph="{...}" />
-            <marker date="1566291886000" expanded="true" signature="125:388" ph="{...}" />
-            <marker date="1566291886000" expanded="true" signature="203:382" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UITitleBar.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="441" column="72" selection-start-line="441" selection-start-column="72" selection-end-line="441" selection-end-column="72" />
-          <folding>
-            <marker date="1565094906000" expanded="false" signature="6:329" ph="..." />
-            <marker date="1565094906000" expanded="true" signature="364:20193" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="404:2981" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="607:711" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="749:2678" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="1264:1503" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="2463:2667" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="2718:2975" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3029:5618" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3241:3345" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3383:5315" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="3907:4146" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="5106:5304" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="5355:5612" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="5670:8269" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="5886:5990" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="6028:7966" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="6550:6789" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="7749:7955" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="8006:8263" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="8312:10658" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="8519:8623" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="8661:10355" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="9180:9419" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="10138:10344" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="10395:10652" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="10704:13428" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="10914:11018" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="11056:13125" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="11578:11817" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="12906:13114" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="13165:13422" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="13474:16117" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="13684:13788" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="13826:15814" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="14348:14587" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="15595:15803" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="15854:16111" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="16172:20191" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="16397:16501" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="16539:19879" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="17070:17309" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="18433:19178" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="19660:19868" ph="{...}" />
-            <marker date="1565094906000" expanded="true" signature="19919:20185" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/RebalancedIndustries.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <marker date="1565094900000" expanded="false" signature="6:85" ph="..." />
-            <marker date="1565094900000" expanded="true" signature="130:799" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="170:797" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="256:530" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="590:791" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/ModToolsCompatibilityPatch.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <marker date="1565094900000" expanded="false" signature="6:67" ph="..." />
-            <marker date="1565094900000" expanded="true" signature="112:566" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="158:564" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="210:391" ph="{...}" />
-            <marker date="1565094900000" expanded="true" signature="450:558" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="139" column="74" lean-forward="true" selection-start-line="139" selection-start-column="74" selection-end-line="141" />
-          <folding>
-            <marker date="1566291986000" expanded="false" signature="6:370" ph="..." />
-            <marker date="1566291986000" expanded="true" signature="420:12431" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="500:12429" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="540:624" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="3367:3510" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="3541:3639" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="3692:4057" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="4111:4473" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="4513:6297" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="6411:7607" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="6578:7595" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="6818:7342" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="6942:7090" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="7119:7320" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="7383:7497" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="7750:8881" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="7889:8869" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="8166:8644" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="8278:8424" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="8449:8626" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="8681:8783" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="9046:10195" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="9185:10183" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="9460:9958" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="9576:9730" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="9755:9940" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="9995:10097" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="10315:11559" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="10474:11547" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="10769:11294" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="10892:11044" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="11073:11272" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="11335:11449" ph="{...}" />
-            <marker date="1566291986000" expanded="true" signature="11616:12423" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

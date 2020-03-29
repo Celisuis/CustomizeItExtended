@@ -205,6 +205,11 @@ namespace CustomizeItExtended.Internal.Buildings
         public int numWellEducatedWorkers;
         public float operationRadius;
         public int quality;
+        
+        // Sunset Harbor
+        public int m_boatCount;
+        public int m_storageBufferSize;
+        
 
         public BuildingProperties()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CustomizeItExtended.Internal.Vehicles;
 
 namespace CustomizeItExtended.Helpers
@@ -60,5 +61,24 @@ namespace CustomizeItExtended.Helpers
                 ? props.CustomName
                 : vehicle.name;
         }
+
+        public static VehicleInfo CreateCustomInfo(VehicleInfo source)
+        {
+            VehicleInfo info = new VehicleInfo();
+
+            var sourceFields = source.GetType().GetFields();
+
+            var newFields = info.GetType().GetFields().ToDictionary(field => field.Name);
+
+            foreach (var field in sourceFields)
+            {
+                if(newFields.ContainsKey(field.Name))
+                    newFields[field.Name].SetValue(info, field.GetValue(source));
+            }
+
+            return info;
+        }
+
+       
     }
 }

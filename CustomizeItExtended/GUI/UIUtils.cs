@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using ColossalFramework.UI;
 using CustomizeItExtended.GUI.Buildings;
 using CustomizeItExtended.GUI.Vehicles;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Internal.Buildings.RICO;
 using CustomizeItExtended.Internal.Citizens;
 using CustomizeItExtended.Internal.Vehicles;
 using UnityEngine;
@@ -162,7 +164,9 @@ namespace CustomizeItExtended.GUI
                 ["numUneducatedWorkers"] = "Uneducated Workers",
                 ["numWellEducatedWorkers"] = "Well Educated Workers",
                 ["operationRadius"] = "Operation Radius",
-                ["quality"] = "Quality"
+                ["quality"] = "Quality",
+                ["m_boatCount"] = "Boat Count",
+                ["m_storageBufferSize"] = "Storage Buffer Size"
             };
         }
 
@@ -453,6 +457,43 @@ namespace CustomizeItExtended.GUI
             textField.text = CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI.GetType()
                 .GetField(fieldName).GetValue(CustomizeItExtendedTool.instance.CurrentSelectedBuilding.m_buildingAI)
                 .ToString();
+
+            return textField;
+        }
+        
+        public static UITextField CreateTextField(UIComponent parent, string fieldName, PropertyChangedEventHandler<string> handler)
+        {
+            var textField = parent.AddUIComponent<UITextField>();
+
+            textField.name = fieldName;
+            textField.builtinKeyNavigation = true;
+            textField.isInteractive = true;
+            textField.readOnly = false;
+
+            textField.selectionSprite = "EmptySprite";
+            textField.selectionBackgroundColor = new Color32(0, 172, 234, 255);
+
+            textField.width = FieldWidth;
+            textField.height = FieldHeight;
+            textField.padding = new RectOffset(6, 6, 6, 6);
+            textField.normalBgSprite = "LevelBarBackground";
+            textField.hoveredBgSprite = "LevelBarBackground";
+            textField.disabledBgSprite = "LevelBarBackground";
+            textField.focusedBgSprite = "LevelBarBackground";
+            textField.horizontalAlignment = UIHorizontalAlignment.Center;
+            textField.textColor = Color.white;
+            textField.textScale = 0.85f;
+            textField.selectOnFocus = true;
+            textField.eventKeyPress += EventKeyPressedHandler;
+            textField.eventTextSubmitted += handler;
+            textField.text = CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuildingInfo.m_buildingAI.GetType()
+                .GetField(fieldName).GetValue(CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuildingInfo.m_buildingAI)
+                .ToString();
+
+            if (string.IsNullOrEmpty(textField.text))
+                textField.text = CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuilding.GetType()
+                    .GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
+                    .GetValue(CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuilding).ToString();
 
             return textField;
         }

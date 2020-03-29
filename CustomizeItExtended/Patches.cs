@@ -3,9 +3,10 @@ using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal;
 using CustomizeItExtended.Internal.Buildings;
+using CustomizeItExtended.Internal.Buildings.RICO;
 using CustomizeItExtended.Internal.Citizens;
 using CustomizeItExtended.Internal.Vehicles;
-using Harmony;
+using HarmonyLib;
 
 namespace CustomizeItExtended
 {
@@ -25,6 +26,18 @@ namespace CustomizeItExtended
 
             if (info.m_buildingAI == null)
                 return;
+
+            if (info.IsRICOBuilding())
+            {
+                if (!CustomizeItExtendedRICOTool.instance.OriginalRICOData.TryGetValue(info.name, out var orig))
+                    CustomizeItExtendedRICOTool.instance.OriginalRICOData.Add(info.name, info.GetRICOInfoProperties());
+                
+                if(CustomizeItExtendedRICOTool.instance.CustomRICOData.TryGetValue(info.name, out var customRICOProps))
+                    info.LoadRICOProperties(customRICOProps);
+                
+                return;
+                    
+            }
 
             if (!info.m_buildingAI.GetType().IsSubclassOf(typeof(PlayerBuildingAI)))
                 return;

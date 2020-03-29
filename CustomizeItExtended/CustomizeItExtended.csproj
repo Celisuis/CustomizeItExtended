@@ -31,27 +31,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=1.2.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.1.2.0.1\lib\net35\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.0.0.8, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Lib.Harmony.2.0.0.8\lib\net35\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="ColossalManaged">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="ColossalManaged, Version=0.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
     </Reference>
     <Reference Include="ICities">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="ICities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
+    </Reference>
     <Reference Include="ModTools">
       <HintPath>..\..\..\..\Games\Steam\steamapps\workshop\content\255710\450877484\ModTools.dll</HintPath>
     </Reference>
+    <Reference Include="PloppableRICO, Version=1.0.6871.39108, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\workshop\content\255710\586012417\PloppableRICO.dll</HintPath>
+    </Reference>
     <Reference Include="SeniorCitizenCenterMod, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>C:\Users\Rh\Downloads\SeniorCitizenCenterMod-master\SeniorCitizenCenterMod\bin\Debug\SeniorCitizenCenterMod.dll</HintPath>
+      <HintPath>P:\Games\Steam\steamapps\workshop\content\255710\554232266\SeniorCitizenCenterMod.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,9 +75,15 @@
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +93,8 @@
     <Compile Include="Helpers\CitizenHelper.cs" />
     <Compile Include="Helpers\InstanceHelper.cs" />
     <Compile Include="Helpers\VehicleHelper.cs" />
+    <Compile Include="Internal\Buildings\RICOBuildingProperties.cs" />
+    <Compile Include="Internal\Buildings\RICO\CustomizeItExtendedRICOTool.cs" />
     <Compile Include="Internal\Citizens\CitizenEntry.cs" />
     <Compile Include="Internal\Citizens\CitizenProperties.cs" />
     <Compile Include="Internal\Citizens\CustomizeItExtendedCitizenTool.cs" />
@@ -94,7 +114,7 @@
     <Compile Include="Internal\NameProperties.cs" />
     <Compile Include="Legacy\CustomizeItSettings.cs" />
     <Compile Include="Legacy\Entry.cs" />
-    <Compile Include="Extensions\BuildingInfoExtensions.cs" />
+    <Compile Include="Extensions\BuildingExtensions.cs" />
     <Compile Include="GUI\Buildings\UIPanelWrapper.cs" />
     <Compile Include="Internal\Buildings\CustomizeItExtendedTool.cs" />
     <Compile Include="Internal\Buildings\BuildingProperties.cs" />
@@ -119,11 +139,10 @@
     <Compile Include="Translations\TranslationFramework.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Changelog.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

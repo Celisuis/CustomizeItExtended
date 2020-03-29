@@ -1,4 +1,11 @@
-﻿Version 1.5.0 - 
+﻿Version 1.6.0 -
+
+Upgraded:
+
+Harmony Patch System to Version 2.0
+Sunset Harbor DLC Compatibility.
+
+Version 1.5.0 - 
 
 New Features:
 

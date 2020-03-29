@@ -9,6 +9,7 @@ using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Buildings;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Translations;
+using PloppableRICO;
 using UnityEngine;
 
 namespace CustomizeItExtended.Internal.Buildings
@@ -36,6 +37,7 @@ namespace CustomizeItExtended.Internal.Buildings
         private UIButton _zonedInfoButton;
 
         internal BuildingInfo CurrentSelectedBuilding;
+
 
         internal Dictionary<string, NameProperties> CustomBuildingNames = new Dictionary<string, NameProperties>();
         internal Dictionary<string, BuildingProperties> CustomData = new Dictionary<string, BuildingProperties>();
@@ -111,6 +113,7 @@ namespace CustomizeItExtended.Internal.Buildings
 
             if (!CustomizeItExtendedMod.Settings.SavePerCity) CustomizeItExtendedMod.Settings.Save();
         }
+
 
         public void ResetBuilding(BuildingInfo info)
         {
