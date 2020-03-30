@@ -9,7 +9,6 @@ using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Buildings;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Translations;
-using PloppableRICO;
 using UnityEngine;
 
 namespace CustomizeItExtended.Internal.Buildings

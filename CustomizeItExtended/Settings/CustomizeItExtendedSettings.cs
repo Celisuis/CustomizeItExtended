@@ -32,6 +32,7 @@ namespace CustomizeItExtended.Settings
         public string Language = "English";
 
         public bool OverrideRebalancedIndustries;
+        public bool OverrideAVO;
         public float PanelX = 8f;
         public float PanelY = 65f;
 

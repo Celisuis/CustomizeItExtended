@@ -2,19 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9c679d9-b0d2-4cf4-a400-9abe445a10c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICO/CustomizeItExtendedRICOTool.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICOBuildingProperties.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CustomizeItExtended/Compatibility/AdvancedVehicleOptionsCompatibilityPatch.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CustomizeItExtended/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Changelog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Changelog.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtended.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtended.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtendedMod.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtendedMod.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingInfoExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/GUI/Vehicles/UIVehiclePanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/GUI/Vehicles/UIVehiclePanel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICO/CustomizeItExtendedRICOTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICOBuildingProperties.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomizeItExtended/Settings/CustomizeItExtendedSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/Settings/CustomizeItExtendedSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomizeItExtended/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/CustomizeItExtended/packages.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,11 +33,11 @@
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Patches.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomVehicleProperties.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICOBuildingProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICO/CustomizeItExtendedRICOTool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Settings/CustomizeItExtendedSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/VehicleInfoExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Compatibility/AdvancedVehicleOptionsCompatibilityPatch.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Translations/StringExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/UITitleBar.cs" root0="FORCE_HIGHLIGHTING" />
@@ -50,6 +51,7 @@
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIPanelWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIUniqueFactoryPanelWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UICustomizeItExtendedPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomizeItExtended/GUI/Buildings/UIWarehousePanelWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/InstanceHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CustomizeItExtended/Helpers/BuildingHelper.cs" root0="FORCE_HIGHLIGHTING" />
@@ -62,13 +64,17 @@
         <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Vehicles/CustomizeItExtendedVehicleTool.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Helpers/VehicleHelper.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICOBuildingProperties.cs" />
-        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingInfoExtensions.cs" />
-        <option value="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/RICO/CustomizeItExtendedRICOTool.cs" />
-        <option value="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" />
-        <option value="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/BuildingProperties.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/GUI/UIUtils.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Internal/Buildings/CustomizeItExtendedTool.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Extensions/BuildingExtensions.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Settings/CustomizeItExtendedSettings.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/GUI/Vehicles/UIVehiclePanel.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Changelog.txt" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Compatibility/AdvancedVehicleOptionsCompatibilityPatch.cs" />
+        <option value="$PROJECT_DIR$/CustomizeItExtended/Patches.cs" />
         <option value="$PROJECT_DIR$/CustomizeItExtended/CustomizeItExtendedMod.cs" />
       </list>
     </option>
@@ -137,7 +143,9 @@
       <workItem from="1573577124561" duration="1388000" />
       <workItem from="1573737591174" duration="9261000" />
       <workItem from="1583600411979" duration="1123000" />
-      <workItem from="1585474853004" duration="1959000" />
+      <workItem from="1585474853004" duration="7032000" />
+      <workItem from="1585487152197" duration="5924000" />
+      <workItem from="1585553768210" duration="784000" />
     </task>
     <servers />
   </component>
@@ -169,6 +177,10 @@
     </state>
     <state x="768" y="191" key="SettingsEditor/0.0.2560.1400/-1920.350.1920.1040/-1920.-730.1920.1040@0.0.2560.1400" timestamp="1585477361193" />
     <state x="768" y="191" key="SettingsEditor/2560.1440/1920.1080" timestamp="1585477324762" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1585491654368">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.350.1920.1040/-1920.-730.1920.1040@0.0.2560.1400" timestamp="1585491654368" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

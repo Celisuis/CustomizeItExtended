@@ -31,36 +31,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.0.8, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Lib.Harmony.2.0.0.8\lib\net35\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=1.2.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Lib.Harmony.1.2.0.1\lib\net35\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="AdvancedVehicleOptions, Version=1.0.7393.26841, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\workshop\content\255710\1548831935\AdvancedVehicleOptions.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="ColossalManaged">
-      <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>P:\Games\Cities Data\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="ColossalManaged, Version=0.3.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
-    </Reference>
-    <Reference Include="ICities">
-      <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>P:\Games\Cities Data\ColossalManaged.dll</HintPath>
     </Reference>
     <Reference Include="ICities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
+      <HintPath>P:\Games\Cities Data\ICities.dll</HintPath>
     </Reference>
     <Reference Include="ModTools">
       <HintPath>..\..\..\..\Games\Steam\steamapps\workshop\content\255710\450877484\ModTools.dll</HintPath>
     </Reference>
-    <Reference Include="PloppableRICO, Version=1.0.6871.39108, Culture=neutral, PublicKeyToken=null">
-      <HintPath>P:\Games\Steam\steamapps\workshop\content\255710\586012417\PloppableRICO.dll</HintPath>
+    <Reference Include="ModTools, Version=3.2.3.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>P:\Games\Steam\steamapps\workshop\content\255710\450877484\ModTools.dll</HintPath>
     </Reference>
     <Reference Include="SeniorCitizenCenterMod, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>P:\Games\Steam\steamapps\workshop\content\255710\554232266\SeniorCitizenCenterMod.dll</HintPath>
@@ -71,30 +62,21 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>P:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\AdvancedVehicleOptionsCompatibilityPatch.cs" />
     <Compile Include="Compatibility\ModToolsCompatibilityPatch.cs" />
     <Compile Include="External\CustomizeItExtendedAccess.cs" />
     <Compile Include="Helpers\BuildingHelper.cs" />
     <Compile Include="Helpers\CitizenHelper.cs" />
     <Compile Include="Helpers\InstanceHelper.cs" />
     <Compile Include="Helpers\VehicleHelper.cs" />
-    <Compile Include="Internal\Buildings\RICOBuildingProperties.cs" />
-    <Compile Include="Internal\Buildings\RICO\CustomizeItExtendedRICOTool.cs" />
     <Compile Include="Internal\Citizens\CitizenEntry.cs" />
     <Compile Include="Internal\Citizens\CitizenProperties.cs" />
     <Compile Include="Internal\Citizens\CustomizeItExtendedCitizenTool.cs" />

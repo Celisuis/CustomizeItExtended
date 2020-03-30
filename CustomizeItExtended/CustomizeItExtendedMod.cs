@@ -12,7 +12,7 @@ using CustomizeItExtended.Internal.Vehicles;
 using CustomizeItExtended.Legacy;
 using CustomizeItExtended.Settings;
 using CustomizeItExtended.Translations;
-using HarmonyLib;
+using Harmony;
 using ICities;
 using UnityEngine;
 
@@ -22,12 +22,11 @@ namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
     {
-        internal const string Version = "1.6.0V";
+        internal const string Version = "1.6.1V";
 
         private static CustomizeItExtendedSettings _settings;
 
-        private static Harmony _harmony;
-
+        private static HarmonyInstance _harmony;
         public static bool DebugMode =
             File.Exists(Path.Combine(DataLocation.localApplicationData, "CSharpDebugMode.txt"));
 
@@ -63,11 +62,11 @@ namespace CustomizeItExtended
 
         public void OnEnabled()
         {
-            _harmony = new Harmony("com.github.celisuis.csl.customizeitextended");
+            _harmony = HarmonyInstance.Create("com.github.celisuis.csl.customizeitextended");
 
             try
             {
-                _harmony.PatchAll(Assembly.GetExecutingAssembly());
+                _harmony.PatchAll();
             }
             catch (Exception e)
             {
@@ -96,7 +95,15 @@ namespace CustomizeItExtended
 
         public void OnDisabled()
         {
-            _harmony.UnpatchAll("com.github.celisuis.csl.customizeitextended");
+            try
+            {
+                _harmony.UnpatchAll("com.github.celisuis.csl.customizeitextended");    
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Error Unpatching Customize It Extended! -{e.Message} - {e.StackTrace}");
+              
+            }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -129,6 +136,16 @@ namespace CustomizeItExtended
 
             overrideButton.isEnabled = RebalancedIndustries.IsRebalancedIndustriesActive();
             overrideButton.disabledColor = Color.gray;
+            helper.AddSpace(10);
+            var overrideAVOButton = (UICheckBox) helper.AddCheckbox("Override Advanced Vehicle Options",
+                Settings.OverrideAVO, x =>
+                {
+                    Settings.OverrideAVO = x;
+                    Settings.Save();
+                });
+            overrideAVOButton.tooltip = "Override Advanced Vehicle Options";
+            overrideAVOButton.enabled = AdvancedVehicleOptionsCompatibilityPatch.IsAVOActive();
+            overrideAVOButton.disabledColor = Color.gray;
             helper.AddSpace(10);
             var absoluteNamesCheckbox = (UICheckBox) helper.AddCheckbox("Use Absolute Names", Settings.AbsoluteNames,
                 x =>

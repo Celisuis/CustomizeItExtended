@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ColossalFramework.UI;
+using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.Extensions;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal;
@@ -65,6 +66,23 @@ namespace CustomizeItExtended.GUI.Vehicles
 
                 if (label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
                     widestWidth = label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
+
+                
+            }
+            
+            if (!CustomizeItExtendedMod.Settings.OverrideAVO)
+            {
+                foreach (var input in Inputs)
+                {
+                    if (!AdvancedVehicleOptionsCompatibilityPatch.IsAVOActive() ||
+                        !AdvancedVehicleOptionsCompatibilityPatch.AVOFields.Contains(input.name))
+                        continue;
+
+                    input.isEnabled = false;
+                    input.isInteractive = false;
+
+                    if (input is UITextField textField) textField.text = "DISABLED";
+                }
             }
 
 

@@ -6,7 +6,6 @@ using CustomizeItExtended.GUI.Buildings;
 using CustomizeItExtended.GUI.Vehicles;
 using CustomizeItExtended.Helpers;
 using CustomizeItExtended.Internal.Buildings;
-using CustomizeItExtended.Internal.Buildings.RICO;
 using CustomizeItExtended.Internal.Citizens;
 using CustomizeItExtended.Internal.Vehicles;
 using UnityEngine;
@@ -486,7 +485,7 @@ namespace CustomizeItExtended.GUI
             textField.selectOnFocus = true;
             textField.eventKeyPress += EventKeyPressedHandler;
             textField.eventTextSubmitted += handler;
-            textField.text = CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuildingInfo.m_buildingAI.GetType()
+           /* textField.text = CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuildingInfo.m_buildingAI.GetType()
                 .GetField(fieldName).GetValue(CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuildingInfo.m_buildingAI)
                 .ToString();
 
@@ -494,7 +493,7 @@ namespace CustomizeItExtended.GUI
                 textField.text = CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuilding.GetType()
                     .GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
                     .GetValue(CustomizeItExtendedRICOTool.instance.CurrentSelectedRICOBuilding).ToString();
-
+            */
             return textField;
         }
 

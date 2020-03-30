@@ -1,4 +1,12 @@
-﻿Version 1.6.0 -
+﻿Version 1.6.2 - 
+
+Added Compatibility Patch for Advanced Vehicle Options 1.9
+
+Version 1.6.1 - 
+
+Fixed ArrayOutOfBounds Issue
+
+Version 1.6.0 -
 
 Upgraded:
 

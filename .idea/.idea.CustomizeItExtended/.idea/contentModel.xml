@@ -8,6 +8,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Changelog.txt" t="Include" />
         <e p="Compatibility" t="Include">
+          <e p="AdvancedVehicleOptionsCompatibilityPatch.cs" t="Include" />
           <e p="ModToolsCompatibilityPatch.cs" t="Include" />
           <e p="RebalancedIndustries.cs" t="Include" />
         </e>
@@ -55,10 +56,6 @@
             <e p="BuildingProperties.cs" t="Include" />
             <e p="CustomizeItExtendedTool.cs" t="Include" />
             <e p="PropertyEntry.cs" t="Include" />
-            <e p="RICO" t="Include">
-              <e p="CustomizeItExtendedRICOTool.cs" t="Include" />
-            </e>
-            <e p="RICOBuildingProperties.cs" t="Include" />
           </e>
           <e p="Citizens" t="Include">
             <e p="CitizenEntry.cs" t="Include" />

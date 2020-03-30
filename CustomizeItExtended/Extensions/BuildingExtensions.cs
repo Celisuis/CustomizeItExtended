@@ -6,8 +6,6 @@ using CustomizeItExtended.Compatibility;
 using CustomizeItExtended.GUI;
 using CustomizeItExtended.GUI.Buildings;
 using CustomizeItExtended.Internal.Buildings;
-using CustomizeItExtended.Internal.Buildings.RICO;
-using PloppableRICO;
 using UnityEngine;
 
 namespace CustomizeItExtended.Extensions
@@ -60,7 +58,7 @@ namespace CustomizeItExtended.Extensions
                     }
         }
 
-        public static RICOBuildingProperties GetOriginalRICOProperties(this BuildingInfo info)
+      /*  public static RICOBuildingProperties GetOriginalRICOProperties(this BuildingInfo info)
         {
             return CustomizeItExtendedRICOTool.instance.OriginalRICOData.TryGetValue(info.name,
                 out RICOBuildingProperties props)
@@ -158,14 +156,14 @@ namespace CustomizeItExtended.Extensions
                 }
             }
 
-        }
+        } */
 
         public static Internal.Buildings.BuildingProperties GetProperties(this BuildingInfo info)
         {
             return new Internal.Buildings.BuildingProperties(info);
         }
 
-        public static RICOBuildingProperties GetRICOInfoProperties(this BuildingInfo info)
+     /*   public static RICOBuildingProperties GetRICOInfoProperties(this BuildingInfo info)
         {
             var ai = info.m_buildingAI;
 
@@ -194,6 +192,7 @@ namespace CustomizeItExtended.Extensions
                    || info.m_buildingAI.GetType() == typeof(PloppableExtractor)
                    || info.m_buildingAI.GetType() == typeof(PloppableOffice);
         }
+        */
         public static UiPanelWrapper GenerateCustomizeItExtendedPanel(this BuildingInfo info)
         {
             try
