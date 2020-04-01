@@ -22,7 +22,7 @@ namespace CustomizeItExtended
 {
     public class CustomizeItExtendedMod : IUserMod
     {
-        internal const string Version = "1.6.1V";
+        internal const string Version = "1.6.2V";
 
         private static CustomizeItExtendedSettings _settings;
 

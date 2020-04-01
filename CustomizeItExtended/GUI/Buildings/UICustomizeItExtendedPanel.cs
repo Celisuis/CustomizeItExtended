@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ColossalFramework.UI;
 using CustomizeItExtended.Compatibility;
@@ -27,121 +28,128 @@ namespace CustomizeItExtended.GUI.Buildings
 
         private void Setup()
         {
-            name = "CustomizeItExtendedPanel";
-            isVisible = false;
-            canFocus = true;
-            isInteractive = true;
-            relativePosition = new Vector3(0f, Titlebar().height);
-            width = parent.width;
-
-            var ai = SelectedBuilding.m_buildingAI;
-
-            var fields = ai.GetType().GetFields();
-
-            var fieldsToRetrieve = typeof(Internal.Buildings.BuildingProperties).GetFields().Select(x => x.Name);
-
-            Inputs = new List<UIComponent>();
-
-            _labels = new List<UILabel>();
-
-            var widestWidth = 0f;
-
-            foreach (var field in fields.Where(x => fieldsToRetrieve.Contains(x.Name)))
+            try
             {
-                var label = AddUIComponent<UILabel>();
-                label.name = field.Name + "Label";
-                label.text = UiUtils.FieldNames[field.Name].TranslateField();
-                label.textScale = 0.9f;
-                label.isInteractive = false;
+                name = "CustomizeItExtendedPanel";
+                isVisible = false;
+                canFocus = true;
+                isInteractive = true;
+                relativePosition = new Vector3(0f, Titlebar().height);
+                width = parent.width;
 
-                if (field.FieldType == typeof(int) || field.FieldType == typeof(float) ||
-                    field.FieldType == typeof(uint))
+                var ai = SelectedBuilding.m_buildingAI;
+
+                var fields = ai.GetType().GetFields();
+
+                var fieldsToRetrieve = typeof(Internal.Buildings.BuildingProperties).GetFields().Select(x => x.Name);
+
+                Inputs = new List<UIComponent>();
+
+                _labels = new List<UILabel>();
+
+                var widestWidth = 0f;
+
+                foreach (var field in fields.Where(x => fieldsToRetrieve.Contains(x.Name)))
                 {
-                    Inputs.Add(UiUtils.CreateTextField(this, field.Name));
-                    _labels.Add(label);
-                }
-                else if (field.FieldType == typeof(bool))
-                {
-                    Inputs.Add(UiUtils.CreateCheckBox(this, field.Name));
-                    _labels.Add(label);
-                }
+                    var label = AddUIComponent<UILabel>();
+                    label.name = field.Name + "Label";
+                    label.text = UiUtils.FieldNames[field.Name].TranslateField();
+                    label.textScale = 0.9f;
+                    label.isInteractive = false;
 
-                if (label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
-                    widestWidth = label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
-            }
-
-            if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
-                foreach (var input in Inputs)
-                {
-                    if (!RebalancedIndustries.IsRebalancedIndustriesActive() ||
-                        !RebalancedIndustries.RebalancedFields.Contains(input.name))
-                        continue;
-
-                    input.isEnabled = false;
-                    input.isInteractive = false;
-
-                    if (input is UITextField textField) textField.text = "DISABLED".TranslateInformation();
-                }
-
-            Inputs.Add(UiUtils.CreateNameTextfield(this, "DefaultName", (component, value) =>
-                {
-                    if (!string.IsNullOrEmpty(value))
+                    if (field.FieldType == typeof(int) || field.FieldType == typeof(float) ||
+                        field.FieldType == typeof(uint))
                     {
-                        if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
-                            out var props))
+                        Inputs.Add(UiUtils.CreateTextField(this, field.Name));
+                        _labels.Add(label);
+                    }
+                    else if (field.FieldType == typeof(bool))
+                    {
+                        Inputs.Add(UiUtils.CreateCheckBox(this, field.Name));
+                        _labels.Add(label);
+                    }
+
+                    if (label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
+                        widestWidth = label.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
+                }
+
+                if (!CustomizeItExtendedMod.Settings.OverrideRebalancedIndustries)
+                    foreach (var input in Inputs)
+                    {
+                        if (!RebalancedIndustries.IsRebalancedIndustriesActive() ||
+                            !RebalancedIndustries.RebalancedFields.Contains(input.name))
+                            continue;
+
+                        input.isEnabled = false;
+                        input.isInteractive = false;
+
+                        if (input is UITextField textField) textField.text = "DISABLED".TranslateInformation();
+                    }
+
+                Inputs.Add(UiUtils.CreateNameTextfield(this, "DefaultName", (component, value) =>
+                    {
+                        if (!string.IsNullOrEmpty(value))
                         {
-                            props.CustomName = value;
-                            props.DefaultName = true;
+                            if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                                out var props))
+                            {
+                                props.CustomName = value;
+                                props.DefaultName = true;
+                            }
+                            else
+                            {
+                                CustomizeItExtendedTool.instance.CustomBuildingNames.Add(SelectedBuilding.name,
+                                    new NameProperties(value, true));
+                            }
                         }
                         else
                         {
-                            CustomizeItExtendedTool.instance.CustomBuildingNames.Add(SelectedBuilding.name,
-                                new NameProperties(value, true));
+                            if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                                out var _))
+                                CustomizeItExtendedTool.instance.CustomBuildingNames.Remove(SelectedBuilding.name);
                         }
-                    }
-                    else
-                    {
-                        if (CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
-                            out var _))
-                            CustomizeItExtendedTool.instance.CustomBuildingNames.Remove(SelectedBuilding.name);
-                    }
 
-                    if (!CustomizeItExtendedMod.Settings.SavePerCity)
-                        CustomizeItExtendedMod.Settings.Save();
-                },
-                CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
-                    out var customName)
-                    ? customName.CustomName
-                    : string.Empty));
+                        if (!CustomizeItExtendedMod.Settings.SavePerCity)
+                            CustomizeItExtendedMod.Settings.Save();
+                    },
+                    CustomizeItExtendedTool.instance.CustomBuildingNames.TryGetValue(SelectedBuilding.name,
+                        out var customName)
+                        ? customName.CustomName
+                        : string.Empty));
 
-            var nameLabel = AddUIComponent<UILabel>();
-            nameLabel.name = "DefaultNameLabel";
-            nameLabel.text = "Default Name";
-            nameLabel.textScale = 0.9f;
-            nameLabel.isInteractive = false;
+                var nameLabel = AddUIComponent<UILabel>();
+                nameLabel.name = "DefaultNameLabel";
+                nameLabel.text = "Default Name";
+                nameLabel.textScale = 0.9f;
+                nameLabel.isInteractive = false;
 
-            if (nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
-                widestWidth = nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
+                if (nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6 > widestWidth)
+                    widestWidth = nameLabel.width + UiUtils.FieldWidth + UiUtils.FieldMargin * 6;
 
-            _labels.Add(nameLabel);
+                _labels.Add(nameLabel);
 
-            Inputs.Sort((x, y) => x.name.CompareTo(y.name));
-            _labels.Sort((x, y) => x.name.CompareTo(y.name));
+                Inputs.Sort((x, y) => x.name.CompareTo(y.name));
+                _labels.Sort((x, y) => x.name.CompareTo(y.name));
 
-            Inputs.Add(UiUtils.CreateResetButton(this));
+                Inputs.Add(UiUtils.CreateResetButton(this));
 
 
-            switch (CustomizeItExtendedTool.instance.PanelType)
+                switch (CustomizeItExtendedTool.instance.PanelType)
+                {
+                    case CustomizeItExtendedTool.InfoPanelType.Warehouse:
+                        SetupWarehousePanel(widestWidth, ref UIWarehousePanelWrapper.Instance);
+                        break;
+                    case CustomizeItExtendedTool.InfoPanelType.Factory:
+                        SetupUniqueFactoryPanel(widestWidth, ref UIUniqueFactoryPanelWrapper.Instance);
+                        break;
+                    default:
+                        SetupDefaultPanel(widestWidth, ref UiPanelWrapper.Instance);
+                        break;
+                }
+            }
+            catch (Exception e)
             {
-                case CustomizeItExtendedTool.InfoPanelType.Warehouse:
-                    SetupWarehousePanel(widestWidth, ref UIWarehousePanelWrapper.Instance);
-                    break;
-                case CustomizeItExtendedTool.InfoPanelType.Factory:
-                    SetupUniqueFactoryPanel(widestWidth, ref UIUniqueFactoryPanelWrapper.Instance);
-                    break;
-                default:
-                    SetupDefaultPanel(widestWidth, ref UiPanelWrapper.Instance);
-                    break;
+                Debug.Log($"{e.Message} - {e.StackTrace}");
             }
         }
 

@@ -206,7 +206,6 @@ namespace CustomizeItExtended.Internal.Buildings
         public float operationRadius;
         public int quality;
         
-        // Sunset Harbor
         public int m_boatCount;
         public int m_storageBufferSize;
         

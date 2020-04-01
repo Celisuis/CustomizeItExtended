@@ -35,6 +35,8 @@ namespace CustomizeItExtended.Internal.Buildings
 
         private UIButton _zonedInfoButton;
 
+        private UIButton _shelterInfoButton;
+
         internal BuildingInfo CurrentSelectedBuilding;
 
 
@@ -66,6 +68,8 @@ namespace CustomizeItExtended.Internal.Buildings
         internal ZonedBuildingWorldInfoPanel ZoneBuildingPanel;
 
         internal UIZonedBuildingPanelWrapper ZonedBuildingPanelWrapper;
+
+        internal ShelterWorldInfoPanel ShelterInfoPanel;
 
         
 
@@ -169,6 +173,13 @@ namespace CustomizeItExtended.Internal.Buildings
             if (CustomizeItExtendedMod.DebugMode)
                 AddBuildingInformationButton(ZoneBuildingPanel, out _zonedInfoButton, new Vector3(120f, 5f, 0f));
 
+            ShelterInfoPanel = GameObject.Find("(Library) ShelterWorldInfoPanel").GetComponent<ShelterWorldInfoPanel>();
+
+            Vector3 shelterPos = new Vector3(160f, 257f, 0f);
+            
+
+            AddDefaultBuildingPropertiesButton(ShelterInfoPanel, out _shelterInfoButton, new Vector3(160f, -231f,0f ));
+            
             _isButtonInitialized = true;
         }
 
@@ -234,6 +245,7 @@ namespace CustomizeItExtended.Internal.Buildings
                     comp.Unfocus();
             });
         }
+
 
         private void AddUniqueFactoriesBuildingPropertiesButton(UniqueFactoryWorldInfoPanel infoPanel,
             out UIButton button,

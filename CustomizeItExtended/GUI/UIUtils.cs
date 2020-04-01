@@ -99,6 +99,7 @@ namespace CustomizeItExtended.GUI
                 ["m_waterStockpileRate"] = "Water Stockpile Rate",
                 ["m_goodsStockpileAmount"] = "Goods Stockpile Size",
                 ["m_goodsStockpileRate"] = "Goods Stockpile Rate",
+                ["m_goodsConsumptionRate"] = "Goods Consumption Rate",
                 ["m_snowCapacity"] = "Snow Capacity",
                 ["m_snowConsumption"] = "Snow Consumption",
                 ["m_snowTruckCount"] = "Snowplow Count",
@@ -165,9 +166,14 @@ namespace CustomizeItExtended.GUI
                 ["operationRadius"] = "Operation Radius",
                 ["quality"] = "Quality",
                 ["m_boatCount"] = "Boat Count",
-                ["m_storageBufferSize"] = "Storage Buffer Size"
+                ["m_storageBufferSize"] = "Storage Buffer Size",
+                ["m_storageBufferSize"] = "Storage Buffer Size",
+                ["m_evacuationRange"] = "Evacuation Range",
+                ["m_evacuationBusCount"] = "Bus Count",
+                
             };
         }
+        
 
         public static void DeepDestroy(UIComponent comp)
         {

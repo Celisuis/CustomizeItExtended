@@ -82,6 +82,13 @@ namespace CustomizeItExtended.GUI.Vehicles
                     input.isInteractive = false;
 
                     if (input is UITextField textField) textField.text = "DISABLED";
+
+                    if (input is UICheckBox checkbox)
+                    {
+                        checkbox.enabled = false;
+                        checkbox.isInteractive = false;
+                        checkbox.disabledColor = Color.gray;
+                    }
                 }
             }
 

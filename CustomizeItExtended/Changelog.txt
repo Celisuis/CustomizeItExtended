@@ -1,10 +1,14 @@
 ﻿Version 1.6.2 - 
 
-Added Compatibility Patch for Advanced Vehicle Options 1.9
+Added Missing Button to Shelters
 
 Version 1.6.1 - 
 
 Fixed ArrayOutOfBounds Issue
+
+Added Compatibility Patch for Advanced Vehicle Options 1.9
+
+Downgraded back to Harmony 1.2
 
 Version 1.6.0 -
 
